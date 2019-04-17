@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% load groups %}
+
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="app">
+        <div class="container">
+            <main class="b-calendar">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="b-calendar__calendar">
+                            <div class="b-calendar__header">
+                                <div class="row">
+                                    <div class="col year text-right" align-h="end">
+                                        <span>{{ year }}</span>
+                                    </div>
+                                </div>
+                                <div class="row" align-v="center">
+                                    <div class=" col text-left" align-h="start">
+                                        <div id="subtractMonthBtn" class="button arrow arrow-left" variant="light"
+                                                  @click="subtractMonth">
+                                            <i class="fa fa-fw fa-chevron-left"></i>
+                                        </div>
+                                        <div class="tooltip" target="subtractMonthBtn">
+                                            {{ previousMonthAsString | capitalize }}
+                                        </div>
+                                    </div>
+                                    <b-col class="text-center" align-h="center">
+                                        <span class="month">{{ month }}</span>
+                                    </b-col>
+                                    <b-col class="text-right d-flex flex-row-reverse" align-h="end">
+                                        <b-button id="addMonthBtn" class="arrow arrow-right" variant="light"
+                                                  @click="addMonth">
+                                            <i class="fa fa-fw fa-chevron-right"></i>
+                                        </b-button>
+                                        <b-tooltip target="addMonthBtn">
+                                            {{ nextMonthAsString | capitalize }}
+                                        </b-tooltip>
+                                    </b-col>
+                                </div>
+                            </div>
+                            <div class="b-calendar__weekdays">
+                                <div class="weekday" v-for="(day, index) in days" :key="index">
+                                    <strong>{{ day }}</strong>
+                                </div>
+                            </div>
+                            <div class="b-calendar__dates">
+                                <div class="date text-right" :class="{
+                                'today': date.today,
+                                'blank': date.blank,
+                                'no-border-right': date.key % 7 === 0,
+                             }"
+                                     v-for="date in dateList" :key="date.key" :data-date="date.date"
+                                     @click="setSelectedDate(date.moment)">
+                                    <span class="day">{{ date.dayNumber }}</span>
+                                    <span class="weekday">{{ date.weekDay }}</span>
+                                    <div class="additional" v-show="date.additional">
+                                        <span class="year"
+                                              v-show="date.additional.year">{{ date.additional.year }}</span>
+                                        <span class="month"
+                                              v-show="date.additional.month">{{ date.additional.month }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js_add %}
+    <script type="text/javascript" src="{% static "js/script_adm.js" %}"></script>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock %}

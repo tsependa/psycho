@@ -12,17 +12,18 @@
         {% include "office/sidebar.html" %}
         <div class="h2-responsive ">Выбор доступного времени консультаций</div>
         <div class="row mt-4 align-content-center">
-            <div class="text-center m-1" v-for="(date, index) in slotsByDate">
-                <div class="inline-group">
-                    <div class="font-weight-bold">${index | day}</div>
-                    <div class="font-weight-light">${index | month}</div>
-                </div>
-                <p>${index | dayOfWeek}</p>
+            <div class="text-center " v-for="(date, index) in slotsByDate" style="display: flex;">
+
+                    <p class="day mr-1">${index | day} </p>
+                    <p class="month flex-wrap mr-3">${index | month}</p>
+
+               {% comment %} <p class="">${index | dayOfWeek}</p>{% endcomment %}
                 <div class="m-1" v-for="timeslot in date">
-                    <div class="pt-2 pl-1 pr-1"
+                    <div class="slot border p-1"
                          @click="editTimeSlot(timeslot)"
                          :class="{ 'blue text-white': timeslot.id > 0,}">
-                        ${timeslot.time}
+                        <div>${timeslot.time}</div>
+
                     </div>
 
                 </div>
@@ -62,6 +63,8 @@
 
 
         <!-- TimeSlot model -->
+
+
 
     </div>
     <!-- Table with panel -->

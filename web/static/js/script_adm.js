@@ -1,3 +1,40 @@
+Vue.filter('formatDate', function (value) {
+    if (value) {
+        return moment(String(value)).format('MM/DD/YYYY')
+    }
+});
+
+Vue.filter('formatTime', function (value) {
+    if (value) {
+        return moment(String(value)).locale('ru').format('HH:mm')
+    }
+});
+
+Vue.filter('dayOfWeek', function (value) {
+    if (value) {
+        return moment(String(value)).locale('ru').format('dd')
+    }
+});
+
+Vue.filter('day', function (value) {
+    if (value) {
+        return moment(String(value)).locale('ru').format('DD')
+    }
+});
+
+Vue.filter('month', function (value) {
+    if (value) {
+        return moment(String(value)).locale('ru').format('MMM')
+    }
+});
+
+Vue.filter('formatDiff', function (value) {
+    if (value) {
+        return moment(String(value)).locale('ru').fromNow();
+    }
+});
+
+
 const app2 = new Vue({
         el: '#adm_app',
         delimiters: ['${', '}'],
@@ -54,7 +91,7 @@ const app2 = new Vue({
             getSlotsByDateMap: function () {
                 this.loading = true;
                 this.slotsByDateMap = [];
-                for (var day = 0; day < 15; day++) {
+                for (var day = 0; day < 10; day++) {
                     var today = new Date();
                     today.setHours(0, 0, 0, 0);
                     today.setDate(today.getDate() + day);
@@ -158,41 +195,6 @@ const app2 = new Vue({
 ;
 
 
-Vue.filter('formatDate', function (value) {
-    if (value) {
-        return moment(String(value)).format('MM/DD/YYYY')
-    }
-});
-
-Vue.filter('formatTime', function (value) {
-    if (value) {
-        return moment(String(value)).locale('ru').format('HH:mm')
-    }
-});
-
-Vue.filter('dayOfWeek', function (value) {
-    if (value) {
-        return moment(String(value)).locale('ru').format('dd')
-    }
-});
-
-Vue.filter('day', function (value) {
-    if (value) {
-        return moment(String(value)).locale('ru').format('DD')
-    }
-});
-
-Vue.filter('month', function (value) {
-    if (value) {
-        return moment(String(value)).locale('ru').format('MMM')
-    }
-});
-
-Vue.filter('formatDiff', function (value) {
-    if (value) {
-        return moment(String(value)).locale('ru').fromNow();
-    }
-});
 
 function readCookie(name) {
     var nameEQ = name + "=";

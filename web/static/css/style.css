@@ -52,7 +52,21 @@
     flex: 1;
 }
 
+.slot:hover {
+    background: rgba(60, 158, 226, 0.44);
+}
 
+.day {
+    font-size: 2em;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.month {
+    font-size: 1.3em;
+    font-weight: 200;
+    line-height: 1;
+}
 
 .full-height {
     min-height: 100%;
