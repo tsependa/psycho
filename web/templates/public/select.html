@@ -51,7 +51,7 @@
                 </div>
 
 
-                <span>Методика </span>
+{% comment %}                <span>Методика </span>
                 <div>
                     <div v-for="(method, index) in methods" class="form-check">
                         <input type="checkbox" class="form-check-input" v-bind:value='method.id+1000'
@@ -59,7 +59,7 @@
                         <label class="form-check-label" v-bind:for='method.id+1000'>${method.title}</label>
                     </div>
 
-                </div>
+                </div>{% endcomment %}
 
                 <span>Опыт консультирования </span>
                 <div v-for="(exp, index) in experienceList" class="form-check">
