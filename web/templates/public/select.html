@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="select_app">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="card-deck col-md-9">
+
+                <div class="card mb-4 specialist" v-for="specialist in filteredSpecialists" :key="specialist.id"
+                     @click="selectSpecialist(specialist)"
+                     style="max-height: 420px" data-toggle="modal" data-target="#modalLoginForm">
+
+                    <div class="card-body rgba-grey-slight" style="padding: 0.25rem;">
+                        <h3 class="card-text"> ${specialist.middle_name} ${specialist.first_name}
+                            ${specialist.last_name }</h3>
+                        {% comment %} <div class="card-text">
+                                <div class="row">
+                                    <i class="fa fa-quote-left"></i>
+                                    <div class="row pl-3">${specialist.quote}</div>
+                                </div>
+
+                            </div>{% endcomment %}
+                    </div>
+
+                    <div class="rgba-grey-slight card-img">
+                        <img v-if="specialist.avatar" class="card-img-bottom" :src="specialist.avatar"
+                             style=""/>
+                        <img v-else class="card-img-top" style=""
+                             src="http://via.placeholder.com/300x450"/>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="container col-md-3 m-0">
+                <span>Направление </span>
+
+                <div v-for="(theme, index) in themes" class="form-check">
+                    <input type="checkbox" class="form-check-input" v-bind:value="theme.id"
+                           v-model="selectedThemes" v-bind:id='theme.id'/>
+                    <label class="form-check-label" v-bind:for='theme.id'>${theme.description}</label>
+                </div>
+
+
+                <span>Методика </span>
+                <div>
+                    <div v-for="(method, index) in methods" class="form-check">
+                        <input type="checkbox" class="form-check-input" v-bind:value='method.id+1000'
+                               v-model="selectedMethods" v-bind:id='method.id+1000'/>
+                        <label class="form-check-label" v-bind:for='method.id+1000'>${method.title}</label>
+                    </div>
+
+                </div>
+
+                <span>Опыт консультирования </span>
+                <div v-for="(exp, index) in experienceList" class="form-check">
+                    <input type="radio" class="form-check-input" v-bind:value="exp"
+                           v-model="selectedExps" v-bind:id="exp.value" v-bind:name="exp.value"
+                           v-bind:checked="exp.checked"/>
+                    <label class="form-check-label" v-bind:for="exp.value">${exp.value}</label>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <div class="modal-content">
+            <div class="modal-header">
+
+            </div>
+            <div class="modal-content">
+                <div class="card ">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card-body">
+
+
+                                <div class="rgba-grey-slight card-img" style="">
+                                    <img v-if="selectedSpecialist.avatar" class="card-img-bottom"
+                                         :src="selectedSpecialist.avatar"
+                                         style=""/>
+                                    <img v-else class="card-img-top" style=""
+                                         src="http://via.placeholder.com/300x450"/>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body rgba-grey-slight" style="padding: 0.25rem;">
+                                <h3 class="card-text"> ${selectedSpecialist.middle_name}
+                                    ${selectedSpecialist.first_name}
+                                    ${selectedSpecialist.last_name }</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        {% comment %}<div class="b-popup" v-bind:class="{active: showPopup}">
+            <div class="card ">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card-body">
+
+                            <div class="card-body rgba-grey-slight" style="padding: 0.25rem;">
+                                <h3 class="card-text"> ${selectedSpecialist.middle_name}
+                                    ${selectedSpecialist.first_name}
+                                    ${selectedSpecialist.last_name }</h3>
+                            </div>
+                            <div class="rgba-grey-slight card-img" style="">
+                                <img v-if="selectedSpecialist.avatar" class="card-img-bottom"
+                                     :src="selectedSpecialist.avatar"
+                                     style=""/>
+                                <img v-else class="card-img-top" style=""
+                                     src="http://via.placeholder.com/300x450"/>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        asdasd
+                    </div>
+                </div>
+            </div>
+        </div>{% endcomment %}
+
+    </div>
+
+
+
+
+
+
+{% endblock %}
+
+{% block js_add %}
+
+    <script type="text/javascript" src="{% static "js/script_select.js" %}"></script>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock %}

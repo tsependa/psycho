@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center m-5">
+            <div class="col-6 col-md-6 ">
+
+
+                <form class="text-center border border-light p-5" method="post" action="{% url 'login' %}"
+                      style="color: #3899e1;">
+
+
+                    <p class="h4 mb-4">Войти</p>
+
+
+                    <div class="form-row mb-4">
+
+                        {% csrf_token %}
+                        {% if next %}
+                            <input type="hidden" name="next" value="{{ next }}"/>
+                        {% endif %}
+                        <!-- Login -->
+                        <label for="materialLoginFormEmail">E-mail</label>
+                        <input type="text" id="materialLoginFormEmail" name="username" class="form-control mb-4">
+
+
+                        <!-- Password -->
+                        <label for="materialLoginFormPassword">Пароль</label>
+                        <input type="password" id="materialLoginFormPassword" name="password"
+                               class="form-control mb-4">
+
+
+                        {% comment %}<div>
+                            <!-- Remember me -->
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
+                                <label class="form-check-label" for="materialLoginFormRemember">Запомнить
+                                    меня</label>
+                            </div>
+                        </div>{% endcomment %}
+                        {% comment %}            <div>
+                        <!-- Forgot password -->
+                        <a href="">Забыли пароль?</a>
+                    </div>{% endcomment %}
+
+
+                        <!-- Sign in button -->
+                        <button class="btn btn-info my-4 btn-block" type="submit">Войти</button>
+
+                        <!-- Register -->
+                        <p>
+                            <a href="{% url 'signup' %}">Зарегистрироваться</a>
+                        </p>
+
+
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock %}

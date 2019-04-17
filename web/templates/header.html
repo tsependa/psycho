@@ -1,0 +1,50 @@
+{% load static %}
+
+
+<div class="container">
+    <nav class="navbar  navbar-expand " style="box-shadow: 0px 0px 0px 0">
+        <a class="navbar-brand" href="/">
+            <div class="row inline">
+                <img src="{% static "img/logo/logo2.svg" %}" alt="Logo" style="height: 80px;">
+
+                <div class="row">
+                    <div class="col-12"
+                         style="font-weight: bold; color: #3899e1; font-size: xx-large;">Роспсихология
+                    </div>
+                    <div class="col-12" style="font-weight: normal; font-size: small; color: #3899e1;">Вы заслуживаете
+                        быть счастливым!
+                    </div>
+                </div>
+            </div>
+
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse align-right" id="navbarSupportedContent">
+
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item dropdown">
+                    {% if user.is_authenticated %}
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">{{ user.username }}</a>
+                        <div class="dropdown-menu">
+                            {% comment %} <a class="dropdown-item" href="#">Личный кабинет</a>{% endcomment %}
+                            <a class="dropdown-item" href="{% url 'office' %}">Заявки</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+                        </div>
+                    {% else %}
+
+                        <a class="nav-link" href="{% url 'login' %} " style="color: #3899e1"></i>Войти</a>
+                    {% endif %}
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

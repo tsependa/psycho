@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+        <div>
+            {{ flatpage.content }}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+{% load groups %}
+
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+
+
+    <div id="adm_app" class="container flex-grow">
+
+        {% include "office/sidebar.html" %}
+        <div class="row">
+            {% if request.user|has_group:"specialist" %}
+                <div class="mt-3 mb-3" v-show="specialist_enrolls != []">
+                    <table class="table" v-show="true">
+                        <div class="h2-responsive">Записи специалиста</div>
+                        <thead>
+                        <tr>
+                            <td>Дата</td>
+                            <td>Время</td>
+                            <td>Осталось до начала</td>
+                            <td>Пользователь</td>
+                            <td>Психолог</td>
+                            <td>Оплата</td>
+                            <td>Ссылка</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="enroll in specialist_enrolls" class="">
+                            <td> ${enroll.timeslot.start_time | formatDate}</td>
+                            <td> ${enroll.timeslot.start_time | formatTime}</td>
+                            <td> ${enroll.timeslot.start_time | formatDiff}</td>
+                            <td> ${enroll.user.username}</td>
+                            <td> ${enroll.timeslot.specialist.middle_name} ${enroll.timeslot.specialist.first_name}</td>
+                            <td>${enroll.payment}</td>
+                            <td><a :href="enroll.timeslot.videoconf_url">Перейти</a></td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+
+            {% else %}
+                <div class="mt-3 mb-3">
+                    <table class="table" v-show="true">
+                        <div class="h2-responsive">Записи на консультацию</div>
+                        <thead>
+                        <tr>
+                            <td>Дата</td>
+                            <td>Время</td>
+                            <td>Осталось до начала</td>
+                            <td>Пользователь</td>
+                            <td>Психолог</td>
+                            <td>Ссылка</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="enroll in user_enrolls" class="">
+                            <td> ${enroll.timeslot.start_time | formatDate}</td>
+                            <td> ${enroll.timeslot.start_time | formatTime}</td>
+                            <td> ${enroll.timeslot.start_time | formatDiff}</td>
+                            <td> ${enroll.user.username}</td>
+                            <td> ${enroll.timeslot.specialist.middle_name} ${enroll.timeslot.specialist.first_name}</td>
+                            <td><a :href="enroll.timeslot.videoconf_url">Перейти</a></td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+            {% endif %}
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js_add %}
+    <script type="text/javascript" src="{% static "js/script_adm.js" %}"></script>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock %}

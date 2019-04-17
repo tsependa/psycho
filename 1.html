@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://www.sberbank.ru/ScheduledOfferings/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sbt="http://www.sberbank.ru/ScheduledOfferings/"
+                  xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.sberbank.ru/ScheduledOfferings/">
+            <xsd:element name="GetScheduledOfferings">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="itemId" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="GetScheduledOfferingsResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="ScheduledOfferings"
+                                     type="sbt:ScheduledOffering"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:complexType name="ScheduledOffering">
+                <xsd:sequence>
+                    <xsd:element name="scheduledOfferingId" type="xsd:string"/>
+                    <xsd:element name="itemId" type="xsd:string"/>
+                    <xsd:element name="description" type="xsd:string"/>
+                    <xsd:element name="price" type="xsd:double"/>
+                    <xsd:element name="startDateTime" type="xsd:dateTime"/>
+                    <xsd:element name="endDateTime" type="xsd:dateTime"/>
+                    <xsd:element name="maxEnrollment" type="xsd:int"/>
+                    <xsd:element name="enrolledCol" type="xsd:int"/>
+                    <xsd:element name="facility" type="xsd:string"/>
+                    <xsd:element name="location" type="xsd:string"/>
+                    <xsd:element name="scheduleStatus" type="xsd:string"/>
+                    <xsd:element name="scheduleStatusValue" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="GetScheduledOfferingsRequest">
+        <wsdl:part name="parameters" element="sbt:GetScheduledOfferings">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetScheduledOfferingsResponse">
+        <wsdl:part name="parameters" element="sbt:GetScheduledOfferingsResponse">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="ScheduledOfferings">
+        <wsdl:operation name="GetScheduledOfferings">
+            <wsdl:input message="sbt:GetScheduledOfferingsRequest">
+            </wsdl:input>
+            <wsdl:output message="sbt:GetScheduledOfferingsResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ScheduledOfferingsSOAP" type="sbt:ScheduledOfferings">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+            <wsp:PolicyReference URI="#BN__binding"/>
+        </wsp:Policy>
+        <wsdl:operation name="GetScheduledOfferings">
+            <soap:operation soapAction="http://www.sberbank.ru/ScheduledOfferings/GetScheduledOfferings"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ScheduledOfferings">
+        <wsdl:port name="ScheduledOfferingsSOAP" binding="sbt:ScheduledOfferingsSOAP">
+            <soap:address
+                    location="https://l40001-iflmap.hcisbp.ru1.hana.ondemand.com:443/cxf/p2/ScheduledOfferings1C"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsp:UsingPolicy required="true" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"/>
+    <wsp:Policy wsu:Id="BN__binding" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+                xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+                    <wsp:Policy>
+                        <sp:TransportToken>
+                            <wsp:Policy>
+                                <sp:HttpsToken>
+                                    <wsp:Policy>
+                                        <wsp:ExactlyOne>
+                                            <sp:HttpBasicAuthentication/>
+                                            <sp:RequireClientCertificate/>
+                                        </wsp:ExactlyOne>
+                                    </wsp:Policy>
+                                </sp:HttpsToken>
+                            </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                            <wsp:Policy>
+                                <wsp:ExactlyOne>
+                                    <sp:Basic256/>
+                                    <sp:Basic192/>
+                                    <sp:Basic128/>
+                                    <sp:TripleDes/>
+                                    <sp:Basic256Rsa15/>
+                                    <sp:Basic192Rsa15/>
+                                    <sp:Basic128Rsa15/>
+                                    <sp:TripleDesRsa15/>
+                                    <sp:Basic256Sha256/>
+                                    <sp:Basic192Sha256/>
+                                    <sp:Basic128Sha256/>
+                                    <sp:TripleDesSha256/>
+                                    <sp:Basic256Sha256Rsa15/>
+                                    <sp:Basic192Sha256Rsa15/>
+                                    <sp:Basic128Sha256Rsa15/>
+                                    <sp:TripleDesSha256Rsa15/>
+                                </wsp:ExactlyOne>
+                            </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                            <wsp:Policy>
+                                <sp:Strict/>
+                            </wsp:Policy>
+                        </sp:Layout>
+                    </wsp:Policy>
+                </sp:TransportBinding>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+</wsdl:definitions>

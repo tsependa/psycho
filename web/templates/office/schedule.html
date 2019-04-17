@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% load groups %}
+
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="adm_app" class="container">
+        {% include "office/sidebar.html" %}
+        <div class="h2-responsive ">Выбор доступного времени консультаций</div>
+        <div class="row mt-4 align-content-center">
+            <div class="text-center m-1" v-for="(date, index) in slotsByDate">
+                <div class="inline-group">
+                    <div class="font-weight-bold">${index | day}</div>
+                    <div class="font-weight-light">${index | month}</div>
+                </div>
+                <p>${index | dayOfWeek}</p>
+                <div class="m-1" v-for="timeslot in date">
+                    <div class="pt-2 pl-1 pr-1"
+                         @click="editTimeSlot(timeslot)"
+                         :class="{ 'blue text-white': timeslot.id > 0,}">
+                        ${timeslot.time}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="editTimeSlotModal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Выбор доступного времени</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="form-group">
+
+                            <p>День: ${editSlot.date}</p>
+
+
+                            <p>Время: </p>
+                            <input type="text" v-model="editSlot.time" placeholder=""/>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="">
+                            Добавить в расписание
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- TimeSlot model -->
+
+    </div>
+    <!-- Table with panel -->
+
+{% endblock %}
+
+{% block js_add %}
+    <script type="text/javascript" src="{% static "js/script_adm.js" %}"></script>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock %}

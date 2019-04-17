@@ -1,0 +1,83 @@
+{% load static %}
+
+
+<!doctype html>
+<html lang="ru-RU">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Онлайн консультации психологов</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/mdb.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+    <link href="{% static "css/credit/card-js.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/glider.min.css" %}" rel="stylesheet" type="text/css">
+
+
+</head>
+<body class="d-flex flex-column">
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+</body>
+<!-- SCRIPTS -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
+<script type="text/javascript" src="{% static "js/glider.min.js" %}"></script>
+<script src="http://momentjs.com/downloads/moment-with-locales.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+<script src="https://unpkg.com/vue-scrollto@2.7.9/vue-scrollto.js"></script>
+{% comment %}<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>{% endcomment %}
+{% comment %}<script src="https://cdn.jsdelivr.net/npm/vue-cookies@1.5.12/vue-cookies.js"></script>{% endcomment %}
+<!-- Yandex.Metrika counter -->
+
+<script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        m[i].l = 1 * new Date();
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(52920385, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true
+    });
+</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/52920385" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136784486-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-136784486-1');
+</script>
+{% block js_add %}
+
+{% endblock %}
+
+</html>

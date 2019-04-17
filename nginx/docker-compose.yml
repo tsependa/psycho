@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+
+  nginx:
+    restart: always
+    image: nginx:latest
+    expose:
+      - 80
+      - 443
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - ./logs:/srv/www/psycho/logs
+      - .:/etc/nginx/conf.d
+      - ./certs:/etc/letsencrypt
+      - ./certs-data:/data/letsencrypt
+
+networks:
+  psycho-net:
+    driver: bridge
+    name: psycho-net

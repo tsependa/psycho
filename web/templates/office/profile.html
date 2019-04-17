@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% load groups %}
+
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+    {% include "office/sidebar.html" %}
+
+{% endblock %}
+
+{% block js_add %}
+    <script type="text/javascript" src="{% static "js/script_adm.js" %}"></script>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock %}
