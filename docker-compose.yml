@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     command: python manage.py runserver 0.0.0.0:9000
     volumes:
-      - ./web :/code
+      - ./web:/code
     ports:
       - "9000:9000"
     depends_on:
