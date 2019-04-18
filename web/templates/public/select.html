@@ -8,50 +8,50 @@
 {% block content %}
     <div id="select_app">
 
-    <div class="container">
-        <div class="row">
+        <div class="container">
+            <div class="row">
 
-            <div class="card-deck col-md-9">
+                <div class="card-deck col-md-9">
 
-                <div class="card mb-4 specialist" v-for="specialist in filteredSpecialists" :key="specialist.id"
-                     @click="selectSpecialist(specialist)"
-                     style="max-height: 420px" data-toggle="modal" data-target="#modalLoginForm">
+                    <div class="card mb-4 specialist" v-for="specialist in filteredSpecialists" :key="specialist.id"
+                             @click="selectSpecialist(specialist)"
+                         style="max-height: 420px" data-toggle="modal" data-target="#modalSpecialist">
 
-                    <div class="card-body rgba-grey-slight" style="padding: 0.25rem;">
-                        <h3 class="card-text"> ${specialist.middle_name} ${specialist.first_name}
-                            ${specialist.last_name }</h3>
-                        {% comment %} <div class="card-text">
+                        <div class="card-body rgba-grey-slight" style="padding: 0.25rem;">
+                            <h3 class="card-text"> ${specialist.middle_name} ${specialist.first_name}
+                                ${specialist.last_name }</h3>
+                            {% comment %} <div class="card-text">
                                 <div class="row">
                                     <i class="fa fa-quote-left"></i>
                                     <div class="row pl-3">${specialist.quote}</div>
                                 </div>
 
                             </div>{% endcomment %}
+                        </div>
+
+                        <div class="rgba-grey-slight card-img">
+                            <img v-if="specialist.avatar" class="card-img-bottom" :src="specialist.avatar"
+                                 style=""/>
+                            <img v-else class="card-img-top" style=""
+                                 src="http://via.placeholder.com/300x450"/>
+
+                        </div>
                     </div>
 
-                    <div class="rgba-grey-slight card-img">
-                        <img v-if="specialist.avatar" class="card-img-bottom" :src="specialist.avatar"
-                             style=""/>
-                        <img v-else class="card-img-top" style=""
-                             src="http://via.placeholder.com/300x450"/>
-
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="container col-md-3 m-0">
-                <span>Направление </span>
-
-                <div v-for="(theme, index) in themes" class="form-check">
-                    <input type="checkbox" class="form-check-input" v-bind:value="theme.id"
-                           v-model="selectedThemes" v-bind:id='theme.id'/>
-                    <label class="form-check-label" v-bind:for='theme.id'>${theme.description}</label>
                 </div>
 
 
-{% comment %}                <span>Методика </span>
+                <div class="container col-md-3 m-0">
+                    <span>Направление </span>
+
+                    <div v-for="(theme, index) in themes" class="form-check">
+                        <input type="checkbox" class="form-check-input" v-bind:value="theme.id"
+                               v-model="selectedThemes" v-bind:id='theme.id'/>
+                        <label class="form-check-label" v-bind:for='theme.id'>${theme.description}</label>
+                    </div>
+
+
+                    {% comment %}                <span>Методика </span>
                 <div>
                     <div v-for="(method, index) in methods" class="form-check">
                         <input type="checkbox" class="form-check-input" v-bind:value='method.id+1000'
@@ -61,84 +61,57 @@
 
                 </div>{% endcomment %}
 
-                <span>Опыт консультирования </span>
-                <div v-for="(exp, index) in experienceList" class="form-check">
-                    <input type="radio" class="form-check-input" v-bind:value="exp"
-                           v-model="selectedExps" v-bind:id="exp.value" v-bind:name="exp.value"
-                           v-bind:checked="exp.checked"/>
-                    <label class="form-check-label" v-bind:for="exp.value">${exp.value}</label>
+                    <span>Опыт консультирования </span>
+                    <div v-for="(exp, index) in experienceList" class="form-check">
+                        <input type="radio" class="form-check-input" v-bind:value="exp"
+                               v-model="selectedExps" v-bind:id="exp.value" v-bind:name="exp.value"
+                               v-bind:checked="exp.checked"/>
+                        <label class="form-check-label" v-bind:for="exp.value">${exp.value}</label>
+                    </div>
                 </div>
             </div>
+
+
         </div>
 
+        <div class="modal fade pt-5" id="modalSpecialist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="container">
+                <div class="modal-dialog" style="max-width: 100%">
+                    <div class="modal-content">
+                        <div class="card ">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card-body p-0">
+                                        <div class="rgba-grey-slight card-img" style="">
+                                            <img v-if="selectedSpecialist.avatar" class="card-img-bottom"
+                                                 :src="selectedSpecialist.avatar"
+                                                 style=""/>
+                                            <img v-else class="card-img-top" style=""
+                                                 src="http://via.placeholder.com/300x450"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body ">
+                                        <h4 class="card-title"> ${selectedSpecialist.middle_name}
+                                            ${selectedSpecialist.first_name}
+                                            ${selectedSpecialist.last_name }</h4>
+                                        <p class="card-text"></p>
+                                        <div class="card-text">
+                                            <blockquote  v-html="selectedSpecialist.quote">
 
-    </div>
-
-    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-
-        <div class="modal-content">
-            <div class="modal-header">
-
-            </div>
-            <div class="modal-content">
-                <div class="card ">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card-body">
-
-
-                                <div class="rgba-grey-slight card-img" style="">
-                                    <img v-if="selectedSpecialist.avatar" class="card-img-bottom"
-                                         :src="selectedSpecialist.avatar"
-                                         style=""/>
-                                    <img v-else class="card-img-top" style=""
-                                         src="http://via.placeholder.com/300x450"/>
-
+                                            </blockquote>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body rgba-grey-slight" style="padding: 0.25rem;">
-                                <h3 class="card-text"> ${selectedSpecialist.middle_name}
-                                    ${selectedSpecialist.first_name}
-                                    ${selectedSpecialist.last_name }</h3>
-                            </div>
-                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
 
-
-        {% comment %}<div class="b-popup" v-bind:class="{active: showPopup}">
-            <div class="card ">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card-body">
-
-                            <div class="card-body rgba-grey-slight" style="padding: 0.25rem;">
-                                <h3 class="card-text"> ${selectedSpecialist.middle_name}
-                                    ${selectedSpecialist.first_name}
-                                    ${selectedSpecialist.last_name }</h3>
-                            </div>
-                            <div class="rgba-grey-slight card-img" style="">
-                                <img v-if="selectedSpecialist.avatar" class="card-img-bottom"
-                                     :src="selectedSpecialist.avatar"
-                                     style=""/>
-                                <img v-else class="card-img-top" style=""
-                                     src="http://via.placeholder.com/300x450"/>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        asdasd
-                    </div>
-                </div>
-            </div>
-        </div>{% endcomment %}
 
     </div>
 

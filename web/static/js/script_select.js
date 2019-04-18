@@ -69,7 +69,7 @@ var app = new Vue({
 
         selectSpecialist: function (specialist) {
             this.selectedSpecialist = specialist;
-            this.showPopup = true;
+          /*  #$('#modalSpecialistForm').modal('show');*/
 
 
         },
