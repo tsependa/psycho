@@ -99,17 +99,24 @@
                                             ${selectedSpecialist.last_name }</h4>
                                         <p class="card-text"></p>
                                         <div class="card-text">
-                                            <div class="row">
+                                            <div class="row  mb-2">
                                                 <blockquote v-html="selectedSpecialist.quote">
                                                 </blockquote>
                                             </div>
 
                                             <div class="row">
-                                                <p><b>${selectedSpecialist.degree}</b> лет опыта консультирования</p>
+                                                <div>Образование:</div>
+                                                <p v-html="selectedSpecialist.education"></p>
                                             </div>
 
                                             <div class="row">
-                                                <p><b>${selectedSpecialist.experience}</b> лет опыта консультирования</p>
+                                                <div>Доп. образование:</div>
+                                                <p v-html="selectedSpecialist.education_add"></p>
+                                            </div>
+
+                                            <div class="row">
+                                                <p><b>${selectedSpecialist.experience}</b> лет опыта консультирования
+                                                </p>
                                             </div>
 
                                         </div>
