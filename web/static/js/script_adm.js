@@ -91,7 +91,7 @@ const app2 = new Vue({
             getSlotsByDateMap: function () {
                 this.loading = true;
                 this.slotsByDateMap = [];
-                for (var day = 0; day < 10; day++) {
+                for (var day = 0; day < 15; day++) {
                     var today = new Date();
                     today.setHours(0, 0, 0, 0);
                     today.setDate(today.getDate() + day);
