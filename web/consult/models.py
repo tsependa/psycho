@@ -50,7 +50,11 @@ class Specialist(models.Model):
     quote = models.TextField(blank=True)
 
     experience = models.IntegerField(blank=True)
+
     degree = models.CharField(max_length=256, blank=True)
+
+    education = models.TextField(blank=True)
+    education_add = models.TextField(blank=True)
 
     themes = models.ManyToManyField(Theme, blank=True)
     methods = models.ManyToManyField(Method, blank=True)

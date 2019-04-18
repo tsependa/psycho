@@ -14,7 +14,7 @@
                 <div class="card-deck col-md-9">
 
                     <div class="card mb-4 specialist" v-for="specialist in filteredSpecialists" :key="specialist.id"
-                             @click="selectSpecialist(specialist)"
+                         @click="selectSpecialist(specialist)"
                          style="max-height: 420px" data-toggle="modal" data-target="#modalSpecialist">
 
                         <div class="card-body rgba-grey-slight" style="padding: 0.25rem;">
@@ -99,9 +99,19 @@
                                             ${selectedSpecialist.last_name }</h4>
                                         <p class="card-text"></p>
                                         <div class="card-text">
-                                            <blockquote  v-html="selectedSpecialist.quote">
+                                            <div class="row">
+                                                <blockquote v-html="selectedSpecialist.quote">
+                                                </blockquote>
+                                            </div>
 
-                                            </blockquote>
+                                            <div class="row">
+                                                <p><b>${selectedSpecialist.degree}</b> лет опыта консультирования</p>
+                                            </div>
+
+                                            <div class="row">
+                                                <p><b>${selectedSpecialist.experience}</b> лет опыта консультирования</p>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
