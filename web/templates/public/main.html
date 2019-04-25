@@ -2,319 +2,363 @@
 {% load static %}
 
 {% block header %}
-    {% include "header.html" %}
+    <header>
+        <div class="container">
+            <div class="row header__row">
+                <div class="col-8 col-sm-8 col-md-4">
+                    <img src="/static/img/pospsychology-logo.png" class="resp-img" alt="">
+                </div>
+                <div class="col-sm-12 col-md-6 d-copy">
+                    <ul class="header__btns">
+                        <li>
+                            <a href="" class="header-btn">Подбор специалиста</a>
+                        </li>
+                        <li>
+                            <a href="" class="header-btn">Ответы на вопросы</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-2 login__wrap d-copy">
+                    <div class="header-btn login">
+                        Войти
+                    </div>
+                </div>
+                <!-- mobile menu -->
+                <div class="col-4 col-sm-4 m-copy">
+                    <div class="menu"></div>
+                    <ul class="menu__list menu-list">
+                        <li>
+                            <a href="" class="header-btn">Подбор специалиста</a>
+                        </li>
+                        <li>
+                            <a href="" class="header-btn">Ответы на вопросы</a>
+                        </li>
+                        <li>
+                            <div class="header-btn login">
+                                Войти
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row header__info">
+                <div class="col-sm-12 col-md-6 header__lrow">
+                    <h1>Онлайн-консультация психолога</h1>
+                    <img src="/static/img/header-img.png" class="resp-img m-copy" alt="">
+                    <button class="btn">Начать</button>
+                </div>
+                <div class="col-sm-12 col-md-6 header__lrow d-copy">
+                    <img src="/static/img/header-img.png" class="resp-img" alt="">
+                </div>
+            </div>
+        </div>
+    </header>
+
 {% endblock %}
 
 {% block content %}
 
-
-    <div id="app">
-
-        <div class=" masterhead " style="opacity: 0.9; background-color: rgb(15, 118, 153);">
-
-            <div class="flex-center">
-                <div class="container text-center white-text">
-                    <div class="row">
-                        <div class="col-sm-6 offset-sm-6 col-md-10 offset-md-0 col-lg-7 offset-lg-5">
-                            <div class="white-text text-xl-left wow fadeInUp ">
-                                <h1>Онлайн-консультации психолога</h1>
-                                <h5>Профессионально, конфиденциально в удобном для Вас месте</h5>
-                                <br>
-                                <form action="{% url 'select' %}" method="GET">
-                                    <input type="submit" class="btn btn-outline- " style="background-color:  #3899e1"
-                                           value="Начать"/>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="container-fluid  text-center  p-3 mt-4">
-            <div class="h2-responsive  ">Что такое онлайн-консультация психолога
-            </div>
-        </div>
-        <div class="container text-center">
-            <div class="row m-2">
-                <div class="col-12 col-md-6 col-lg-4 d-flex d-sm-block mt-3" v-for="con in consult">
-
-                    <div>
-                        <img v-for="img in con.img" :src="'static/' +  img " style="height: 80px" class="">
-                    </div>
-
-                    <p v-html="con.text" class="mt-2"></p>
-
-                </div>
-            </div>
-
-        </div>
-
-
-        {% comment %} <div class="container-fluid text-center p-3 mt-4">
-            <div class="h2-responsive ">Мы поможем, если Вы:</div>
-        </div>
-
-        <div class="container text-center">
-            <div class="row m-2">
-                <div class="col-12 col-md-6 col-lg-3  d-flex d-sm-block " v-for="promo in promos">
-                    <img :src="'static/' +  promo.img " style="height: 80px" class="">
-                    <p class="">${ promo.text }</p>
-
-                </div>
-            </div>
-
-        </div>{% endcomment %}
-        <div class="rgba-blue-grey-slight">
-            <div class="container-fluid  text-center p-3 mt-4">
-                <div class="h2-responsive  ">Почему нужно обращаться к нам</div>
-            </div>
-            <div class="container text-center">
-                <div class="row m-2">
-                    <div class="col-12 col-md-6 col-lg-4 d-flex d-sm-block mt-3" v-for="feature in features">
-
-                        <div>
-                            <img v-for="img in feature.img" :src="'static/' +  img " style="height: 80px" class="">
-                        </div>
-                        <p class="font-weight-bold mt-2" v-html="feature.title"></p>
-                        <p v-html="feature.text"></p>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-        {% comment %} <div class="mb-5 mt-3">
-            <div class="container-fluid  text-center" id="start">
-                <div class="h2-responsive ">Выбрать специалиста</div>
-            </div>
-
-            <div class="container mt-4">
-
-                <button v-on:click="step=1; selectedThemes={};" v-bind:class="{'selected-button': step>1 }"
-                        class="btn btn-light d-inline" style=" background-color:  #3899e1;">
-                    Выбор темы
-                </button>
-                <div class="d-inline h4-responsive"> ${ selectedThemes.title }</div>
-
-            </div>
-
-
-            <div class="container pl-5" v-show="step == 1" style="display: none">
-                <div class="row">
-                    <div v-for="theme in themes" :key="theme.id" @click="selectedThemes = theme">
-                        <button v-on:click="selectTheme" type="button"
-                                class="btn btn-outline-blue-grey">
-                            ${theme.title}
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="container">
-
-                <button v-on:click="selectSpecialist" v-bind:class="{'selected-button': step > 2 }"
-                        class="btn btn-light d-inline">Выбор специалиста
-                </button>
-                <div class="d-inline h4-responsive"> ${selectedSpecialist.middle_name} ${selectedSpecialist.first_name}
-                    ${selectedSpecialist.last_name }
-                </div>
-
-            </div>
-
-            <div class="container  pl-5 mt-2" v-show="step == 2" style="display: none">
-                <div class="card-deck">
-
-
-                    <div class="card mb-4" v-for="specialist in specialists" :key="specialist.id"
-                         @click="selectedSpecialist = specialist; step = 3; getTimeSlots();"
-                         v-show="selectedThemes.id ? specialist.themes.includes(selectedThemes.id) : true">
-
-                        <div class="card-body rgba-grey-slight">
-                            <h4 class="card-title"> ${specialist.middle_name} ${specialist.first_name}
-                                ${specialist.last_name }</h4>
-                            <div class="card-text">
-                                <div class="row">
-                                       <i class="fa fa-quote-left"></i>
-                                    <div class="row pl-3">${specialist.quote}</div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="rgba-grey-slight img-fluid">
-                            <img v-if="specialist.avatar" class="card-img-bottom" :src="specialist.avatar"
-                                 style=""/>
-                            <img v-else class="card-img-top" style=""
-                                 src="http://via.placeholder.com/300x450"/>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="container">
-
-                <button v-on:click="step = 3" v-bind:class="{'selected-button': step>3 }"
-                        class="btn btn-light  d-inline">
-                    Выбор времени консультации
-                </button>
-                <div class="d-inline  h4-responsive"> ${ selectedTimeslot.start_time | formatDate } ${
-                    selectedTimeslot.start_time |
-                    formatTime }
-                </div>
-
-            </div>
-
-            <div class="container pl-5" v-show="step == 3" style="display: none">
-                <h2 class="h1-responsive  my-5">Выберите удобное время</h2>
-                <div class="row" v-for="(date, index) in slotsByDate" :key="index">
-                    <div class="col-12"><p class="h3-responsive mt-2">${ index }</p></div>
-                    <div v-for="timeslot in date" :key="timeslot.id" class="">
-                        <button type="button" v-on:click="selectedTimeslot = timeslot; step = 4"
-                                class="btn btn-outline-primary "
-                                :class="[timeslot.enrolls.length > 0 ? ' disabled btn-grey' : '']">
-                            ${timeslot.time}
-                        </button>
-                    </div>
-
-
-                </div>
-            </div>
-
-            <div class="container">
-
-                <button v-on:click="step = 4" class="btn btn-light d-inline">Оплата</button>
-                <div class="d-inline"> ${ selectedTimeslot.start_time | formatDate } ${ selectedTimeslot.start_time |
-                formatTime }
-            </div>
-
-            </div>
-
-
-            <div class="container pl-5 mb-5" v-show="step == 4" class="m-2" style="display: none">
-
-
-                <div class="row">
-                    <h5 class="font-weight-bold my-4 col-6" style=" color: #3899e1;"> Стоимость одной консультации</h5>
-                    <h5 class="font-weight-bold my-4 col-6"> 3 400 руб.</h5>
-
-                </div>
-
-
-                <div class="row">
-
-                    <form class="text-center border border-light p-5" method="post" action="{% url 'magic_payment' %}">
-                        {% csrf_token %}
-                        <div class="form-row">
-                            <input type="email" name="email" class="input-email form-control mb-2"
-                                   placeholder="Электронная почта" required/>
-                        </div>
-                        <div class="form-row">
-                            <input class="input-card form-control mb-2" placeholder="Номер карты"/>
-                        </div>
-
-
-                        <div class="form-row">
-
-                            <input class="col input-card-date form-control mb-2 mr-2" placeholder="Срок действия"/>
-                            <input class="col input-card-CVV form-control mb-2" placeholder="CVV2/CVC2" maxlength="3"/>
-                        </div>
-                        <div class="form-row">
-                            <input class="input-holder form-control mb-2" placeholder="Имя держателя карты"/>
-                        </div>
-                        <div class="form-row">
-                            <input type="hidden" name="specialist_id" v-model="selectedSpecialist.id">
-                            <input type="hidden" name="theme_id" v-model="selectedThemes.id">
-                            <input type="hidden" name="timeslot_id" v-model="selectedTimeslot.id">
-                        </div>
-                        <div class="form-row">
-                            <button type="submit" v-on:click="showSuccess = true; magicPayment();
-                                    class="btn selected-button  d-inline">
-                                Оплатить 3 400 руб.
-                            </button>
-                        </div>
-                    </form>
-
-
-                </div>
-
-
-            </div>
-        </div>{% endcomment %}
-
-        <div>
-            <div class="container-fluid  text-center p-3 mt-4">
-                <div class="h2-responsive  ">Наши специалисты</div>
-            </div>
-
-
-        </div>
-
-        <div class="glider container " style="padding-left: 0px;">
-
-            {% for specialist in specialists %}
-                <div class="card m-3">
-
-                    <div class="card-body rgba-grey-slight">
-                        <h4 class="card-title"> {{ specialist.middle_name }} {{ specialist.first_name }}
-                            {{ specialist.last_name }}</h4>
-                        {% comment %}      <div class="card-text">
-                        <div class="row">
-                            <i class="fa fa-quote-left"></i>
-                            <div class="row pl-3">{{specialist.quote}}</div>
-                        </div>
-
-                    </div>{% endcomment %}
-                    </div>
-
-                    <div class="rgba-grey-slight img-fluid">
-                        <img class="card-img-bottom" src="/media/{{ specialist.avatar }}"
-                             style=""/>
-
-                    </div>
-                </div>
-            {% endfor %}
-
-        </div>
-
+    <section class="white-block about">
         <div class="container">
-            <form action={% url 'select' %}>
-                <button type="submit" class="btn btn-outline- " style="background-color:  #3899e1">
-                    Подобрать специалиста
-                </button>
-            </form>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Что такое онлайн-консультация психолога</h2>
+                </div>
+            </div>
+            <div class="row about__list">
+                <div class="col-12 col-sm-6 col-md-3 m-30">
+                    <img src="/static/img/timer.png">
+                    <p><strong>50 минут</strong></p>
+                    <p>длительность консультации</p>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 m-30">
+                    <img src="/static/img/homework.png">
+                    <p><strong>Домашние задания</strong></p>
+                    <p>от психолога в личном кабинете</p>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 m-30">
+                    <img src="/static/img/card.png">
+                    <p><strong>3400 рублей</strong></p>
+                    <p>стоимость сеанса</p>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <img src="/static/img/msgs.png">
+                    <p><strong>5-6 сеансов</strong></p>
+                    <p>средняя длительность терапии</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
+    <section class="white-block users">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Для кого этот сервис</h2>
+                </div>
+            </div>
+            <div class="row users__list">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img src="/static/img/user-01.png">
+                        <h3><strong>Хотите работать с профессиональными психологами</strong></h3>
+                        <ul class="users__descr text-left">
+                            <li>
+                                <p>Наши специалисты регулярно проходят супервизии
+                                    <span class="mark"></span>
+                                    <span class="mark-text">Супервизии — это один из методов теоретического и практического повышения квалификации специалистов в области психотерапии, клинической психологии и др. в форме их профессионального консультирования и анализа целесообразности и качества используемых практических подходов и методов психотерапии.</span>
+                                </p>
+                            </li>
+                            <li>
+                                <p>Все специалисты являются сотрудниками Московской службы психологической помощи
+                                    населению и работают с самыми разными проблемами</p>
+                            </li>
+                            <li>
+                                <p>Специалисты имеют большой практический опыт и работают в данной сфере много лет</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img src="/static/img/user-02.png">
+                        <h3><strong>Не хотите никуда ездить и подстраиваться под чужое расписание</strong></h3>
+                        <ul class="users__descr text-left">
+                            <li>
+                                <p>Вы сможете выбрать удобное время для себя</p>
+                            </li>
+                            <li>
+                                <p>Получайте консультацию где-угодно, главное чтобы под рукой был компьютер или
+                                    телефон</p>
+                            </li>
+                            <li>
+                                <p>Не нужно тратить время на дорогу к психологу и обратно</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img src="/static/img/user-03.png">
+                        <h3><strong>Не знаете где и как искать хорошего психолога</strong></h3>
+                        <ul class="users__descr text-left">
+                            <li>
+                                <p>Вам не нужно разбираться в различных методиках и школах психологии. Специалист
+                                    подберет подходящую именно вам методику</p>
+                            </li>
+                            <li>
+                                <p>Вам не нужно изучать дипломы и сертификаты специалистов. Мы уже все проверили</p>
+                            </li>
+                            <li>
+                                <p>Не нужно гадать являются ли отзывы настоящими. Специалисты - сотрудники
+                                    государственной организации, а не частные практики</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <script>
+    <section class="white-block specialists">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Наши специалисты</h2>
+                </div>
+            </div>
+            <div class="row specialists__list">
+                <div class="col-10 offset-1 col-md-12 offset-md-0">
+                    <div>
+                        <div class="owl-carousel specialist__slider">
+                            <div>
+                                <img src="/static/img/specialist-01.png">
+                                <p class="specialist__name">Балоян Вероника Евгеньевна</p>
+                                <p class="specialist__prof">Специалист по семейным проблемам</p>
+                                <p class="specialist__time">14 марта, 10:00</p>
+                            </div>
+                            <div>
+                                <img src="/static/img/specialist-02.png">
+                                <p class="specialist__name">Ашихина Екатерина Владимировна</p>
+                                <p class="specialist__prof">Гештальт-терапевт</p>
+                                <p class="specialist__time">12 марта, 14:00</p>
+                            </div>
+                            <div>
+                                <img src="/static/img/specialist-03.png">
+                                <p class="specialist__name">Ромадинова Галина Ивановна</p>
+                                <p class="specialist__prof">Сексолог и арт-терапевт</p>
+                                <p class="specialist__time">17 марта, 11:00</p>
+                            </div>
+                            <div>
+                                <img src="/static/img/specialist-04.png">
+                                <p class="specialist__name">Комаров Максим Александрович</p>
+                                <p class="specialist__prof">Коуч и специалсит по саморазвитию</p>
+                                <p class="specialist__time">13 марта, 18:00</p>
+                            </div>
+                            <div>
+                                <img src="/static/img/specialist-01.png">
+                                <p class="specialist__name">Балоян Вероника Евгеньевна</p>
+                                <p class="specialist__prof">Специалист по семейным проблемам</p>
+                                <p class="specialist__time">14 марта, 10:00</p>
+                            </div>
+                            <div>
+                                <img src="/static/img/specialist-02.png">
+                                <p class="specialist__name">Ашихина Екатерина Владимировна</p>
+                                <p class="specialist__prof">Гештальт-терапевт</p>
+                                <p class="specialist__time">12 марта, 14:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn">
+                        Подобрать специалиста
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    </script>
+    <section class="white-block about">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Почему мы?</h2>
+                </div>
+            </div>
+            <div class="row about__list">
+                <div class="col-10 offset-1 col-sm-6 offset-sm-0 col-md-3 offset-md-0 m-30">
+                    <img src="/static/img/practice.png">
+                    <p><strong>23 очных отделения в Москве и МО</strong> — только практикующие специалисты
+                </div>
+                <div class="col-10 offset-1 col-sm-6 offset-sm-0 col-md-3 offset-md-0 m-30">
+                    <img src="/static/img/experience.png">
+                    <p><strong>Более 170 консультаций в день</strong> — богатый реальный опыт</p>
+                </div>
+                <div class="col-10 offset-1 col-sm-6 offset-sm-0 col-md-3 offset-md-0 m-30">
+                    <img src="/static/img/specialist.png">
+                    <p>
+                        <strong>Специалисты регулятно проходят супервизии <span class="mark"></span></strong> и
+                        повышения квалификации
+                        <span class="mark-text">Супервизии — это один из методов теоретического и практического повышения квалификации специалистов в области психотерапии, клинической психологии и др. в форме их профессионального консультирования и анализа целесообразности и качества используемых практических подходов и методов психотерапии.</span>
+                    </p>
+                </div>
+                <div class="col-10 offset-1 col-sm-6 offset-sm-0 col-md-3 offset-md-0">
+                    <img src="/static/img/task.png">
+                    <p><strong>Не только выслушать, но и добиться результата</strong> — наша главная задача!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="moscow">
+        <div class="container">
+            <div class="row card">
+                <div class="col-12 col-md-6 moscow__logos">
+                    <img src="/static/img/msppn-logo.png">
+                    <img src="/static/img/moscow-logo.png">
+                </div>
+                <div class="col-10 offset-1 col-md-6 offset-md-0">
+                    <p>
+                        Все специалисты нашего сервиса являются сотрудниками Московской службы психологической помощи
+                        населению Департамента труда и социальной защиты населения города Москвы
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="howto">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Как пользоваться сервисом</h2>
+                </div>
+            </div>
+            <div class="row howto__list">
+                <div class="col-12 col-md-4 howto__list-wrap">
+                    <div class="howto__step step-one">
+                        <img src="/static/img/step-01.png">
+                        <p><strong>Выберите психолога</strong></p>
+                        <p>Воспользуйтесь фильтрами: проблемы, опыт, возраст, пол; Из оставшихся выбирайте того, кто вам
+                            лично понравится</p>
+                    </div>
+                    <div class="howto__step step-two">
+                        <img src="/static/img/step-02.png">
+                        <p><strong>Выберите время и дату</strong></p>
+                        <p>Получите консультацию в удобное время</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 text-center">
+                    <img src="/static/img/howto.png" class="resp-img">
+                </div>
+                <div class="col-12 col-md-4  howto__list-wrap">
+                    <div class="howto__step step-three">
+                        <img src="/static/img/step-03.png">
+                        <p><strong>Оплатите картой</strong></p>
+                        <p>Все просто как при оплате картой на любом сайте</p>
+                    </div>
+                    <div class="howto__step step-four">
+                        <img src="/static/img/step-04.png">
+                        <p><strong>Получите консультацию в назначенное время</strong></p>
+                        <p>Мы дополнительно напомним вам уведомлением на почту или по смс</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-3 footer__mlast">
+                    <div>
+                        <a href="">Служба поддержки</a>
+                    </div>
+                    <div>
+                        <a href="">Ответы на вопросы</a>
+                    </div>
+                    <div>
+                        <a href="mailto:office@роспсихология.рф" target="_blank">office@роспсихология.рф</a>
+                    </div>
+                    <p class="m-copy">© 2019 Роспсихология.рф</p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <p>“Роспсихология" — это не скорая психологическая помощь.</p>
+                    <p><strong>Если у вас серьезные, угрожающие вашей жизни проблемы</strong>, которые требуют
+                        немедленного решения, вам лучше обратиться в какую-либо из <a href="" target="_blank">этих
+                            организаций</a>.</p>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div>
+                        <a href="" class="footer__file" download>Пользовательское соглашение</a>
+                    </div>
+                    <div>
+                        <a href="" class="footer__file" download>Политика в отношении обработки и защиты персональных
+                            данных</a>
+                    </div>
+                    <p class="d-copy">© 2019 Роспсихология.рф</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 
 {% endblock %}
 
 
 {% block js_add %}
-    <script type="text/javascript" src="{% static "js/credit/cleave.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/script.js" %}"></script>
+
+   {% comment %} <script type="text/javascript" src="/static/js/script.js"></script>{% endcomment %}
     <script>
         moment.locale('ru');  // Set the default/global locale
     </script>
+    <script src="/static/js/owl.carousel.min.js"></script>
+    <script src="/static/js/app.js"></script>
     <script type="text/javascript">
 
     </script>
 {% endblock %}
 
 {% block footer %}
-    {% include "footer.html" %}
+
 {% endblock %}
