@@ -122,7 +122,7 @@
                     <div>
                         <div class="owl-carousel specialist__slider">
                             {% for specialist in specialists %}
-                                <div >
+                                <div>
                                     <img class="img__gradient1" src="/media/{{ specialist.avatar }}">
                                     <p class="specialist__name">{{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }} </p>
                                     <p class="specialist__prof">Специалист по семейным проблемам</p>
@@ -130,7 +130,7 @@
                                 </div>
                             {% endfor %}
 
-{% comment %}                            <div>
+                            {% comment %}                            <div>
                                 <img src="/static/img/specialist-02.png">
                                 <p class="specialist__name">Ашихина Екатерина Владимировна</p>
                                 <p class="specialist__prof">Гештальт-терапевт</p>
@@ -138,9 +138,11 @@
                             </div>{% endcomment %}
                         </div>
                     </div>
-                    <button class="green-btn">
-                        Подобрать специалиста
-                    </button>
+                    <form action="{% url 'select' %}">
+                        <button class="green-btn" type="submit">
+                            Подобрать специалиста
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -43,7 +43,9 @@
             <div class="col-sm-12 col-md-6 header__lrow">
                 <h1>Онлайн-консультация психолога</h1>
                 <img src="/static/img/header-img-clear.png" class="resp-img m-copy" alt="">
-                <button class="green-btn">Начать</button>
+                <form action="{% url 'select' %}">
+                    <button class="green-btn" type="submit">Начать</button>
+                </form>
             </div>
             <div class="js-type__box">
                 <p id="js-type__element" data-typeitid="18gl3fjt0ko">
