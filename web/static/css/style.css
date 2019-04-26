@@ -1,15 +1,3 @@
-.masterhead {
-    text-align: center;
-    color: #3899e1;
-    background-color: #3899e1;
-    background-image: url('https://oprostatit.ru/wp-content/uploads/2017/12/Pomoshh-psihologa.png');
-    opacity: 0.1;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-position: top left;
-    background-size: cover;
-    height: 400px;
-}
 
 .selected-button {
     background-color: #3899e1 !important;

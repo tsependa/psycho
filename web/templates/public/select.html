@@ -10,27 +10,47 @@
 
         <div class="container">
             <div class="row">
+                <div class="col-md-9">
+                    <div class="row specialist__slider">
 
-                <div class="card-deck col-md-9">
+                        <div class="col-md-4" v-for="specialist in filteredSpecialists" :key="specialist.id"
+                             @click="selectSpecialist(specialist)" data-toggle="modal" data-target="#modalSpecialist">
+                            <img class="img__gradient1" :src="specialist.avatar">
+                            <p class="specialist__name">${ specialist.middle_name } ${ specialist.first_name } ${
+                                specialist.last_name } </p>
+                            <p class="specialist__prof">Специалист по семейным проблемам</p>
+                            <p class="specialist__time">06 мая, 10:00</p>
+                        </div>
+
+
+                        {% comment %}                            <div>
+                                <img src="/static/img/specialist-02.png">
+                                <p class="specialist__name">Ашихина Екатерина Владимировна</p>
+                                <p class="specialist__prof">Гештальт-терапевт</p>
+                                <p class="specialist__time">12 марта, 14:00</p>
+                            </div>{% endcomment %}
+                    </div>
+                </div>
+                {% comment %} <div class="card-deck col-md-9">
 
                     <div class="card mb-4 specialist" v-for="specialist in filteredSpecialists" :key="specialist.id"
                          @click="selectSpecialist(specialist)"
                          style="max-height: 420px" data-toggle="modal" data-target="#modalSpecialist">
 
-                        <div class="card-body rgba-grey-slight" style="padding: 0.25rem;">
+                        <div class="card-body " style="padding: 0.25rem;">
                             <h3 class="card-text"> ${specialist.middle_name} ${specialist.first_name}
                                 ${specialist.last_name }</h3>
-                            {% comment %} <div class="card-text">
+                             <div class="card-text">
                                 <div class="row">
                                     <i class="fa fa-quote-left"></i>
                                     <div class="row pl-3">${specialist.quote}</div>
                                 </div>
 
-                            </div>{% endcomment %}
+                            </div>
                         </div>
 
-                        <div class="rgba-grey-slight card-img">
-                            <img v-if="specialist.avatar" class="card-img-bottom" :src="specialist.avatar"
+                        <div class=" card-img">
+                            <img v-if="specialist.avatar" class="card-img-bottom img__gradient1" :src="specialist.avatar"
                                  style=""/>
                             <img v-else class="card-img-top" style=""
                                  src="http://via.placeholder.com/300x450"/>
@@ -38,11 +58,11 @@
                         </div>
                     </div>
 
-                </div>
+                </div>{% endcomment %}
 
 
                 <div class="container col-md-3 m-0">
-                    <span>Направление </span>
+                    <div class="filter__title">Направление </div>
 
                     <div v-for="(theme, index) in themes" class="form-check">
                         <input type="checkbox" class="form-check-input" v-bind:value="theme.id"
@@ -51,17 +71,9 @@
                     </div>
 
 
-                    {% comment %}                <span>Методика </span>
-                <div>
-                    <div v-for="(method, index) in methods" class="form-check">
-                        <input type="checkbox" class="form-check-input" v-bind:value='method.id+1000'
-                               v-model="selectedMethods" v-bind:id='method.id+1000'/>
-                        <label class="form-check-label" v-bind:for='method.id+1000'>${method.title}</label>
-                    </div>
 
-                </div>{% endcomment %}
 
-                    <span>Опыт консультирования </span>
+                    <div class="filter__title">Опыт консультирования </div>
                     <div v-for="(exp, index) in experienceList" class="form-check">
                         <input type="radio" class="form-check-input" v-bind:value="exp"
                                v-model="selectedExps" v-bind:id="exp.value" v-bind:name="exp.value"

@@ -3,7 +3,7 @@ var app = new Vue({
     delimiters: ['${', '}'],
     data: {
         selectedThemes: [],
-        selectedExps: {value: 'от 1 года', start: 1},
+        selectedExps: {value: 'от 5 лет', start: 6, checked: 'checked'},
         selectedMethods: [],
         selectedSpecialist: {},
         selectedTimeslot: {},
@@ -128,8 +128,7 @@ var app = new Vue({
 
         experienceList() {
             return [
-                {value: 'от 1 года', start: 1, checked: 'checked'},
-                {value: 'от 5 лет', start: 6,},
+                {value: 'от 5 лет', start: 6, checked: 'checked'},
                 {value: 'от 10 лет', start: 11,},
                 {value: 'от 15 лет', start: 16,},
                 {value: 'более 20 лет', start: 21,},
