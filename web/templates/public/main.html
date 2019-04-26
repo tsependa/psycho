@@ -2,66 +2,9 @@
 {% load static %}
 
 {% block header %}
-    <header>
-        <div class="container">
-            <div class="row header__row">
-                <div class="col-8 col-sm-8 col-md-4">
-                    <img src="/static/img/pospsychology-logo.png" class="resp-img" alt="">
-                </div>
-                <div class="col-sm-12 col-md-6 d-copy">
-                    <ul class="header__btns">
-                        <li>
-                            <a href="" class="header-btn">Подбор специалиста</a>
-                        </li>
-                        <li>
-                            <a href="" class="header-btn">Ответы на вопросы</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-sm-12 col-md-2 login__wrap d-copy">
-                    <div class="header-btn login">
-                        Войти
-                    </div>
-                </div>
-                <!-- mobile menu -->
-                <div class="col-4 col-sm-4 m-copy">
-                    <div class="menu"></div>
-                    <ul class="menu__list menu-list">
-                        <li>
-                            <a href="" class="header-btn">Подбор специалиста</a>
-                        </li>
-                        <li>
-                            <a href="" class="header-btn">Ответы на вопросы</a>
-                        </li>
-                        <li>
-                            <div class="header-btn login">
-                                Войти
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row header__info">
-                <div class="col-sm-12 col-md-6 header__lrow">
-                    <h1>Онлайн-консультация психолога</h1>
-                    <img src="/static/img/header-img-clear.png" class="resp-img m-copy" alt="">
-                    <button class="btn">Начать</button>
-                </div>
-                <div class="js-type__box">
-                    <p id="js-type__element" data-typeitid="18gl3fjt0ko">
-                        <span style="display:inline;position:relative;font:inherit;color:inherit;" class="ti-container">Как вести себя в отношениях?</span>
-                        <span style="display:inline;position:relative;font:inherit;color:inherit;"
-                              class="ti-cursor">|</span></p>
-                </div>
-                <div class="col-sm-12 col-md-6 header__lrow d-copy">
-                    <img src="/static/img/header-img-clear.png" class="resp-img" alt="">
-                </div>
-            </div>
-        </div>
-    </header>
-    <script src="https://cdn.jsdelivr.net/npm/typeit@6.0.2/dist/typeit.min.js"></script>
+    {% include 'header_full.html' %}
 {% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/typeit@6.0.2/dist/typeit.min.js"></script>
 
 {% block content %}
 
@@ -106,7 +49,7 @@
             </div>
             <div class="row users__list">
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card">
+                    <div class="blue-card">
                         <img src="/static/img/user-01.png">
                         <h3><strong>Хотите работать с профессиональными психологами</strong></h3>
                         <ul class="users__descr text-left">
@@ -127,7 +70,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card">
+                    <div class="blue-card">
                         <img src="/static/img/user-02.png">
                         <h3><strong>Не хотите никуда ездить и подстраиваться под чужое расписание</strong></h3>
                         <ul class="users__descr text-left">
@@ -145,7 +88,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card">
+                    <div class="blue-card">
                         <img src="/static/img/user-03.png">
                         <h3><strong>Не знаете где и как искать хорошего психолога</strong></h3>
                         <ul class="users__descr text-left">
@@ -178,45 +121,24 @@
                 <div class="col-10 offset-1 col-md-12 offset-md-0">
                     <div>
                         <div class="owl-carousel specialist__slider">
-                            <div>
-                                <img src="/static/img/specialist-01.png">
-                                <p class="specialist__name">Балоян Вероника Евгеньевна</p>
-                                <p class="specialist__prof">Специалист по семейным проблемам</p>
-                                <p class="specialist__time">14 марта, 10:00</p>
-                            </div>
-                            <div>
+                            {% for specialist in specialists %}
+                                <div >
+                                    <img class="img__gradient1" src="/media/{{ specialist.avatar }}">
+                                    <p class="specialist__name">{{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }} </p>
+                                    <p class="specialist__prof">Специалист по семейным проблемам</p>
+                                    <p class="specialist__time">14 марта, 10:00</p>
+                                </div>
+                            {% endfor %}
+
+{% comment %}                            <div>
                                 <img src="/static/img/specialist-02.png">
                                 <p class="specialist__name">Ашихина Екатерина Владимировна</p>
                                 <p class="specialist__prof">Гештальт-терапевт</p>
                                 <p class="specialist__time">12 марта, 14:00</p>
-                            </div>
-                            <div>
-                                <img src="/static/img/specialist-03.png">
-                                <p class="specialist__name">Ромадинова Галина Ивановна</p>
-                                <p class="specialist__prof">Сексолог и арт-терапевт</p>
-                                <p class="specialist__time">17 марта, 11:00</p>
-                            </div>
-                            <div>
-                                <img src="/static/img/specialist-04.png">
-                                <p class="specialist__name">Комаров Максим Александрович</p>
-                                <p class="specialist__prof">Коуч и специалсит по саморазвитию</p>
-                                <p class="specialist__time">13 марта, 18:00</p>
-                            </div>
-                            <div>
-                                <img src="/static/img/specialist-01.png">
-                                <p class="specialist__name">Балоян Вероника Евгеньевна</p>
-                                <p class="specialist__prof">Специалист по семейным проблемам</p>
-                                <p class="specialist__time">14 марта, 10:00</p>
-                            </div>
-                            <div>
-                                <img src="/static/img/specialist-02.png">
-                                <p class="specialist__name">Ашихина Екатерина Владимировна</p>
-                                <p class="specialist__prof">Гештальт-терапевт</p>
-                                <p class="specialist__time">12 марта, 14:00</p>
-                            </div>
+                            </div>{% endcomment %}
                         </div>
                     </div>
-                    <button class="btn">
+                    <button class="green-btn">
                         Подобрать специалиста
                     </button>
                 </div>
@@ -243,7 +165,7 @@
                 <div class="col-10 offset-1 col-sm-6 offset-sm-0 col-md-3 offset-md-0 m-30">
                     <img src="/static/img/specialist.png">
                     <p>
-                        <strong>Специалисты регулятно проходят супервизии <span class="mark"></span></strong> и
+                        <strong>Специалисты регулятно проходят супервизии</strong> <span class="mark"></span> и
                         повышения квалификации
                         <span class="mark-text">Супервизии — это один из методов теоретического и практического повышения квалификации специалистов в области психотерапии, клинической психологии и др. в форме их профессионального консультирования и анализа целесообразности и качества используемых практических подходов и методов психотерапии.</span>
                     </p>
@@ -258,7 +180,7 @@
 
     <section class="moscow">
         <div class="container">
-            <div class="row card">
+            <div class="row blue-card">
                 <div class="col-12 col-md-6 moscow__logos">
                     <img src="/static/img/msppn-logo.png">
                     <img src="/static/img/moscow-logo.png">
@@ -309,44 +231,13 @@
                         <p>Мы дополнительно напомним вам уведомлением на почту или по смс</p>
                     </div>
                 </div>
+
             </div>
+
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-3 footer__mlast">
-                    <div>
-                        <a href="">Служба поддержки</a>
-                    </div>
-                    <div>
-                        <a href="">Ответы на вопросы</a>
-                    </div>
-                    <div>
-                        <a href="mailto:office@роспсихология.рф" target="_blank">office@роспсихология.рф</a>
-                    </div>
-                    <p class="m-copy">© 2019 Роспсихология.рф</p>
-                </div>
-                <div class="col-12 col-md-6">
-                    <p>“Роспсихология" — это не скорая психологическая помощь.</p>
-                    <p><strong>Если у вас серьезные, угрожающие вашей жизни проблемы</strong>, которые требуют
-                        немедленного решения, вам лучше обратиться в какую-либо из <a href="" target="_blank">этих
-                            организаций</a>.</p>
-                </div>
-                <div class="col-12 col-md-3">
-                    <div>
-                        <a href="" class="footer__file" download>Пользовательское соглашение</a>
-                    </div>
-                    <div>
-                        <a href="" class="footer__file" download>Политика в отношении обработки и защиты персональных
-                            данных</a>
-                    </div>
-                    <p class="d-copy">© 2019 Роспсихология.рф</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+
 
 
 {% endblock %}
@@ -360,11 +251,12 @@
     </script>
     <script src="/static/js/owl.carousel.min.js"></script>
     <script src="/static/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typeit@6.0.2/dist/typeit.min.js"></script>
     <script type="text/javascript">
 
     </script>
 {% endblock %}
 
 {% block footer %}
-
+    {% include 'footer.html' %}
 {% endblock %}

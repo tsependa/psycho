@@ -10,17 +10,18 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Онлайн консультации психологов</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-{% comment %}    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">{% endcomment %}
-      <link href="/static/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="/static/css/mdb.min.css" rel="stylesheet">
     <link href="/static/css/app.css" rel="stylesheet">
-    <link href="/static/css/grid.min.css" rel="stylesheet">
+    {% comment %}    <link href="/static/css/grid.min.css" rel="stylesheet">{% endcomment %}
     <link href="/static/css/owl.carousel.min.css" rel="stylesheet">
     <link href="/static/css/owl.theme.default.css" rel="stylesheet">
 
 </head>
-<body >
+<body>
 
 {% block header %}
+    {% include 'header.html' %}
 {% endblock %}
 
 {% block content %}
@@ -67,11 +68,15 @@
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138440288-1"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'UA-138440288-1');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-138440288-1');
 </script>
 
 {% block js_add %}
