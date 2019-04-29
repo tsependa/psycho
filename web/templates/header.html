@@ -18,7 +18,19 @@
             </div>
             <div class="col-sm-12 col-md-2 login__wrap d-copy">
                 <div class="header-btn login">
-                    <a class="nav-link" href="{% url 'login' %} "></i>Войти</a>
+                    {% if user.is_authenticated %}
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">{{ user.username }}</a>
+                        <div class="dropdown-menu">
+                            {% comment %} <a class="dropdown-item" href="#">Личный кабинет</a>{% endcomment %}
+                            <a class="dropdown-item" href="{% url 'office' %}">Заявки</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+                        </div>
+                    {% else %}
+                        <a class="nav-link" href="{% url 'login' %} "></i>Войти</a>
+                    {% endif %}
                 </div>
             </div>
             <!-- mobile menu -->
@@ -33,13 +45,12 @@
                     </li>
                     <li>
                         <div class="header-btn login">
-                              <a href="{% url 'login' %}" class="header-btn">Войти</a>
+                            <a href="{% url 'login' %}" class="header-btn">Войти</a>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
-
 
 
     </div>

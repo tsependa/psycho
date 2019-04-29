@@ -18,7 +18,23 @@
             </div>
             <div class="col-sm-12 col-md-2 login__wrap d-copy">
                 <div class="header-btn login">
-                    <a class="nav-link" href="{% url 'login' %} ">Войти</a>
+                    {% if user.is_authenticated %}
+                        <ul class="navbar-nav ml-auto nav-flex-icons">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">{{ user.username }}</a>
+                                <div class="dropdown-menu">
+                                    {% comment %} <a class="dropdown-item" href="#">Личный кабинет</a>{% endcomment %}
+                                    <a class="dropdown-item" href="{% url 'office' %}">Заявки</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+                                </div>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <a class="nav-link" href="{% url 'login' %} "></i>Войти</a>
+                    {% endif %}
                 </div>
             </div>
             <!-- mobile menu -->
