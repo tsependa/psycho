@@ -519,6 +519,11 @@ header {
     padding: 50px 0 0 0;
 }
 
+.header__small {
+    background: #F3F9FF;
+    padding: 10px 0 0 0;
+}
+
 .header__row {
     display: flex;
     align-items: center;
@@ -892,9 +897,21 @@ footer strong {
     top: 190px;
     left: 67%;
     background: #fff;
-    padding: 10px 20px;
+    padding: 10px 10px;
     border-radius: 12px
 }
+
+@media (max-width: 768px) {
+    .js-type__box {
+        position: absolute;
+        top: 350px;
+        left: 40%;
+        background: #fff;
+        padding: 10px 10px;
+        border-radius: 12px
+    }
+}
+
 
 .js-type__box:before {
     content: "";
@@ -916,7 +933,7 @@ footer strong {
     cursor: default
 }
 
-.img__gradient1{
+.img__gradient1 {
     display: block;
     width: 100%;
     content: '';

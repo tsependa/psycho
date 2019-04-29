@@ -1,6 +1,6 @@
 {% load static %}
 
-<header>
+<header class="header__small">
     <div class="container">
         <div class="row header__row">
             <div class="col-8 col-sm-8 col-md-4">
@@ -33,7 +33,7 @@
                     </li>
                     <li>
                         <div class="header-btn login">
-                            Войти
+                              <a href="{% url 'login' %}" class="header-btn">Войти</a>
                         </div>
                     </li>
                 </ul>

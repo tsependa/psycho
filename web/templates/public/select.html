@@ -62,7 +62,7 @@
 
 
                 <div class="container col-md-3 m-0">
-                    <div class="filter__title">Направление </div>
+                    <div class="filter__title">Направление</div>
 
                     <div v-for="(theme, index) in themes" class="form-check">
                         <input type="checkbox" class="form-check-input" v-bind:value="theme.id"
@@ -71,9 +71,7 @@
                     </div>
 
 
-
-
-                    <div class="filter__title">Опыт консультирования </div>
+                    <div class="filter__title">Опыт консультирования</div>
                     <div v-for="(exp, index) in experienceList" class="form-check">
                         <input type="radio" class="form-check-input" v-bind:value="exp"
                                v-model="selectedExps" v-bind:id="exp.value" v-bind:name="exp.value"
@@ -105,7 +103,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="card-body ">
+                                    <div class="card-body m-2 ">
                                         <h4 class="card-title"> ${selectedSpecialist.middle_name}
                                             ${selectedSpecialist.first_name}
                                             ${selectedSpecialist.last_name }</h4>
@@ -129,6 +127,14 @@
                                             <div class="row">
                                                 <p><b>${selectedSpecialist.experience}</b> лет опыта консультирования
                                                 </p>
+                                            </div>
+
+                                            <div class="row">
+                                                <form action="{% url 'select' %}">
+                                                    <button class="green-btn" type="submit">
+                                                        Записаться на консультацию
+                                                    </button>
+                                                </form>
                                             </div>
 
                                         </div>

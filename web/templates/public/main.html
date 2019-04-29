@@ -4,7 +4,6 @@
 {% block header %}
     {% include 'header_full.html' %}
 {% endblock %}
-<script src="https://cdn.jsdelivr.net/npm/typeit@6.0.2/dist/typeit.min.js"></script>
 
 {% block content %}
 
@@ -252,10 +251,40 @@
         moment.locale('ru');  // Set the default/global locale
     </script>
     <script src="/static/js/owl.carousel.min.js"></script>
-    <script src="/static/js/app.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/typeit@6.0.2/dist/typeit.min.js"></script>
     <script type="text/javascript">
+        var instance = new TypeIt('#js-type__element', {
+            strings: ["Как повысить самооценку?", "Как вести себя в отношениях?", "Как простить измену?", "Как полюбить себя?", "Как избавиться от депрессии?", "Как избавиться от одиночества?", "Как бороться со стрессом?", "Как пережить потерю близкого человека?", "Как пережить развод?", "Как быть хорошим родителем?", "Как общаться с ребенком?"],
+            speed: 100,
+            breakLines: false,
+            autoStart: true,
+            loop: true
+        });
 
+        instance.go();
+
+        // slider
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                600: {
+                    items: 2,
+                    nav: true
+                },
+                1000: {
+                    items: 4,
+                    nav: true,
+                    loop: false
+                }
+            }
+        });
     </script>
 {% endblock %}
 
