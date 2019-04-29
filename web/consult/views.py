@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 
-from consult.models import Theme, Specialist, Enroll, TimeSlot
+from consult.models import Theme, Specialist, Enroll, TimeSlot, Faq
 
 
 @login_required
@@ -69,6 +69,11 @@ def magic_payment(request):
 
 def profile(request):
     return render(request, 'office/profile.html', {})
+
+
+def faq(request):
+    faqs = Faq.objects.all()
+    return render(request, 'public/faq.html', {'faqs': faqs})
 
 
 @login_required

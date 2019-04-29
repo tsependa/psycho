@@ -102,3 +102,9 @@ class Payment(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=STATUS_OPEN)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Faq(models.Model):
+    question = models.TextField(blank=True)
+    answer = models.TextField(blank=True)
+    sequence = models.IntegerField()
