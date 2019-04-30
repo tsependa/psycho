@@ -521,7 +521,7 @@ header {
 
 .header__small {
     background: #F3F9FF;
-    padding: 10px 0 0 0;
+    padding: 10px 0 0 20px;
 }
 
 .header__row {
@@ -1048,4 +1048,22 @@ blockquote cite {
     margin-top: 10px;
     margin-bottom: 8px;
     color: #0d0d0d;
+}
+
+.day {
+    font-size: 1.7em;
+    font-weight: 300;
+    line-height: 1;
+    width: 40px;
+}
+
+.month {
+    font-size: 1.3em;
+    font-weight: 200;
+    line-height: 1;
+    width: 50px;
+}
+
+.slot:hover {
+    background: rgba(60, 158, 226, 0.44);
 }

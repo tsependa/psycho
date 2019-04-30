@@ -124,17 +124,10 @@
                                 <div>
                                     <img class="img__gradient1" src="/media/{{ specialist.avatar }}">
                                     <p class="specialist__name">{{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }} </p>
-                                    <p class="specialist__prof">Специалист по семейным проблемам</p>
+                                    <p class="specialist__prof">Опыт консультирования {{ specialist.experience }} лет.</p>
                                     <p class="specialist__time">6 мая, 10:00</p>
                                 </div>
                             {% endfor %}
-
-                            {% comment %}                            <div>
-                                <img src="/static/img/specialist-02.png">
-                                <p class="specialist__name">Ашихина Екатерина Владимировна</p>
-                                <p class="specialist__prof">Гештальт-терапевт</p>
-                                <p class="specialist__time">12 марта, 14:00</p>
-                            </div>{% endcomment %}
                         </div>
                     </div>
                     <form action="{% url 'select' %}">

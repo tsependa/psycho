@@ -40,6 +40,10 @@
     flex: 1;
 }
 
+.slot {
+    margin: 10px;
+}
+
 .slot:hover {
     background: rgba(60, 158, 226, 0.44);
 }

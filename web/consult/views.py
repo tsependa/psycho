@@ -78,8 +78,10 @@ def faq(request):
 
 @login_required
 def schedule(request):
-    response = render(request, 'office/schedule.html', {})
     user = User.objects.get(username=request.user.username)
+    specialist = user.specialist
+    response = render(request, 'office/schedule.html', {'specialist': specialist})
+
 
     if hasattr(user, 'specialist'):
         response.set_cookie("specialist_id", user.specialist.id)

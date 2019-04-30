@@ -15,12 +15,15 @@
                 </li>
                 <li><a class="collapsible-header waves-effect arrow-r" href="{% url 'office' %}"><i
                         class=" fa fa-chevron-right"></i>
-                    Заявки</a>
+                    Консультации</a>
                 </li>
-                <li><a class="collapsible-header waves-effect arrow-r" href="{% url 'schedule' %}"><i
-                        class=" fa fa-calendar"></i>
-                    Расписание</a>
-                </li>
+
+                {% if user.specialist %}
+                    <li><a class="collapsible-header waves-effect arrow-r" href="{% url 'schedule' %}"><i
+                            class=" fa fa-calendar"></i>
+                        Расписание</a>
+                    </li>
+                {% endif %}
                 <li><a class="collapsible-header waves-effect arrow-r" href="{% url 'profile' %}"><i
                         class="fa fa-user"></i>
                     Профиль</a>
