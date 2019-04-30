@@ -945,7 +945,7 @@ footer strong {
     background: radial-gradient(#efefef, #b1b1b1);
 }
 
-
+/*
 @media (min-width: 0) {
     .card-deck .card {
         flex: 0 0 calc(100% - 30px);
@@ -974,7 +974,7 @@ footer strong {
     .card-deck .card {
         flex: 0 0 calc(33.33333% - 30px);
     }
-}
+}*/
 
 .specialist {
     position: relative;
@@ -1066,4 +1066,23 @@ blockquote cite {
 
 .slot:hover {
     background: rgba(60, 158, 226, 0.44);
+}
+
+.mobile_search {
+    display: none;
+}
+
+.desktop_search {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+    .mobile_search {
+        display: block;
+    }
+
+    .desktop_search {
+        display: none;
+    }
 }

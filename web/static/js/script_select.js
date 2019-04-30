@@ -19,14 +19,25 @@ var app = new Vue({
         showPopup: false,
 
 
-
     },
+
     mounted: function () {
         this.getThemes();
         this.getSpecialists();
         this.getMethods();
+
+
     },
     methods: {
+        installOwlCarousel: function () {
+            console.log("install carusele")
+            $('.owl-carousel').owlCarousel({
+                margin: 30,
+
+                items: 1,
+                nav: true,
+            })
+        },
         getThemes: function () {
             this.loading = true;
             this.$http.get('/api/theme/')
@@ -46,6 +57,10 @@ var app = new Vue({
                 .then((response) => {
                     this.specialists = response.data;
                     this.loading = false;
+                    vm = this;
+                    Vue.nextTick(function () {
+                        vm.installOwlCarousel();
+                    }.bind(vm));
                 })
                 .catch((err) => {
                     this.loading = false;
@@ -69,7 +84,7 @@ var app = new Vue({
 
         selectSpecialist: function (specialist) {
             this.selectedSpecialist = specialist;
-          /*  #$('#modalSpecialistForm').modal('show');*/
+            /*  #$('#modalSpecialistForm').modal('show');*/
 
 
         },
@@ -123,6 +138,8 @@ var app = new Vue({
 
                 return specialist.experience > this.selectedExps.start;
             });
+
+
             return filteredExpSpecialists;
         },
 
@@ -139,6 +156,3 @@ var app = new Vue({
     }
 
 });
-
-
-

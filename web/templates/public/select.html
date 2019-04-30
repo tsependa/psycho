@@ -9,28 +9,30 @@
     <div id="select_app">
 
         <div class="container">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="row specialist__slider">
 
-                        <div class="col-md-4" v-for="specialist in filteredSpecialists" :key="specialist.id"
-                             @click="selectSpecialist(specialist)" data-toggle="modal" data-target="#modalSpecialist">
+            <div class="mobile_search">
+
+                <div class="row">
+
+                    <div class="owl-carousel">
+                        <div v-for="specialist in filteredSpecialists" {% comment %}:key="specialist.id"{% endcomment %}
+                             @click="selectSpecialist(specialist)" data-toggle="modal"
+                             data-target="#modalSpecialist">
                             <img class="img__gradient1" :src="specialist.avatar">
-                            <p class="specialist__name">${ specialist.middle_name } ${ specialist.first_name } ${
-                                specialist.last_name } </p>
-                            <p class="specialist__prof">Специалист по семейным проблемам</p>
+                            <p class="specialist__name">
+                                ${ specialist.middle_name }
+                                ${ specialist.first_name }
+                                ${ specialist.last_name } </p>
+                            <p class="specialist__prof">${ specialist.experience } лет опыта
+                                консультирования</p>
                             <p class="specialist__time">06 мая, 10:00</p>
                         </div>
 
 
-                        {% comment %}                            <div>
-                                <img src="/static/img/specialist-02.png">
-                                <p class="specialist__name">Ашихина Екатерина Владимировна</p>
-                                <p class="specialist__prof">Гештальт-терапевт</p>
-                                <p class="specialist__time">12 марта, 14:00</p>
-                            </div>{% endcomment %}
                     </div>
+
                 </div>
+
                 {% comment %} <div class="card-deck col-md-9">
 
                     <div class="card mb-4 specialist" v-for="specialist in filteredSpecialists" :key="specialist.id"
@@ -80,6 +82,27 @@
                     </div>
                 </div>
             </div>
+             <div class="desktop_search">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="row specialist__slider">
+
+                            <div class="col-md-4" v-for="specialist in filteredSpecialists" :key="specialist.id"
+                                 @click="selectSpecialist(specialist)" data-toggle="modal"
+                                 data-target="#modalSpecialist">
+                                <img class="img__gradient1" :src="specialist.avatar">
+                                <p class="specialist__name">${ specialist.middle_name } ${ specialist.first_name }
+                                    ${
+                                    specialist.last_name } </p>
+                                <p class="specialist__prof">${ specialist.experience } лет опыта
+                                    консультирования</p>
+                                <p class="specialist__time">06 мая, 10:00</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
         </div>
@@ -115,6 +138,11 @@
                                             </div>
 
                                             <div class="row">
+                                                <p><b>${selectedSpecialist.experience}</b> лет опыта консультирования
+                                                </p>
+                                            </div>
+
+                                            <div class="row">
                                                 <div class="modal__title">Образование:</div>
                                                 <p v-html="selectedSpecialist.education"></p>
                                             </div>
@@ -124,10 +152,6 @@
                                                 <p v-html="selectedSpecialist.education_add"></p>
                                             </div>
 
-                                            <div class="row">
-                                                <p><b>${selectedSpecialist.experience}</b> лет опыта консультирования
-                                                </p>
-                                            </div>
 
                                             <div class="row">
                                                 <form action="{% url 'select' %}">
@@ -151,15 +175,14 @@
     </div>
 
 
-
-
-
-
 {% endblock %}
 
 {% block js_add %}
-
+    <script src="/static/js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/static/js/script_select.js"></script>
+    {% comment %}
+    <script type="text/javascript" src="/static/js/app.js"></script>
+{% endcomment %}
 
 
 {% endblock %}
