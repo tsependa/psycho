@@ -40,6 +40,10 @@ class Type(models.Model):
 
 
 class Specialist(models.Model):
+    GENDER_CHOICES = (
+        ('male', 'Мужской'),
+        ('female', 'Женский'),
+    )
     user = models.OneToOneField(User, blank=True, null=True, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
@@ -50,6 +54,8 @@ class Specialist(models.Model):
     quote = models.TextField(blank=True)
 
     experience = models.IntegerField(blank=True)
+
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='female')
 
     degree = models.CharField(max_length=256, blank=True)
 
