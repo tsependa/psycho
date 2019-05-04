@@ -92,8 +92,15 @@
                                     <div class="row">
                                         <div class="modal__title">Доступное время:</div>
 
-                                        <div class="theme-btn" v-for="timeslot in specialist.timeslots">
-                                            ${timeslot.start_time | formatDay}
+                                        <div class=""
+                                             v-for="(timeslot, index) in slotsAggr(specialist.timeslots)">
+                                            <div class="theme-btn">
+                                                ${index | formatDay}
+                                            </div>
+                                            <div class="theme-btn" v-for="time in timeslot"
+                                                 v-on:click="selectTimeslot(time)">
+                                                ${time.start_time | formatTime}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
