@@ -8,97 +8,177 @@
 {% block content %}
     <div id="select_app">
 
-        <div class="container">
+        <div class="container-fluid">
 
             <div class="mobile_search">
 
-                <div class="row">
 
-                    <div class="owl-carousel">
-                        <div v-for="specialist in filteredSpecialists" {% comment %}:key="specialist.id"{% endcomment %}
-                             @click="selectSpecialist(specialist)" data-toggle="modal"
-                             data-target="#modalSpecialist">
-                            <img class="img__gradient1" :src="specialist.avatar">
-                            <p class="specialist__name">
-                                ${ specialist.middle_name }
-                                ${ specialist.first_name }
-                                ${ specialist.last_name } </p>
-                            <p class="specialist__prof">${ specialist.experience } лет опыта
-                                консультирования</p>
-                            <p class="specialist__time">06 мая, 10:00</p>
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 p-1">
+                                    <select class="browser-default custom-select" v-model="selectedTheme">
+                                        <option selected :value={}></option>
+                                        <option v-for="theme in themes" v-bind:value="theme">${theme.title}</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 p-1">
+                                    <select class="browser-default custom-select" v-model="selectedExps">
+                                        <option v-for="exp in experienceList" v-bind:value="exp">${exp.value}</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 p-1">
+                                    <select class="browser-default custom-select" v-model="selectedGender">
+                                        <option selected value=""></option>
+                                        <option value="male">мужской</option>
+                                        <option value="female">женский</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-
-
                     </div>
 
                 </div>
 
-                {% comment %} <div class="card-deck col-md-9">
 
-                    <div class="card mb-4 specialist" v-for="specialist in filteredSpecialists" :key="specialist.id"
-                         @click="selectSpecialist(specialist)"
-                         style="max-height: 420px" data-toggle="modal" data-target="#modalSpecialist">
+                <div v-for="specialist in filteredSpecialists" :key="specialist.id"
+                     @click="selectSpecialist(specialist)" data-toggle="modal"
+                     data-target="#modalSpecialist">
+                    <div class="row font-small">
+                        <div class="col-4 p-1">
+                            <div class="p-0">
+                                <img class="img__gradient1" :src="specialist.avatar">
+                            </div>
+                            <div class="row p-0 m-0">
+                                <form action="{% url 'select' %}">
+                                    <button class="green-btn-small" type="submit">
+                                        Записаться на консультацию
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="p-1">
+                                <h4 class=""> ${specialist.middle_name}
+                                    ${specialist.first_name}
+                                    ${specialist.last_name }</h4>
+                                <div class="">
+                                    <div class="row">
+                                        <blockquote v-html="specialist.quote">
+                                        </blockquote>
+                                    </div>
 
-                        <div class="card-body " style="padding: 0.25rem;">
-                            <h3 class="card-text"> ${specialist.middle_name} ${specialist.first_name}
-                                ${specialist.last_name }</h3>
-                             <div class="card-text">
-                                <div class="row">
-                                    <i class="fa fa-quote-left"></i>
-                                    <div class="row pl-3">${specialist.quote}</div>
+                                    <div class="row">
+                                        <b>${specialist.experience}</b> лет опыта консультирования
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="modal__title">Образование:</div>
+                                        <p v-html="specialist.education"></p>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="modal__title">Доп. образование:</div>
+                                        <p v-html="specialist.education_add"></p>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% comment %} <img class="img__gradient1" :src="specialist.avatar">
+                    <p class="specialist__name">
+                        ${ specialist.middle_name }
+                        ${ specialist.first_name }
+                        ${ specialist.last_name } </p>
+                    <p class="specialist__prof">${ specialist.experience } лет опыта
+                        консультирования</p>
+                    <p class="specialist__time">06 мая, 10:00</p>{% endcomment %}
+                </div>
+
+
+            </div>
+            <div class="desktop_search">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="" v-for="specialist in filteredSpecialists" :key="specialist.id"
+                                     @click="selectSpecialist(specialist)" data-toggle="modal"
+                                     data-target="#modalSpecialist">
+                                    <div class="row font-small">
+                                        <div class="col-3 p-1">
+                                            <div class="p-0">
+                                                <img class="img__gradient1" :src="specialist.avatar">
+                                            </div>
+                                            <div class="row">
+                                                <form action="{% url 'select' %}">
+                                                    <button class="green-btn m-3" type="submit">
+                                                        Записаться на консультацию
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="p-1">
+                                                <h4 class=""> ${specialist.middle_name}
+                                                    ${specialist.first_name}
+                                                    ${specialist.last_name }</h4>
+                                                <div class="">
+                                                    <div class="row">
+                                                        <blockquote v-html="specialist.quote">
+                                                        </blockquote>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <b>${specialist.experience}</b> лет опыта консультирования
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="modal__title">Образование:</div>
+                                                        <p v-html="specialist.education"></p>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="modal__title">Доп. образование:</div>
+                                                        <p v-html="specialist.education_add"></p>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% comment %}                                <img class="img__gradient1" :src="specialist.avatar">
+                                <p class="specialist__name">${ specialist.middle_name } ${ specialist.first_name }
+                                    ${ specialist.last_name } </p>
+                                <p class="specialist__prof">${ specialist.experience } лет опыта
+                                    консультирования</p>
+                                <p class="specialist__time">06 мая, 10:00</p>{% endcomment %}
                                 </div>
 
                             </div>
                         </div>
+                        <div class="col-md-3 m-0">
+                            <div class="filter__title">Направление</div>
 
-                        <div class=" card-img">
-                            <img v-if="specialist.avatar" class="card-img-bottom img__gradient1" :src="specialist.avatar"
-                                 style=""/>
-                            <img v-else class="card-img-top" style=""
-                                 src="http://via.placeholder.com/300x450"/>
-
-                        </div>
-                    </div>
-
-                </div>{% endcomment %}
-
-
-                <div class="container col-md-3 m-0">
-                    <div class="filter__title">Направление</div>
-
-                    <div v-for="(theme, index) in themes" class="form-check">
-                        <input type="checkbox" class="form-check-input" v-bind:value="theme.id"
-                               v-model="selectedThemes" v-bind:id='theme.id'/>
-                        <label class="form-check-label" v-bind:for='theme.id'>${theme.description}</label>
-                    </div>
-
-
-                    <div class="filter__title">Опыт консультирования</div>
-                    <div v-for="(exp, index) in experienceList" class="form-check">
-                        <input type="radio" class="form-check-input" v-bind:value="exp"
-                               v-model="selectedExps" v-bind:id="exp.value" v-bind:name="exp.value"
-                               v-bind:checked="exp.checked"/>
-                        <label class="form-check-label" v-bind:for="exp.value">${exp.value}</label>
-                    </div>
-                </div>
-            </div>
-             <div class="desktop_search">
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="row specialist__slider">
-
-                            <div class="col-md-4" v-for="specialist in filteredSpecialists" :key="specialist.id"
-                                 @click="selectSpecialist(specialist)" data-toggle="modal"
-                                 data-target="#modalSpecialist">
-                                <img class="img__gradient1" :src="specialist.avatar">
-                                <p class="specialist__name">${ specialist.middle_name } ${ specialist.first_name }
-                                    ${
-                                    specialist.last_name } </p>
-                                <p class="specialist__prof">${ specialist.experience } лет опыта
-                                    консультирования</p>
-                                <p class="specialist__time">06 мая, 10:00</p>
+                            <div v-for="(theme, index) in themes" class="form-check">
+                                <input type="radio" class="form-check-input" v-bind:value="theme"
+                                       v-model="selectedTheme" v-bind:id='theme.id'/>
+                                <label class="form-check-label" v-bind:for='theme.id'>${theme.description}</label>
                             </div>
 
+
+                            <div class="filter__title">Опыт консультирования</div>
+                            <div v-for="(exp, index) in experienceList" class="form-check">
+                                <input type="radio" class="form-check-input" v-bind:value="exp"
+                                       v-model="selectedExps" v-bind:id="exp.value" v-bind:name="exp.value"
+                                       v-bind:checked="exp.checked"/>
+                                <label class="form-check-label" v-bind:for="exp.value">${exp.value}</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -180,9 +260,9 @@
 {% block js_add %}
     <script src="/static/js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/static/js/script_select.js"></script>
-    {% comment %}
-    <script type="text/javascript" src="/static/js/app.js"></script>
-{% endcomment %}
+
+    {% comment %}    <script type="text/javascript" src="/static/js/app.js"></script>{% endcomment %}
+
 
 
 {% endblock %}

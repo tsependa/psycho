@@ -2,11 +2,12 @@ var app = new Vue({
     el: '#select_app',
     delimiters: ['${', '}'],
     data: {
-        selectedThemes: [],
+        selectedTheme: {},
         selectedExps: {value: 'от 5 лет', start: 6, checked: 'checked'},
-        selectedMethods: [],
+        selectedGender: "",
         selectedSpecialist: {},
         selectedTimeslot: {},
+
 
         themes: [],
         specialists: [],
@@ -24,20 +25,11 @@ var app = new Vue({
     mounted: function () {
         this.getThemes();
         this.getSpecialists();
-        this.getMethods();
+        /*this.getMethods();*/
 
 
     },
     methods: {
-        installOwlCarousel: function () {
-            console.log("install carusele")
-            $('.owl-carousel').owlCarousel({
-                margin: 30,
-
-                items: 1,
-                nav: true,
-            })
-        },
         getThemes: function () {
             this.loading = true;
             this.$http.get('/api/theme/')
@@ -57,10 +49,6 @@ var app = new Vue({
                 .then((response) => {
                     this.specialists = response.data;
                     this.loading = false;
-                    vm = this;
-                    Vue.nextTick(function () {
-                        vm.installOwlCarousel();
-                    }.bind(vm));
                 })
                 .catch((err) => {
                     this.loading = false;
@@ -131,16 +119,29 @@ var app = new Vue({
 
         filteredSpecialists() {
             let filteredThemeSpecialists = this.specialists.filter((specialist) => {
-                return this.selectedThemes.every(i => specialist.themes.includes(i))
-            });
+                    if (isEmpty(this.selectedTheme)) {
+                        return true;
+                    } else {
+                        return specialist.themes.includes(this.selectedTheme.id);
+
+                    }
+                }
+            );
 
             let filteredExpSpecialists = filteredThemeSpecialists.filter((specialist) => {
-
                 return specialist.experience > this.selectedExps.start;
             });
 
+            let filteredGenderSpecialists = filteredExpSpecialists.filter((specialist) => {
+                if (isEmpty(this.selectedGender)) {
+                    return true;
+                } else {
+                    return specialist.gender === this.selectedGender;
+                }
+            });
 
-            return filteredExpSpecialists;
+
+            return filteredGenderSpecialists;
         },
 
         experienceList() {
@@ -156,3 +157,11 @@ var app = new Vue({
     }
 
 });
+
+function isEmpty(obj) {
+    for (let key in obj) {
+        // if the loop has started, there is a property
+        return false;
+    }
+    return true;
+}

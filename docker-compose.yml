@@ -14,6 +14,7 @@ services:
     networks:
       psycho-net:
 
+
   db:
     container_name: mysql
     restart: always

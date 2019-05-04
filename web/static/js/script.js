@@ -19,7 +19,7 @@ var app = new Vue({
         specialists: [],
         timeslots: [],
         loading: false,
-        selectedThemes: {},
+        selectedTheme: {},
         selectedSpecialist: {},
         selectedTimeslot: {},
         message: null,
