@@ -12,6 +12,8 @@ class ThemeSerializer(serializers.ModelSerializer):
 
 
 class SpecialistSerializer(serializers.ModelSerializer):
+    themes = ThemeSerializer(many=True, read_only=True)
+
     class Meta:
         model = Specialist
         fields = '__all__'

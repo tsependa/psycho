@@ -20,8 +20,9 @@
                             <div class="row">
                                 <div class="col-12 p-1">
                                     <select class="browser-default custom-select" v-model="selectedTheme">
-                                        <option selected :value={}></option>
-                                        <option v-for="theme in themes" v-bind:value="theme">${theme.title}</option>
+                                        <option selected :value={}>Выберите проблему</option>
+                                        <option v-for="theme in themes" v-bind:value="theme">${theme.description}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-12 p-1">
@@ -31,7 +32,7 @@
                                 </div>
                                 <div class="col-12 p-1">
                                     <select class="browser-default custom-select" v-model="selectedGender">
-                                        <option selected value=""></option>
+                                        <option selected value="">Выберите пол специалиста</option>
                                         <option value="male">мужской</option>
                                         <option value="female">женский</option>
                                     </select>
@@ -51,19 +52,12 @@
                             <div class="p-0">
                                 <img class="img__gradient1" :src="specialist.avatar">
                             </div>
-                            <div class="row p-0 m-0">
-                                <form action="{% url 'select' %}">
-                                    <button class="green-btn-small" type="submit">
-                                        Записаться на консультацию
-                                    </button>
-                                </form>
-                            </div>
+
                         </div>
                         <div class="col-8">
                             <div class="p-1">
                                 <h4 class=""> ${specialist.middle_name}
-                                    ${specialist.first_name}
-                                    ${specialist.last_name }</h4>
+                                    ${specialist.first_name}</h4>
                                 <div class="">
                                     <div class="row">
                                         <blockquote v-html="specialist.quote">
@@ -71,7 +65,18 @@
                                     </div>
 
                                     <div class="row">
-                                        <b>${specialist.experience}</b> лет опыта консультирования
+                                        <b>${specialist.experience} </b> лет опыта консультирования
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="modal__title">Направления:</div>
+                                        <div class="row p-0 m-0">
+                                            <div class="theme-btn" v-for="(theme, index) in specialist.themes"
+                                                 v-if="index < 4"
+                                                 :class="theme.id == selectedTheme.id ? 'theme-btn-selected' : ''">
+                                                ${theme.description}
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="row">
@@ -114,13 +119,7 @@
                                             <div class="p-0">
                                                 <img class="img__gradient1" :src="specialist.avatar">
                                             </div>
-                                            <div class="row">
-                                                <form action="{% url 'select' %}">
-                                                    <button class="green-btn m-3" type="submit">
-                                                        Записаться на консультацию
-                                                    </button>
-                                                </form>
-                                            </div>
+
                                         </div>
                                         <div class="col-9">
                                             <div class="p-1">
@@ -136,7 +135,16 @@
                                                     <div class="row">
                                                         <b>${specialist.experience}</b> лет опыта консультирования
                                                     </div>
-
+                                                    <div class="row">
+                                                        <div class="modal__title">Направления:</div>
+                                                        <div class="row p-0 m-0">
+                                                            <div class="theme-btn"
+                                                                 v-for="(theme, index) in specialist.themes"
+                                                                 :class="theme.id == selectedTheme.id ? 'theme-btn-selected' : ''">
+                                                                ${theme.description}
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="row">
                                                         <div class="modal__title">Образование:</div>
                                                         <p v-html="specialist.education"></p>
@@ -152,12 +160,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {% comment %}                                <img class="img__gradient1" :src="specialist.avatar">
-                                <p class="specialist__name">${ specialist.middle_name } ${ specialist.first_name }
-                                    ${ specialist.last_name } </p>
-                                <p class="specialist__prof">${ specialist.experience } лет опыта
-                                    консультирования</p>
-                                <p class="specialist__time">06 мая, 10:00</p>{% endcomment %}
+
                                 </div>
 
                             </div>
@@ -187,7 +190,7 @@
 
         </div>
 
-        <div class="modal fade pt-5" id="modalSpecialist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        {% comment %}        <div class="modal fade pt-5" id="modalSpecialist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="container">
                 <div class="modal-dialog" style="max-width: 100%">
@@ -249,7 +252,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>{% endcomment %}
 
 
     </div>

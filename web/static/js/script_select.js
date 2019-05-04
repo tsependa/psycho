@@ -122,7 +122,7 @@ var app = new Vue({
                     if (isEmpty(this.selectedTheme)) {
                         return true;
                     } else {
-                        return specialist.themes.includes(this.selectedTheme.id);
+                        return specialist.themes.map(theme => theme.id).includes(this.selectedTheme.id);
 
                     }
                 }

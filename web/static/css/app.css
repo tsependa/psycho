@@ -1112,3 +1112,18 @@ blockquote cite {
         display: none;
     }
 }
+
+.theme-btn {
+    border: 1px solid #44bafb;
+    background-color: transparent;
+    padding: 2px 2px 2px 2px;
+    margin: 2px 2px 2px 2px;
+    transition: all .5s;
+    order: 2;
+}
+
+.theme-btn-selected {
+    background-color: #44bafb;
+    color: white;
+    order: 1;
+}
