@@ -71,7 +71,7 @@ class Specialist(models.Model):
 
 
 class TimeSlot(models.Model):
-    specialist = models.ForeignKey(Specialist, on_delete=models.CASCADE)
+    specialist = models.ForeignKey(Specialist, on_delete=models.CASCADE, related_name='timeslots')
     start_time = models.DateTimeField()
     duration = models.IntegerField(blank=True, default=60)
 

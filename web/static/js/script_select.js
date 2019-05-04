@@ -25,6 +25,7 @@ var app = new Vue({
     mounted: function () {
         this.getThemes();
         this.getSpecialists();
+
         /*this.getMethods();*/
 
 
@@ -79,7 +80,7 @@ var app = new Vue({
 
         getTimeSlots: function () {
             this.loading = true;
-            this.$http.get('/api/timeslot/' + this.selectedSpecialist.id)
+            this.$http.get('/api/readTimeSlot/')
                 .then((response) => {
                     this.timeslots = response.data;
                     this.loading = false;
@@ -89,21 +90,17 @@ var app = new Vue({
                     console.log(err);
                 })
         },
+        slotsAggr: function (timeslots) {
+            return timeslots.reduce((r, e) => {
+                (r[e.date] = r[e.date] || []).push(e)
+                return r;
+            }, {})
 
-        registerUser: function () {
-            this.$http.post('/api/user/', {
-                    username: 'tsependa_s1@mail.ru',
-                    email: 'tsependa_s1@mail.ru',
-                    password: '123456',
-                }, {
-                    headers:
-                        {"X-CSRFToken": csrftoken}
-                },
-                {emulateJSON: true})
-                .then((response) => {
-                    console.log(response.data);
-                });
-            window.location = "/office";
+        },
+
+        selectTimeslot: function (timeslot) {
+            this.selectedTimeslot = timeslot;
+            console.log(timeslot)
         },
 
 
@@ -165,3 +162,24 @@ function isEmpty(obj) {
     }
     return true;
 }
+
+
+Vue.filter('formatDate', function (value) {
+    if (value) {
+        return moment(String(value)).format('MM/DD/YYYY')
+    }
+});
+
+Vue.filter('formatTime', function (value) {
+    if (value) {
+        return moment(String(value)).format('HH:mm')
+    }
+});
+
+Vue.filter('formatDay', function (value) {
+    if (value) {
+        return moment(String(value)).format('DD MMM')
+    }
+});
+
+

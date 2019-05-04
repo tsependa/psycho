@@ -1120,6 +1120,7 @@ blockquote cite {
     margin: 2px 2px 2px 2px;
     transition: all .5s;
     order: 2;
+    cursor: pointer;
 }
 
 .theme-btn-selected {
@@ -1127,3 +1128,13 @@ blockquote cite {
     color: white;
     order: 1;
 }
+
+.theme-collapse
+div:nth-child(n+6) {
+    display: none;
+}
+
+
+
+
+

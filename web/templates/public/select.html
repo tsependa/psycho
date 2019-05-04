@@ -70,9 +70,9 @@
 
                                     <div class="row">
                                         <div class="modal__title">Направления:</div>
-                                        <div class="row p-0 m-0">
+                                        <div class="theme-collapse row p-0 m-0">
                                             <div class="theme-btn" v-for="(theme, index) in specialist.themes"
-                                                 v-if="index < 4"
+                                                    {% comment %}        v-if="index < 4"{% endcomment %}
                                                  :class="theme.id == selectedTheme.id ? 'theme-btn-selected' : ''">
                                                 ${theme.description}
                                             </div>
@@ -89,19 +89,17 @@
                                         <p v-html="specialist.education_add"></p>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="modal__title">Доступное время:</div>
 
+                                        <div class="theme-btn" v-for="timeslot in specialist.timeslots">
+                                            ${timeslot.start_time | formatDay}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {% comment %} <img class="img__gradient1" :src="specialist.avatar">
-                    <p class="specialist__name">
-                        ${ specialist.middle_name }
-                        ${ specialist.first_name }
-                        ${ specialist.last_name } </p>
-                    <p class="specialist__prof">${ specialist.experience } лет опыта
-                        консультирования</p>
-                    <p class="specialist__time">06 мая, 10:00</p>{% endcomment %}
                 </div>
 
 
@@ -137,7 +135,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="modal__title">Направления:</div>
-                                                        <div class="row p-0 m-0">
+                                                        <div class="theme-collapse row p-0 m-0">
                                                             <div class="theme-btn"
                                                                  v-for="(theme, index) in specialist.themes"
                                                                  :class="theme.id == selectedTheme.id ? 'theme-btn-selected' : ''">
@@ -155,6 +153,21 @@
                                                         <p v-html="specialist.education_add"></p>
                                                     </div>
 
+                                                    <div class="row">
+                                                        <div class="modal__title">Доступное время:</div>
+
+                                                        <div class=""
+                                                             v-for="(timeslot, index) in slotsAggr(specialist.timeslots)">
+                                                            <div class="theme-btn">
+                                                                ${index | formatDay}
+                                                            </div>
+                                                            <div class="theme-btn" v-for="time in timeslot"
+                                                                 v-on:click="selectTimeslot(time)">
+                                                                ${time.start_time | formatTime}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
 
                                                 </div>
                                             </div>
@@ -167,13 +180,16 @@
                         </div>
                         <div class="col-md-3 m-0">
                             <div class="filter__title">Направление</div>
-
-                            <div v-for="(theme, index) in themes" class="form-check">
-                                <input type="radio" class="form-check-input" v-bind:value="theme"
-                                       v-model="selectedTheme" v-bind:id='theme.id'/>
-                                <label class="form-check-label" v-bind:for='theme.id'>${theme.description}</label>
+                            <div claas="form-check">
+                                <input type="radio" class="form-check-input" v-bind:id='{}'
+                                       v-model="selectedTheme" v-bind:value="{}"/>
+                                <label class="form-check-label" v-bind:for='{}'>Без темы</label>
+                                <div v-for="(theme, index) in themes">
+                                    <input type="radio" class="form-check-input" v-bind:value="theme"
+                                           v-model="selectedTheme" v-bind:id='theme.id'/>
+                                    <label class="form-check-label" v-bind:for='theme.id'>${theme.description}</label>
+                                </div>
                             </div>
-
 
                             <div class="filter__title">Опыт консультирования</div>
                             <div v-for="(exp, index) in experienceList" class="form-check">
@@ -189,71 +205,6 @@
 
 
         </div>
-
-        {% comment %}        <div class="modal fade pt-5" id="modalSpecialist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             aria-hidden="true">
-            <div class="container">
-                <div class="modal-dialog" style="max-width: 100%">
-                    <div class="modal-content">
-                        <div class="card ">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="card-body p-0">
-                                        <div class="rgba-grey-slight card-img" style="">
-                                            <img v-if="selectedSpecialist.avatar" class="card-img-bottom"
-                                                 :src="selectedSpecialist.avatar"
-                                                 style=""/>
-                                            <img v-else class="card-img-top" style=""
-                                                 src="http://via.placeholder.com/300x450"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body m-2 ">
-                                        <h4 class="card-title"> ${selectedSpecialist.middle_name}
-                                            ${selectedSpecialist.first_name}
-                                            ${selectedSpecialist.last_name }</h4>
-                                        <p class="card-text"></p>
-                                        <div class="card-text">
-                                            <div class="row  mb-2">
-                                                <blockquote v-html="selectedSpecialist.quote">
-                                                </blockquote>
-                                            </div>
-
-                                            <div class="row">
-                                                <p><b>${selectedSpecialist.experience}</b> лет опыта консультирования
-                                                </p>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="modal__title">Образование:</div>
-                                                <p v-html="selectedSpecialist.education"></p>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="modal__title">Доп. образование:</div>
-                                                <p v-html="selectedSpecialist.education_add"></p>
-                                            </div>
-
-
-                                            <div class="row">
-                                                <form action="{% url 'select' %}">
-                                                    <button class="green-btn" type="submit">
-                                                        Записаться на консультацию
-                                                    </button>
-                                                </form>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>{% endcomment %}
-
 
     </div>
 

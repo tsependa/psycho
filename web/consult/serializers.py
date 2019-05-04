@@ -11,21 +11,26 @@ class ThemeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class SpecialistSerializer(serializers.ModelSerializer):
-    themes = ThemeSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Specialist
-        fields = '__all__'
-
-
 class TimeSlotSerializer(serializers.ModelSerializer):
-    #specialist = SpecialistSerializer(many=False, read_only=True)
-    videoconf_url = serializers.ReadOnlyField()
-    enrolls = serializers.StringRelatedField(many=True, read_only=True)
+    # specialist = SpecialistSerializer(many=False, read_only=True)
+    #videoconf_url = serializers.ReadOnlyField()
+    #enrolls = serializers.StringRelatedField(many=True, read_only=True)
+    date  = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = TimeSlot
+        fields = '__all__'
+
+    def get_date (self, timeslot):
+        return timeslot.start_time.date()
+
+
+class SpecialistSerializer(serializers.ModelSerializer):
+    themes = ThemeSerializer(many=True, read_only=True)
+    timeslots = TimeSlotSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Specialist
         fields = '__all__'
 
 

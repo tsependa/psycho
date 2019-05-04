@@ -36,12 +36,12 @@ class TimeSlotViewSet(viewsets.ModelViewSet):
     serializer_class = TimeSlotSerializer
 
 
+
 class EnrollViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Enroll.objects.all()
     serializer_class = EnrollSerializer
 
     def get_queryset(self):
-
         queryset = Enroll.objects.all()
         user = self.request.user
         if user is not None:
@@ -54,7 +54,6 @@ class EnrollSpecViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EnrollSerializer
 
     def get_queryset(self):
-
         queryset = Enroll.objects.all()
         specialist = self.request.user.specialist
         if specialist is not None:
