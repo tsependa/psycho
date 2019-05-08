@@ -91,17 +91,25 @@
 
                                     <div class="row">
                                         <div class="modal__title">Доступное время:</div>
-
+                                    </div>
+                                    <div class="row">
                                         <div class=""
                                              v-for="(timeslot, index) in slotsAggr(specialist.timeslots)">
-                                            <div class="theme-btn">
+                                            <div class="timeslot-header">
                                                 ${index | formatDay}
                                             </div>
-                                            <div class="theme-btn" v-for="time in timeslot"
-                                                 v-on:click="selectTimeslot(time)">
+                                            <div class="timeslot-select" v-for="time in timeslot"
+                                                 v-on:click="selectTimeslot(time)"
+                                                 :class="{ 'blue text-white': time.id == selectedTimeslot.id,}">
                                                 ${time.start_time | formatTime}
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row" v-show="specialist.id===selectedTimeslot.specialist">
+                                        <div class="col-12 modal__title">Стоимость: 3400 руб.</div>
+                                        <form class="col-12" :action="'/enroll/'+selectedTimeslot.id">
+                                            <button class="green-btn-small" type="submit">Записаться на консультацию</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -162,56 +170,58 @@
 
                                                     <div class="row">
                                                         <div class="modal__title">Доступное время:</div>
-
+                                                    </div>
+                                                    <div class="row">
                                                         <div class=""
                                                              v-for="(timeslot, index) in slotsAggr(specialist.timeslots)">
-                                                            <div class="theme-btn">
+                                                            <div class="timeslot-header">
                                                                 ${index | formatDay}
                                                             </div>
                                                             <div class="theme-btn" v-for="time in timeslot"
-                                                                 v-on:click="selectTimeslot(time)">
+                                                                 v-on:click="selectTimeslot(time)"
+                                                                 :class="{ 'blue text-white': time.id == selectedTimeslot.id,}">
                                                                 ${time.start_time | formatTime}
                                                             </div>
                                                         </div>
                                                     </div>
-
-
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
 
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3 m-0">
+                        <div class="filter__title">Направление</div>
+                        <div claas="form-check">
+                            <input type="radio" class="form-check-input" v-bind:id='{}'
+                                   v-model="selectedTheme" v-bind:value="{}"/>
+                            <label class="form-check-label" v-bind:for='{}'>Без темы</label>
+                            <div v-for="(theme, index) in themes">
+                                <input type="radio" class="form-check-input" v-bind:value="theme"
+                                       v-model="selectedTheme" v-bind:id='theme.id'/>
+                                <label class="form-check-label" v-bind:for='theme.id'>${theme.description}</label>
                             </div>
                         </div>
-                        <div class="col-md-3 m-0">
-                            <div class="filter__title">Направление</div>
-                            <div claas="form-check">
-                                <input type="radio" class="form-check-input" v-bind:id='{}'
-                                       v-model="selectedTheme" v-bind:value="{}"/>
-                                <label class="form-check-label" v-bind:for='{}'>Без темы</label>
-                                <div v-for="(theme, index) in themes">
-                                    <input type="radio" class="form-check-input" v-bind:value="theme"
-                                           v-model="selectedTheme" v-bind:id='theme.id'/>
-                                    <label class="form-check-label" v-bind:for='theme.id'>${theme.description}</label>
-                                </div>
-                            </div>
 
-                            <div class="filter__title">Опыт консультирования</div>
-                            <div v-for="(exp, index) in experienceList" class="form-check">
-                                <input type="radio" class="form-check-input" v-bind:value="exp"
-                                       v-model="selectedExps" v-bind:id="exp.value" v-bind:name="exp.value"
-                                       v-bind:checked="exp.checked"/>
-                                <label class="form-check-label" v-bind:for="exp.value">${exp.value}</label>
-                            </div>
+                        <div class="filter__title">Опыт консультирования</div>
+                        <div v-for="(exp, index) in experienceList" class="form-check">
+                            <input type="radio" class="form-check-input" v-bind:value="exp"
+                                   v-model="selectedExps" v-bind:id="exp.value" v-bind:name="exp.value"
+                                   v-bind:checked="exp.checked"/>
+                            <label class="form-check-label" v-bind:for="exp.value">${exp.value}</label>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
+
+
+    </div>
 
     </div>
 
@@ -219,7 +229,6 @@
 {% endblock %}
 
 {% block js_add %}
-    <script src="/static/js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/static/js/script_select.js"></script>
 
     {% comment %}    <script type="text/javascript" src="/static/js/app.js"></script>{% endcomment %}

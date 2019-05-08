@@ -25,7 +25,6 @@ services:
       MYSQL_DATABASE: 'psycho'
       MYSQL_USER: 'psycho'
       MYSQL_PASSWORD: 'Celeron!1'
-      MYSQL_ROOT_HOST: %
 
     volumes:
       - ./mysql:/var/lib/mysql

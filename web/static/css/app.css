@@ -468,7 +468,7 @@ h3 {
     max-width: 380px;
     background: #02BB83;
     border-radius: 8px;
-
+    margin: 10px 0px 0px 0px;
     line-height: normal;
     text-align: center;
     color: #FFFFFF;
@@ -1120,13 +1120,32 @@ blockquote cite {
     margin: 2px 2px 2px 2px;
     transition: all .5s;
     order: 2;
-    cursor: pointer;
+
 }
 
 .theme-btn-selected {
     background-color: #44bafb;
     color: white;
     order: 1;
+}
+
+.timeslot-header {
+
+    background-color: transparent;
+    padding: 2px 2px 2px 2px;
+    margin: 2px 2px 2px 2px;
+    font-weight: 400;
+}
+
+.timeslot-select {
+    border: 1px solid #44bafb;
+    background-color: transparent;
+    padding: 2px 2px 2px 2px;
+    margin: 2px 2px 2px 2px;
+    transition: all .5s;
+    order: 2;
+    text-align: center;
+    cursor: pointer;
 }
 
 .theme-collapse

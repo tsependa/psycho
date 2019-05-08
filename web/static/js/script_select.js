@@ -1,3 +1,6 @@
+moment.locale('ru');  // Set the default/global locale
+
+
 var app = new Vue({
     el: '#select_app',
     delimiters: ['${', '}'],

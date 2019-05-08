@@ -76,12 +76,17 @@ def faq(request):
     return render(request, 'public/faq.html', {'faqs': faqs})
 
 
+def user_enroll(request, timeslot_id):
+    timeslot = TimeSlot.objects.get(pk=timeslot_id)
+    print(timeslot)
+    return render(request, 'public/enroll.html', {'timeslot': timeslot})
+
+
 @login_required
 def schedule(request):
     user = User.objects.get(username=request.user.username)
     specialist = user.specialist
     response = render(request, 'office/schedule.html', {'specialist': specialist})
-
 
     if hasattr(user, 'specialist'):
         response.set_cookie("specialist_id", user.specialist.id)

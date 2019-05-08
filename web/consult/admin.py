@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 
-from consult.models import Theme, Specialist, TimeSlot, Enroll, Payment, Method
+from consult.models import Theme, Specialist, TimeSlot, Enroll, Payment, Method, Faq
 
 admin.site.register(Theme)
 admin.site.register(Specialist)
@@ -12,6 +12,7 @@ admin.site.register(TimeSlot)
 admin.site.register(Enroll)
 admin.site.register(Payment)
 admin.site.register(Method)
+admin.site.register(Faq)
 
 class FlatPageAdmin(FlatPageAdmin):
     fieldsets = (

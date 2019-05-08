@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="enroll_app">
+    </div>
+{% endblock %}
+
+{% block js_add %}
+
+    <script type="text/javascript" src="/static/js/script_select.js"></script>
+
+    {% comment %}    <script type="text/javascript" src="/static/js/app.js"></script>{% endcomment %}
+
+
+
+{% endblock %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock %}

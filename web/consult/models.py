@@ -114,3 +114,6 @@ class Faq(models.Model):
     question = models.TextField(blank=True)
     answer = models.TextField(blank=True)
     sequence = models.IntegerField()
+
+    def __str__(self):
+        return self.question
