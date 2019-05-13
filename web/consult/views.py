@@ -1,5 +1,9 @@
 from collections import defaultdict
 from datetime import timedelta, datetime
+
+import uuid
+
+from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -8,6 +12,12 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from django.views import View
+
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from yandex_checkout import Configuration, Payment
 
 from consult.models import Theme, Specialist, Enroll, TimeSlot, Faq
 
@@ -81,3 +91,38 @@ def user_enroll(request, timeslot_id):
     timeslot = TimeSlot.objects.get(pk=timeslot_id)
     specialist = timeslot.specialist
     return render(request, 'public/enroll.html', {'timeslot': timeslot, 'specialist': specialist})
+
+
+Configuration.account_id = 602385
+Configuration.secret_key = "test_iHkZR98UHAIn2h-UzFhLtiSFaXCY14YZLC7w85BvOKw"
+
+
+def pay(request, timeslot_id):
+    timeslot=TimeSlot.objects.get(pk=timeslot_id)
+    payment = Payment.create({
+        "amount": {
+            "value": "3400.00",
+            "currency": "RUB"
+        },
+        "payment_method_data": {
+            "type": "bank_card"
+        },
+        "confirmation": {
+            "type": "redirect",
+            "return_url": "http://localhost:9000/office"
+        },
+        "capture": True,
+        "description": "Консультация c "+timeslot.specialist.middle_name+" "+timeslot.specialist.first_name+" "+timeslot.start_time,
+    }, uuid.uuid4())
+
+    return HttpResponseRedirect(payment.confirmation.confirmation_url)
+
+
+class YandexNotification(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        payment_id = request.data['object']['id']
+        Payment.capture(payment_id)
+
+        return Response(status=200)

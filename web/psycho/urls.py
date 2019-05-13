@@ -39,6 +39,7 @@ urlpatterns = [
                   path('specialist/<int:specialist_id>', views.specialist, name='specialist'),
                   path('enroll/<int:timeslot_id>', views.user_enroll, name='enroll'),
                   path('faq', views.faq, name='faq'),
+                  path('pay/<int:timeslot_id>/', views.pay),
                   path('api-auth/', include('rest_framework.urls')),
                   path('api/', include(router.urls)),
                   path('pages/', include('django.contrib.flatpages.urls')),

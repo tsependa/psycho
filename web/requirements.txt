@@ -2,3 +2,4 @@ Django
 djangorestframework
 Pillow
 mysqlclient
+yandex-checkout
