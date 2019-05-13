@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+
+    <section class="profile" id="{{ specialist.id }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 m-30">
+                    <div class="profile__wrapper m-30">
+                        <img src="../media/{{ specialist.avatar }}" alt="" class="resp-img profile__img">
+                        <div class="profile__quote">
+                            {{ specialist.quote | safe }}
+                        </div>
+                    </div>
+
+                    <div class="profile__actions">
+                        <a href="#consultation" class="green-btn profile-btn open-modal">
+                            Выбрать время консультации
+                        </a>
+                        <p>
+                            <strong>Ближайшая консультация:</strong>
+                            {{ next_slot.start_time | date:"d M H:i"}}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 m-30">
+                    <h2 class="m-30"> {{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }}</h2>
+                    <p>
+                        {{ specialist.experience }} лет опыта консультирования
+                    </p>
+                    <!--    -->
+                    <p>
+                        <strong>Образование</strong>
+                    </p>
+                    <p>
+                        {{ specialist.education | safe }}
+                    </p>
+                    <!--    -->
+                    <p>
+                        <strong>Доп. образование</strong>
+                    </p>
+                    <p>
+                        {{ specialist.education_add | safe }}
+                    </p>
+                    <!--    -->
+                    <p>
+                        <strong>Направления</strong>
+                    </p>
+                    {% for theme in specialist.themes.all %}
+                        <p>
+                            — {{ theme.description }}
+                        </p>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="recommendations">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3>
+                        Специалисты, работающие в похожих направлениях
+                    </h3>
+                </div>
+            </div>
+            <div class="row select-specialist__list">
+                <!-- specialist -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
+                    <a href="specialist.html" target="_blank" class="select-specialist__item">
+                        <div class="specialist__wrapper">
+                            <img src="img/profile-01.png" class="resp-img">
+                        </div>
+                        <p class="specialist__name">Балоян Вероника Евгеньевна</p>
+                    </a>
+                    <p class="specialist__prof">12 лет опыта консультирования</p>
+                    <p class="specialist__time">Ближайшая запись: 14 марта, 10:00</p>
+                </div>
+                <!-- specialist -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
+                    <a href="specialist.html" target="_blank" class="select-specialist__item">
+                        <div class="specialist__wrapper">
+                            <img src="img/profile-02.png" class="resp-img">
+                        </div>
+                        <p class="specialist__name">Ашихина Екатерина Владимировна</p>
+                    </a>
+                    <p class="specialist__prof">12 лет опыта консультирования</p>
+                    <p class="specialist__time">Ближайшая запись: 12 марта, 14:00</p>
+                </div>
+                <!-- specialist -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
+                    <a href="specialist.html" target="_blank" class="select-specialist__item">
+                        <div class="specialist__wrapper">
+                            <img src="img/profile-03.png" class="resp-img">
+                        </div>
+                        <p class="specialist__name">Ромадинова Галина Ивановна</p>
+                    </a>
+                    <p class="specialist__prof">12 лет опыта консультирования</p>
+                    <p class="specialist__time">Ближайшая запись: 17 марта, 11:00</p>
+                </div>
+                <!-- specialist -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
+                    <a href="specialist.html" target="_blank" class="select-specialist__item">
+                        <div class="specialist__wrapper">
+                            <img src="img/profile-04.png" class="resp-img">
+                        </div>
+                        <p class="specialist__name">Комаров Максим Александрович</p>
+                    </a>
+                    <p class="specialist__prof">12 лет опыта консультирования</p>
+                    <p class="specialist__time">Ближайшая запись: 13 марта, 18:00</p>
+                </div>
+                <!-- specialist -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
+                    <a href="specialist.html" target="_blank" class="select-specialist__item">
+                        <div class="specialist__wrapper">
+                            <img src="img/profile-05.png" class="resp-img">
+                        </div>
+                        <p class="specialist__name">Балоян Вероника Евгеньевна</p>
+                    </a>
+                    <p class="specialist__prof">12 лет опыта консультирования</p>
+                    <p class="specialist__time">Ближайшая запись: 14 марта, 10:00</p>
+                </div>
+                <!-- specialist -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
+                    <a href="specialist.html" target="_blank" class="select-specialist__item">
+                        <div class="specialist__wrapper">
+                            <img src="img/profile-06.png" class="resp-img">
+                        </div>
+                        <p class="specialist__name">Ашихина Екатерина Владимировна</p>
+                    </a>
+                    <p class="specialist__prof">12 лет опыта консультирования</p>
+                    <p class="specialist__time">Ближайшая запись: 12 марта, 14:00</p>
+                </div>
+                <!-- end specialist list -->
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="all-scpecialists">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 offset-0 col-sm-4 offset-sm-4">
+                    <button class="inv-green-btn">
+                        Все специалисты
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="consultation" class="modal-div">
+        <span class="modal-close"></span>
+        <span class="modal-inner">
+
+	    	<form action="" method="" class="consultation-signup">
+
+		        <div class="modal-header">
+		            <p>Выберите дату и время консультации</p>
+		        </div>
+
+		        <div class="modal-container">
+	                <div class="consultation__block">
+                        <div v-for="(date, index) in slotsByDate" :key="index">
+                            <p class="consultation__day">${index | formatDay}</p>
+                            <div class="consultation__time m-10">
+                                <!--
+                                    время не доступное для записи не выводится
+                                -->
+                                <div class="consultation-item" v-for="timeslot in date" :key="timeslot.id">
+                                    <input :id="'slot'+timeslot.id" type="radio" name="signup"/>
+                                    <label :for="'slot'+timeslot.id" class="consultation-label"
+                                           v-on:click="selectedTimeslot = timeslot;">${timeslot.start_time | formatTime}</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+	                </div>
+		        </div>
+		        <div class="modal-footer">
+		            <div class="consultation__actions">
+		            	<p>
+                                ${selectedTimeslot.start_time | formatDate} ${selectedTimeslot.start_time | formatTime}
+		            	</p>
+		            	<button class="green-btn" v-on:click="">
+		            		Записаться
+		            	</button>
+		            </div>
+		        </div>
+		    </form>
+	    </span>
+    </div>
+
+    <div id="overlay"></div>
+
+{% endblock %}
+
+{% block js_add %}
+
+    <script src="/static/js/script_specialist.js"></script>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock %}

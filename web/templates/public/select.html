@@ -8,7 +8,7 @@
 {% block content %}
     <div id="select_app">
 
-        <div class="container-fluid">
+        <section class="select-specialist">
 
             <div class="mobile_search">
 
@@ -108,7 +108,8 @@
                                     <div class="row" v-show="specialist.id===selectedTimeslot.specialist">
                                         <div class="col-12 modal__title">Стоимость: 3400 руб.</div>
                                         <form class="col-12" :action="'/enroll/'+selectedTimeslot.id">
-                                            <button class="green-btn-small" type="submit">Записаться на консультацию</button>
+                                            <button class="green-btn-small" type="submit">Записаться на консультацию
+                                            </button>
                                         </form>
                                     </div>
                                 </div>
@@ -122,12 +123,29 @@
             <div class="desktop_search">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-9">
-                            <div class="row">
-                                <div class="" v-for="specialist in filteredSpecialists" :key="specialist.id"
+                        <div class="col-12">
+                            <h1>Выберите психотерапевра для онлайн-консультации</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-9 m-30 select-specialist__pro">
+                            <div class="row select-specialist__list">
+                                <div class="col-12 col-sm-6 col-md-6 col-lg-4 m-30"
+                                     v-for="specialist in filteredSpecialists" :key="specialist.id"
                                      @click="selectSpecialist(specialist)" data-toggle="modal"
                                      data-target="#modalSpecialist">
-                                    <div class="row font-small">
+                                    <a :href="'/specialist/'+specialist.id" target="_blank" class="select-specialist__item">
+                                        <div class="quote-wrapper">
+                                            <p class="quote" v-html="specialist.quote"></p>
+                                            <img :src="specialist.avatar" class="resp-img">
+                                        </div>
+                                        <p class="specialist__name"> ${specialist.middle_name}
+                                            ${specialist.first_name}
+                                            ${specialist.last_name }</p>
+                                    </a>
+                                    <p class="specialist__prof">${specialist.experience} лет опыта консультирования</p>
+                                    <p class="specialist__time">Ближайшая запись: 14 марта, 10:00</p>
+                                    {% comment %} <div class="row font-small">
                                         <div class="col-3 p-1">
                                             <div class="p-0">
                                                 <img class="img__gradient1" :src="specialist.avatar">
@@ -188,16 +206,15 @@
 
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>{% endcomment %}
                                 </div>
 
                             </div>
 
                         </div>
-                    </div>
-                    <div class="col-md-3 m-0">
-                        <div class="filter__title">Направление</div>
-                        <div claas="form-check">
+                        <div class="col-12 col-md-3 m-30 select-specialist__filter">
+                            <h4>Направление</h4>
+                            <div class="filter-list m-30"> {% comment %}
                             <input type="radio" class="form-check-input" v-bind:id='{}'
                                    v-model="selectedTheme" v-bind:value="{}"/>
                             <label class="form-check-label" v-bind:for='{}'>Без темы</label>
@@ -206,23 +223,26 @@
                                        v-model="selectedTheme" v-bind:id='theme.id'/>
                                 <label class="form-check-label" v-bind:for='theme.id'>${theme.description}</label>
                             </div>
-                        </div>
-
-                        <div class="filter__title">Опыт консультирования</div>
-                        <div v-for="(exp, index) in experienceList" class="form-check">
-                            <input type="radio" class="form-check-input" v-bind:value="exp"
-                                   v-model="selectedExps" v-bind:id="exp.value" v-bind:name="exp.value"
-                                   v-bind:checked="exp.checked"/>
-                            <label class="form-check-label" v-bind:for="exp.value">${exp.value}</label>
+                        </div>{% endcomment %}
+                                <div class="theme-item" v-for="(theme, index) in themes">
+                                    <input v-bind:id='theme.id' type="checkbox" class="filter-input"
+                                           name="filter-theme[]"/>
+                                    <label v-bind:for='theme.id' class="theme-label">${theme.description}</label>
+                                    {% comment %}          <div class="filter__title">Опыт консультирования</div>
+                                <div v-for="(exp, index) in experienceList" class="form-check">
+                                    <input type="radio" class="form-check-input" v-bind:value="exp"
+                                           v-model="selectedExps" v-bind:id="exp.value" v-bind:name="exp.value"
+                                           v-bind:checked="exp.checked"/>
+                                    <label class="form-check-label" v-bind:for="exp.value">${exp.value}</label>
+                                </div>{% endcomment %}
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
-        </div>
-
-
-    </div>
-
+        </section>
     </div>
 
 

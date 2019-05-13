@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 
@@ -27,14 +29,13 @@ class TimeslotFilteredViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = TimeSlot.objects.all()
         specialist_id = self.kwargs['specialist_id']
         if specialist_id is not None:
-            queryset = queryset.filter(specialist_id=specialist_id)
+            queryset = queryset.filter(specialist_id=specialist_id).filter(start_time__gte=datetime.now())
         return queryset
 
 
 class TimeSlotViewSet(viewsets.ModelViewSet):
     queryset = TimeSlot.objects.all()
     serializer_class = TimeSlotSerializer
-
 
 
 class EnrollViewSet(viewsets.ReadOnlyModelViewSet):

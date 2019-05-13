@@ -36,16 +36,12 @@ urlpatterns = [
                   path('office/schedule', views.schedule, name='schedule'),
                   path('', views.consult, name='index'),
                   path('select', views.select, name='select'),
+                  path('specialist/<int:specialist_id>', views.specialist, name='specialist'),
                   path('enroll/<int:timeslot_id>', views.user_enroll, name='enroll'),
                   path('faq', views.faq, name='faq'),
                   path('api-auth/', include('rest_framework.urls')),
                   path('api/', include(router.urls)),
                   path('pages/', include('django.contrib.flatpages.urls')),
-
-                  url(r'^static/(?P<path>.*)$', serve,
-                      {'document_root': settings_prod.STATIC_ROOT}),
-                  url(r'^media/(?P<path>.*)$', serve,
-                      {'document_root': settings_prod.MEDIA_ROOT}),
 
               ] + static(settings_prod.STATIC_URL, document_root=settings_prod.STATIC_ROOT) + static(
     settings_prod.MEDIA_URL,

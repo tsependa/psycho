@@ -1,3 +1,6 @@
+from collections import defaultdict
+from datetime import timedelta, datetime
+from django.utils import timezone
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -36,6 +39,12 @@ def select(request):
                   context={})
 
 
+def specialist(request, specialist_id):
+    specialist = Specialist.objects.get(pk=specialist_id)
+    next_slot = specialist.timeslots.filter(start_time__gte=datetime.now()).order_by('start_time').first()
+    return render(request, "public/specialist.html", context={'specialist': specialist, 'next_slot': next_slot})
+
+
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -51,22 +60,6 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
-def magic_payment(request):
-    try:
-        user = User.objects.get(username=request.user.username)
-    except User.DoesNotExist:
-        user = None
-
-    if (user == None):
-        user = User.objects.create_user(email=request.POST['email'], username=request.POST['email'], password='123456')
-        user.save()
-        auth_user = authenticate(username=user.username, password='123456')
-        login(request, auth_user)
-    enroll = Enroll.objects.create(timeslot_id=request.POST['timeslot_id'], user=user, )
-    enroll.save()
-    return redirect('office')
-
-
 def profile(request):
     return render(request, 'office/profile.html', {})
 
@@ -76,19 +69,15 @@ def faq(request):
     return render(request, 'public/faq.html', {'faqs': faqs})
 
 
-def user_enroll(request, timeslot_id):
-    timeslot = TimeSlot.objects.get(pk=timeslot_id)
-    print(timeslot)
-    return render(request, 'public/enroll.html', {'timeslot': timeslot})
-
-
 @login_required
 def schedule(request):
     user = User.objects.get(username=request.user.username)
     specialist = user.specialist
-    response = render(request, 'office/schedule.html', {'specialist': specialist})
 
-    if hasattr(user, 'specialist'):
-        response.set_cookie("specialist_id", user.specialist.id)
+    return render(request, 'office/schedule.html', {'specialist': specialist})
 
-    return response
+
+def user_enroll(request, timeslot_id):
+    timeslot = TimeSlot.objects.get(pk=timeslot_id)
+    print(timeslot)
+    return render(request, 'public/enroll.html', {'timeslot': timeslot})
