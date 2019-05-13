@@ -3,6 +3,7 @@ from datetime import timedelta, datetime
 
 import uuid
 
+from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.contrib.auth import authenticate, login
@@ -93,8 +94,8 @@ def user_enroll(request, timeslot_id):
     return render(request, 'public/enroll.html', {'timeslot': timeslot, 'specialist': specialist})
 
 
-Configuration.account_id = 602385
-Configuration.secret_key = "test_iHkZR98UHAIn2h-UzFhLtiSFaXCY14YZLC7w85BvOKw"
+Configuration.account_id = settings.KASSA_ACCOUNT
+Configuration.secret_key = settings.KASSA_SECRET
 
 
 def pay(request, timeslot_id):
@@ -109,7 +110,7 @@ def pay(request, timeslot_id):
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": "http://localhost:9000/office"
+            "return_url": settings.KASSA_REDIRECT_URL
         },
         "capture": True,
         "description": "Консультация 1 "+timeslot.specialist.middle_name+" "+timeslot.specialist.first_name
