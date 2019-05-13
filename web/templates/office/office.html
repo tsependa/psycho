@@ -33,7 +33,8 @@
                     </thead>
                     <tbody>
                     <tr v-for="enroll in specialist_enrolls" class="">
-                        <td><div class="day mr-1">${enroll.timeslot.start_time | day }</div>
+                        <td>
+                            <div class="day mr-1">${enroll.timeslot.start_time | day }</div>
                             <div class="month flex-wrap mr-3">${enroll.timeslot.start_time | month}</div>
                         </td>
 
@@ -57,7 +58,7 @@
 {% endblock %}
 
 {% block js_add %}
-    <script type="text/javascript" src="{% static "js/script_adm.js" %}"></script>
+    <script type="text/javascript" src="/static/js/script_adm.js"></script>
 
 {% endblock %}
 

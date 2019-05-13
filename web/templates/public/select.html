@@ -225,8 +225,8 @@
                             </div>
                         </div>{% endcomment %}
                                 <div class="theme-item" v-for="(theme, index) in themes">
-                                    <input v-bind:id='theme.id' type="checkbox" class="filter-input"
-                                           name="filter-theme[]"/>
+                                    <input v-bind:id='theme.id' type="radio" class="filter-input"
+                                           name="filter-theme[]" v-bind:value="theme" v-model="selectedTheme"/>
                                     <label v-bind:for='theme.id' class="theme-label">${theme.description}</label>
                                     {% comment %}          <div class="filter__title">Опыт консультирования</div>
                                 <div v-for="(exp, index) in experienceList" class="form-check">

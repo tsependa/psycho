@@ -112,7 +112,7 @@ def pay(request, timeslot_id):
             "return_url": "http://localhost:9000/office"
         },
         "capture": True,
-        "description": "Консультация c "+timeslot.specialist.middle_name+" "+timeslot.specialist.first_name+" "+timeslot.start_time,
+        "description": "Консультация 1 "+timeslot.specialist.middle_name+" "+timeslot.specialist.first_name
     }, uuid.uuid4())
 
     return HttpResponseRedirect(payment.confirmation.confirmation_url)
