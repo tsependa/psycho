@@ -79,5 +79,5 @@ def schedule(request):
 
 def user_enroll(request, timeslot_id):
     timeslot = TimeSlot.objects.get(pk=timeslot_id)
-    print(timeslot)
-    return render(request, 'public/enroll.html', {'timeslot': timeslot})
+    specialist = timeslot.specialist
+    return render(request, 'public/enroll.html', {'timeslot': timeslot, 'specialist': specialist})

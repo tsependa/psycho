@@ -24,7 +24,7 @@
                         </a>
                         <p>
                             <strong>Ближайшая консультация:</strong>
-                            {{ next_slot.start_time | date:"d M H:i"}}
+                            {{ next_slot.start_time | date:"d M H:i" }}
                         </p>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
         <span class="modal-close"></span>
         <span class="modal-inner">
 
-	    	<form action="" method="" class="consultation-signup">
+	    	<form :action="'/enroll/'+selectedTimeslot.id" method="GET" class="consultation-signup">
 
 		        <div class="modal-header">
 		            <p>Выберите дату и время консультации</p>
@@ -190,9 +190,11 @@
 		            	<p>
                                 ${selectedTimeslot.start_time | formatDate} ${selectedTimeslot.start_time | formatTime}
 		            	</p>
-		            	<button class="green-btn" v-on:click="">
+
+		            	    <button class="green-btn">
 		            		Записаться
-		            	</button>
+                            </button>
+
 		            </div>
 		        </div>
 		    </form>

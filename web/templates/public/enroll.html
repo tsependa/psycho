@@ -6,13 +6,48 @@
 {% endblock %}
 
 {% block content %}
-    <div id="enroll_app">
+    <div id="enroll_app" class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-2 m-30">
+                <h4>Cпециалист:</h4>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-1 m-30">
+                <img src="../media/{{ specialist.avatar }}" alt="" class="" style="max-width: 100%">
+
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-9 m-30">
+                <p class="specialist__name"> {{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }}</p>
+                <p class="specialist__prof">{{ specialist.experience }} лет опыта консультирования</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-2 m-30">
+                <h4>Выбранное время:</h4>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 m-30">
+                <p class="specialist__name"> {{ timeslot.start_time | date:"D d M H:i" }}</p>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-2 m-30">
+                <h4>Стоимость консультации:</h4>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 m-30">
+                <p class="specialist__name"> 3 400 руб.</p>
+            </div>
+
+        </div>
+        <div class="row">
+
+        </div>
+
     </div>
 {% endblock %}
 
 {% block js_add %}
 
-    <script type="text/javascript" src="/static/js/script_select.js"></script>
+    {% comment %} <script type="text/javascript" src="/static/js/script_select.js"></script>{% endcomment %}
 
     {% comment %}    <script type="text/javascript" src="/static/js/app.js"></script>{% endcomment %}
 
