@@ -144,7 +144,7 @@
                                             ${specialist.last_name }</p>
                                     </a>
                                     <p class="specialist__prof">${specialist.experience} лет опыта консультирования</p>
-                                    <p class="specialist__time">Ближайшая запись: 14 марта, 10:00</p>
+                                    <p v-if="specialist.next_slot" class="specialist__time">Ближайшая запись: ${specialist.next_slot.start_time | formatDayPretty} </p>
                                     {% comment %} <div class="row font-small">
                                         <div class="col-3 p-1">
                                             <div class="p-0">

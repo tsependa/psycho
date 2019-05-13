@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -68,6 +70,9 @@ class Specialist(models.Model):
 
     def __str__(self):
         return self.middle_name + " " + self.first_name + " " + self.last_name
+
+    def next_slot(self):
+        return self.timeslots.filter(start_time__gte=datetime.now()).order_by('start_time').first()
 
 
 class TimeSlot(models.Model):

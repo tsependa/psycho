@@ -28,6 +28,7 @@ class TimeSlotSerializer(serializers.ModelSerializer):
 class SpecialistSerializer(serializers.ModelSerializer):
     themes = ThemeSerializer(many=True, read_only=True)
     timeslots = TimeSlotSerializer(many=True, read_only=True)
+    next_slot = TimeSlotSerializer(many=False, read_only=True)
 
     class Meta:
         model = Specialist

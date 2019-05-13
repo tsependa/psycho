@@ -185,4 +185,8 @@ Vue.filter('formatDay', function (value) {
     }
 });
 
-
+Vue.filter('formatDayPretty', function (value) {
+    if (value) {
+        return moment(String(value)).format('DD MMM HH:mm')
+    }
+});
