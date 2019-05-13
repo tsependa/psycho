@@ -68,8 +68,12 @@ class Specialist(models.Model):
     methods = models.ManyToManyField(Method, blank=True)
     types = models.ManyToManyField(Type, blank=True)
 
+    promo = models.IntegerField(blank=True, default=1)
+
     def __str__(self):
         return self.middle_name + " " + self.first_name + " " + self.last_name
+
+
 
     def next_slot(self):
         return self.timeslots.filter(start_time__gte=datetime.now()).order_by('start_time').first()

@@ -743,6 +743,15 @@ header {
     background: url('../img/dot.svg') 0 5px no-repeat;
 }
 
+.specialist__time__empty {
+    font-size: 14px;
+    line-height: normal;
+    font-weight: 300;
+    text-align: left;
+    margin-bottom: 30px;
+    padding: 0 0 0 0;
+}
+
 @media (max-width: 768px) {
     .specialist__name,
     .specialist__prof,

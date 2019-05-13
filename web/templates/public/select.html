@@ -145,6 +145,7 @@
                                     </a>
                                     <p class="specialist__prof">${specialist.experience} лет опыта консультирования</p>
                                     <p v-if="specialist.next_slot" class="specialist__time">Ближайшая запись: ${specialist.next_slot.start_time | formatDayPretty} </p>
+                                    <p v-else class="specialist__time__empty">На ближайшие даты нет записи</p>
                                     {% comment %} <div class="row font-small">
                                         <div class="col-3 p-1">
                                             <div class="p-0">
