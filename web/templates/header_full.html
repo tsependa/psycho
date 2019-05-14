@@ -41,6 +41,11 @@
             <div class="col-4 col-sm-4 m-copy">
                 <div class="menu"></div>
                 <ul class="menu__list menu-list">
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'office' %}" class="header-btn">Личный кабинет</a>
+                        </li>
+                    {% endif %}
                     <li>
                         <a href="{% url 'select' %}" class="header-btn">Подбор специалиста</a>
                     </li>
