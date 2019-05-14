@@ -6,7 +6,7 @@ var app = new Vue({
     delimiters: ['${', '}'],
     data: {
         selectedTheme: {},
-        selectedExps: {value: 'от 5 лет', start: 6, checked: 'checked'},
+        selectedExps: {value: 'от 5 лет', start: 0, checked: 'checked'},
         selectedGender: "",
         selectedSpecialist: {},
         selectedTimeslot: {},
