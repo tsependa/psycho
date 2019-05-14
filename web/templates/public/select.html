@@ -10,7 +10,7 @@
 
         <section class="select-specialist">
 
-            <div class="mobile_search">
+            {% comment %}  <div class="mobile_search">
 
 
                 <div class="container">
@@ -72,7 +72,7 @@
                                         <div class="modal__title">Направления:</div>
                                         <div class="theme-collapse row p-0 m-0">
                                             <div class="theme-btn" v-for="(theme, index) in specialist.themes"
-                                                    {% comment %}        v-if="index < 4"{% endcomment %}
+                                                            v-if="index < 4"
                                                  :class="theme.id == selectedTheme.id ? 'theme-btn-selected' : ''">
                                                 ${theme.description}
                                             </div>
@@ -119,8 +119,8 @@
                 </div>
 
 
-            </div>
-            <div class="desktop_search">
+            </div>{% endcomment %}
+            <div>
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -134,7 +134,8 @@
                                      v-for="specialist in filteredSpecialists" :key="specialist.id"
                                      @click="selectSpecialist(specialist)" data-toggle="modal"
                                      data-target="#modalSpecialist">
-                                    <a :href="'/specialist/'+specialist.id" target="_blank" class="select-specialist__item">
+                                    <a :href="'/specialist/'+specialist.id+'?theme_id='+selectedTheme.id" target="_blank"
+                                       class="select-specialist__item">
                                         <div class="quote-wrapper">
                                             <p class="quote" v-html="specialist.quote"></p>
                                             <img :src="specialist.avatar" class="resp-img">
@@ -144,7 +145,8 @@
                                             ${specialist.last_name }</p>
                                     </a>
                                     <p class="specialist__prof">${specialist.experience} лет опыта консультирования</p>
-                                    <p v-if="specialist.next_slot" class="specialist__time">Ближайшая запись: ${specialist.next_slot.start_time | formatDayPretty} </p>
+                                    <p v-if="specialist.next_slot" class="specialist__time">Ближайшая запись:
+                                        ${specialist.next_slot.start_time | formatDayPretty} </p>
                                     <p v-else class="specialist__time__empty">На ближайшие даты нет записи</p>
                                     {% comment %} <div class="row font-small">
                                         <div class="col-3 p-1">

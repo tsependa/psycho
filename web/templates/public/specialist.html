@@ -24,7 +24,7 @@
                         </a>
                         <p>
                             <strong>Ближайшая консультация:</strong>
-                            {{ next_slot.start_time | date:"d M H:i" }}
+                            {{ specialist.next_slot.start_time | date:"d M H:i" }}
                         </p>
                     </div>
                 </div>
@@ -73,72 +73,25 @@
             </div>
             <div class="row select-specialist__list">
                 <!-- specialist -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
-                    <a href="specialist.html" target="_blank" class="select-specialist__item">
-                        <div class="specialist__wrapper">
-                            <img src="img/profile-01.png" class="resp-img">
-                        </div>
-                        <p class="specialist__name">Балоян Вероника Евгеньевна</p>
-                    </a>
-                    <p class="specialist__prof">12 лет опыта консультирования</p>
-                    <p class="specialist__time">Ближайшая запись: 14 марта, 10:00</p>
-                </div>
+                {% for specialist in recommends %}
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
+                        <a href="/specialist/{{ specialist.id }}" target="_blank" class="select-specialist__item">
+                            <div class="specialist__wrapper">
+                                <img src="../media/{{ specialist.avatar }}" class="resp-img profile__img">
+                            </div>
+                            <p class="specialist__name"> {{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }} </p>
+                        </a>
+                        <p class="specialist__prof">{{ specialist.experience }} лет опыта консультирования</p>
+                        {% if specialist.next_slot %}
+                            <p class="specialist__time">Ближайшая
+                                запись: {{ specialist.next_slot.start_time | date:"d M H:i" }}</p>
+                        {% else %}
+                             <p class="specialist__time__empty">Нет записей</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
                 <!-- specialist -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
-                    <a href="specialist.html" target="_blank" class="select-specialist__item">
-                        <div class="specialist__wrapper">
-                            <img src="img/profile-02.png" class="resp-img">
-                        </div>
-                        <p class="specialist__name">Ашихина Екатерина Владимировна</p>
-                    </a>
-                    <p class="specialist__prof">12 лет опыта консультирования</p>
-                    <p class="specialist__time">Ближайшая запись: 12 марта, 14:00</p>
-                </div>
-                <!-- specialist -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
-                    <a href="specialist.html" target="_blank" class="select-specialist__item">
-                        <div class="specialist__wrapper">
-                            <img src="img/profile-03.png" class="resp-img">
-                        </div>
-                        <p class="specialist__name">Ромадинова Галина Ивановна</p>
-                    </a>
-                    <p class="specialist__prof">12 лет опыта консультирования</p>
-                    <p class="specialist__time">Ближайшая запись: 17 марта, 11:00</p>
-                </div>
-                <!-- specialist -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
-                    <a href="specialist.html" target="_blank" class="select-specialist__item">
-                        <div class="specialist__wrapper">
-                            <img src="img/profile-04.png" class="resp-img">
-                        </div>
-                        <p class="specialist__name">Комаров Максим Александрович</p>
-                    </a>
-                    <p class="specialist__prof">12 лет опыта консультирования</p>
-                    <p class="specialist__time">Ближайшая запись: 13 марта, 18:00</p>
-                </div>
-                <!-- specialist -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
-                    <a href="specialist.html" target="_blank" class="select-specialist__item">
-                        <div class="specialist__wrapper">
-                            <img src="img/profile-05.png" class="resp-img">
-                        </div>
-                        <p class="specialist__name">Балоян Вероника Евгеньевна</p>
-                    </a>
-                    <p class="specialist__prof">12 лет опыта консультирования</p>
-                    <p class="specialist__time">Ближайшая запись: 14 марта, 10:00</p>
-                </div>
-                <!-- specialist -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
-                    <a href="specialist.html" target="_blank" class="select-specialist__item">
-                        <div class="specialist__wrapper">
-                            <img src="img/profile-06.png" class="resp-img">
-                        </div>
-                        <p class="specialist__name">Ашихина Екатерина Владимировна</p>
-                    </a>
-                    <p class="specialist__prof">12 лет опыта консультирования</p>
-                    <p class="specialist__time">Ближайшая запись: 12 марта, 14:00</p>
-                </div>
-                <!-- end specialist list -->
+
             </div>
         </div>
         </div>

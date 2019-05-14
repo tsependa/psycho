@@ -53,7 +53,13 @@ def select(request):
 def specialist(request, specialist_id):
     specialist = Specialist.objects.get(pk=specialist_id)
     next_slot = specialist.timeslots.filter(start_time__gte=datetime.now()).order_by('start_time').first()
-    return render(request, "public/specialist.html", context={'specialist': specialist, 'next_slot': next_slot})
+    theme_id = request.GET.get('theme', None)
+
+    if  (theme_id != 'Undefined'):
+        recommends = Specialist.objects.all()[:6]
+    else:
+        recommends = Specialist.objects.all()[:6]
+    return render(request, "public/specialist.html", context={'specialist': specialist, 'recommends': recommends})
 
 
 def signup(request):
@@ -99,7 +105,7 @@ Configuration.secret_key = settings.KASSA_SECRET
 
 
 def pay(request, timeslot_id):
-    timeslot=TimeSlot.objects.get(pk=timeslot_id)
+    timeslot = TimeSlot.objects.get(pk=timeslot_id)
     payment = Payment.create({
         "amount": {
             "value": "3400.00",
@@ -113,7 +119,7 @@ def pay(request, timeslot_id):
             "return_url": settings.KASSA_REDIRECT_URL
         },
         "capture": True,
-        "description": "Консультация 1 "+timeslot.specialist.middle_name+" "+timeslot.specialist.first_name
+        "description": "Консультация 1 " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name
     }, uuid.uuid4())
 
     return HttpResponseRedirect(payment.confirmation.confirmation_url)

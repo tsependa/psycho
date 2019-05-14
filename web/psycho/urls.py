@@ -37,6 +37,7 @@ urlpatterns = [
                   path('', views.consult, name='index'),
                   path('select', views.select, name='select'),
                   path('specialist/<int:specialist_id>', views.specialist, name='specialist'),
+                  path('specialist/<int:specialist_id>/<int:theme_id>', views.specialist, name='specialist'),
                   path('enroll/<int:timeslot_id>', views.user_enroll, name='enroll'),
                   path('faq', views.faq, name='faq'),
                   path('pay/<int:timeslot_id>/', views.pay),
