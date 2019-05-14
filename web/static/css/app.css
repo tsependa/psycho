@@ -1240,17 +1240,17 @@ div:nth-child(n+6) {
     display: none;
 }
 
-.quote-wrapper {
+.quote-wrapper,
+.link-wrapper {
     position: relative;
     background: radial-gradient(188.75px at 50% 30%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #E2E5E9;;
     border-radius: 8px;
 }
-
-.quote-wrapper img {
+.quote-wrapper img ,
+.link-wrapper img {
     display: block;
     margin: 0 auto;
 }
-
 .quote {
     position: absolute;
     bottom: 0;
@@ -1269,31 +1269,65 @@ div:nth-child(n+6) {
     -o-transition: ease-out 0.2s;
     transition: ease-out 0.2s;
 }
-
-.quote-wrapper > .quote {
+.quote-wrapper >  .quote {
     opacity: 0;
 }
-
-.quote-wrapper:hover > .quote {
+.quote-wrapper:hover >  .quote {
     opacity: 0.95;
 }
+@media only screen and (max-width: 992px) {
+    .quote-wrapper:hover >  .quote {
+        opacity: 0;
+    }
+}
 
-.select-specialist__item .specialist__name {
+.select-specialist__item .specialist__name,
+.select-specialist__item .specialist__themes,
+.specialist-slider__link .specialist__name {
     color: #212529;
     margin: 20px 0 10px 0;
 }
-
-.select-specialist__item .specialist__name:hover {
+.select-specialist__item .specialist__name:hover,
+.select-specialist__item .specialist__themes:hover,
+.specialist-slider__link .specialist__name:hover {
     opacity: 0.9;
 }
+
 
 @media only screen and (max-width: 768px) {
     .select-specialist__pro {
         order: 2;
+        overflow: hidden;
     }
-
     .select-specialist__filter {
         order: 1;
+    }
+    .select-specialist__item .specialist__name {
+        margin: 0 0 10px 0;
+    }
+    .select-specialist__item {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .quote-wrapper {
+        width: 80px;
+        height: 80px;
+        margin-right: 20px;
+        border-radius: 50%;
+    }
+    .m-info-wrapper {
+        width: calc(100% - 100px);
+    }
+    .select-specialist__themes {
+        font-size: 14px;
+    }
+    .choosen {
+        font-weight: 600;
     }
 }
 
