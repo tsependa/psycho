@@ -146,10 +146,10 @@ var app = new Vue({
 
         experienceList() {
             return [
-                {value: 'от 5 лет', start: 6, checked: 'checked'},
-                {value: 'от 10 лет', start: 11,},
-                {value: 'от 15 лет', start: 16,},
-                {value: 'более 20 лет', start: 21,},
+                {value: 'от 5 лет', start: 5, checked: 'checked'},
+                {value: 'от 10 лет', start: 10,},
+                {value: 'от 15 лет', start: 15,},
+                {value: 'более 20 лет', start: 20,},
 
             ]
         },
