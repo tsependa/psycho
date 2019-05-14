@@ -77,6 +77,9 @@ class Specialist(models.Model):
     def next_slot(self):
         return self.timeslots.filter(start_time__gte=datetime.now()).order_by('start_time').first()
 
+    class Meta:
+        ordering = ('promo',)
+
 
 class TimeSlot(models.Model):
     specialist = models.ForeignKey(Specialist, on_delete=models.CASCADE, related_name='timeslots')
