@@ -52,6 +52,7 @@ class Specialist(models.Model):
     middle_name = models.CharField(max_length=100, blank=True)
 
     avatar = models.ImageField(blank=True)
+    avatar_mob = models.ImageField(blank=True)
 
     quote = models.TextField(blank=True)
 
@@ -72,8 +73,6 @@ class Specialist(models.Model):
 
     def __str__(self):
         return self.middle_name + " " + self.first_name + " " + self.last_name
-
-
 
     def next_slot(self):
         return self.timeslots.filter(start_time__gte=datetime.now()).order_by('start_time').first()
