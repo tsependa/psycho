@@ -104,10 +104,14 @@
                                     <a :href="'/specialist/'+specialist.id+'?theme_id='+selectedTheme.id"
                                        target="_blank"
                                        class="select-specialist__item">
-                                        <div class="quote-wrapper">
+                                        <div class="quote-wrapper d-copy">
                                             <p class="quote" v-html="specialist.quote"></p>
-                                            <img :src="specialist.avatar" class="resp-img d-copy">
-                                            <img :src="specialist.avatar_mob" class="resp-img m-copy">
+                                            <img :src="specialist.avatar" class="resp-img">
+                                        </div>
+                                         <div class="quote-wrapper m-copy">
+                                            <p class="quote" v-html="specialist.quote"></p>
+
+                                            <img :src="specialist.avatar_mob" class="resp-img">
                                         </div>
                                         <p class="specialist__name"> ${specialist.middle_name}
                                             ${specialist.first_name}
