@@ -76,26 +76,27 @@
                 {% for specialist in recommends %}
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
                         <a href="/specialist/{{ specialist.id }}" class="select-specialist__item">
-                            <div class="specialist__wrapper d-copy">
+                            {% comment %}                            <div class="specialist__wrapper d-copy">
                                 <img src="../media/{{ specialist.avatar }}" class="resp-img">
-                            </div>
+                            </div>{% endcomment %}
 
-                            <div class="specialist__wrapper m-copy">
+                            <div class="specialist__wrapper">
                                 <img src="../media/{{ specialist.avatar_mob }}" class="resp-img">
                             </div>
+                            <div class="m-info-wrapper">
+                                <p class="specialist__name"> {{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }} </p>
+                                <p class="specialist__prof">{{ specialist.experience }} лет опыта
+                                    консультирования</p>
+                                {% if specialist.next_slot %}
+                                    <p class="specialist__time">Ближайшая
+                                        запись: {{ specialist.next_slot.start_time | date:"d M H:i" }}</p>
+                                {% else %}
+                                    <p class="specialist__time__empty">Нет записей</p>
+                                {% endif %}
+                            </div>
                         </a>
-                        <div class="m-info-wrapper">
-                            <p class="specialist__name"> {{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }} </p>
-                            <p class="specialist__prof d-copy">{{ specialist.experience }} лет опыта
-                                консультирования</p>
-                            {% if specialist.next_slot %}
-                                <p class="specialist__time d-copy">Ближайшая
-                                    запись: {{ specialist.next_slot.start_time | date:"d M H:i" }}</p>
-                            {% else %}
-                                <p class="specialist__time__empty d-copy">Нет записей</p>
-                            {% endif %}
-                        </div>
 
+                    
                     </div>
                 {% endfor %}
                 <!-- specialist -->

@@ -52,10 +52,9 @@ def select(request):
 
 def specialist(request, specialist_id):
     specialist = Specialist.objects.get(pk=specialist_id)
-    next_slot = specialist.timeslots.filter(start_time__gte=datetime.now()).order_by('start_time').first()
     theme_id = request.GET.get('theme', None)
 
-    if  (theme_id != 'Undefined'):
+    if theme_id != 'Undefined':
         recommends = Specialist.objects.all()[:6]
     else:
         recommends = Specialist.objects.all()[:6]

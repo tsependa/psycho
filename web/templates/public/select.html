@@ -96,14 +96,14 @@
                 </div>
 
                 <div class="row m-copy">
-                    <div class="col-12 p-1">
+                    <div class="col-12 m-3">
                         <select class="browser-default custom-select" v-model="selectedTheme">
                             <option selected :value={}>Выберите проблему</option>
                             <option v-for="theme in themes" v-bind:value="theme">${theme.title}
                             </option>
                         </select>
                     </div>
-                    <div class="col-12 p-1">
+                    <div class="col-12 m-3">
                         <select class="browser-default custom-select" v-model="selectedExps">
                             <option v-for="exp in experienceList" v-bind:value="exp">${exp.value}</option>
                         </select>
@@ -132,17 +132,17 @@
                                         <p class="specialist__name"> ${specialist.middle_name}
                                             ${specialist.first_name}
                                             ${specialist.last_name }</p>
-{% comment %}                                        <p class="specialist__themes m-copy">
+                                        {% comment %}                                        <p class="specialist__themes m-copy">
                                             <span v-for="theme in specialist.themes" >${theme.description}, </span>
                                         </p>{% endcomment %}
                                         <p class="specialist__prof">${specialist.experience} лет опыта
                                             консультирования</p>
-
+                                        <p v-if="specialist.next_slot " class="specialist__time">Ближайшая запись:
+                                            ${specialist.next_slot.start_time | formatDayPretty} </p>
+                                        <p v-else class="specialist__time__empty">На ближайшие даты нет записи</p>
                                     </div>
                                 </a>
-                                <p v-if="specialist.next_slot " class="specialist__time d-copy">Ближайшая запись:
-                                    ${specialist.next_slot.start_time | formatDayPretty} </p>
-                                <p v-else class="specialist__time__empty d-copy">На ближайшие даты нет записи</p>
+
 
                                 {% comment %} <div class="row font-small">
                                         <div class="col-3 p-1">
