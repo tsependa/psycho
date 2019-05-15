@@ -76,11 +76,11 @@
                 {% for specialist in recommends %}
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-30">
                         <a href="/specialist/{{ specialist.id }}" class="select-specialist__item">
-                            {% comment %}                            <div class="specialist__wrapper d-copy">
+                            <div class="specialist__wrapper d-copy">
                                 <img src="../media/{{ specialist.avatar }}" class="resp-img">
-                            </div>{% endcomment %}
+                            </div>
 
-                            <div class="specialist__wrapper">
+                            <div class="specialist__wrapper m-copy" >
                                 <img src="../media/{{ specialist.avatar_mob }}" class="resp-img">
                             </div>
                             <div class="m-info-wrapper">
@@ -96,7 +96,7 @@
                             </div>
                         </a>
 
-                    
+
                     </div>
                 {% endfor %}
                 <!-- specialist -->
