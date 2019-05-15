@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load groups %}
 <header class="header__small">
     <div class="container">
         <div class="row header__row">
@@ -43,6 +43,13 @@
                     {% if user.is_authenticated %}
                         <li>
                             <a href="{% url 'office' %}" class="header-btn">Личный кабинет</a>
+                        </li>
+
+                    {% endif %}
+                    dfgdfgdfg
+                    {% if  request.user|has_group:"specialist" %}
+                        <li>
+                            <a href="{% url 'schedule' %}" class="header-btn">Расписание</a>
                         </li>
                     {% endif %}
                     <li>
