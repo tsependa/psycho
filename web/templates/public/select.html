@@ -105,6 +105,7 @@
                 </div>
                 <div class="col-12 mt-3 mb-4">
                     <select class="browser-default custom-select" v-model="selectedExps">
+                        <option selected :value="{value: 'от 5 лет', start: 0, checked: 'checked'}">Выберите опыт</option>
                         <option v-for="exp in experienceList" v-bind:value="exp">${exp.value}</option>
                     </select>
                 </div>

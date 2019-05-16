@@ -12,8 +12,8 @@
                 <h4>Cпециалист:</h4>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-1 m-30">
-                <img src="../media/{{ specialist.avatar }}" alt="" class="" style="max-width: 100%">
-
+                <img src="../media/{{ specialist.avatar }}" alt="" class="d-copy" style="max-width: 100%">
+                    <img src="../media/{{ specialist.avatar_mob }}" alt="" class="m-copy" style="max-width: 100%">
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-9 m-30">
                 <p class="specialist__name"> {{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }}</p>
@@ -25,7 +25,7 @@
                 <h4>Выбранное время:</h4>
             </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 m-30">
-                <p class="specialist__name"> {{ timeslot.start_time | date:"D d M H:i" }}</p>
+                <p class="specialist__time"> {{ timeslot.start_time | date:"D d M H:i" }}</p>
             </div>
 
         </div>
