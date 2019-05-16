@@ -1668,7 +1668,5 @@ div:nth-child(n+6) {
 @media only screen and (max-width: 650px) {
     .modal-div {
         width: 90%;
-
-
     }
 }
