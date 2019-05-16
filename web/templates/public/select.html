@@ -145,84 +145,14 @@
                             </a>
 
 
-                            {% comment %} <div class="row font-small">
-                                        <div class="col-3 p-1">
-                                            <div class="p-0">
-                                                <img class="img__gradient1" :src="specialist.avatar">
-                                            </div>
 
-                                        </div>
-                                        <div class="col-9">
-                                            <div class="p-1">
-                                                <h4 class=""> ${specialist.middle_name}
-                                                    ${specialist.first_name}
-                                                    ${specialist.last_name }</h4>
-                                                <div class="">
-                                                    <div class="row">
-                                                        <blockquote v-html="specialist.quote">
-                                                        </blockquote>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <b>${specialist.experience}</b> лет опыта консультирования
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="modal__title">Направления:</div>
-                                                        <div class="theme-collapse row p-0 m-0">
-                                                            <div class="theme-btn"
-                                                                 v-for="(theme, index) in specialist.themes"
-                                                                 :class="theme.id == selectedTheme.id ? 'theme-btn-selected' : ''">
-                                                                ${theme.description}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="modal__title">Образование:</div>
-                                                        <p v-html="specialist.education"></p>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="modal__title">Доп. образование:</div>
-                                                        <p v-html="specialist.education_add"></p>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="modal__title">Доступное время:</div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class=""
-                                                             v-for="(timeslot, index) in slotsAggr(specialist.timeslots)">
-                                                            <div class="timeslot-header">
-                                                                ${index | formatDay}
-                                                            </div>
-                                                            <div class="theme-btn" v-for="time in timeslot"
-                                                                 v-on:click="selectTimeslot(time)"
-                                                                 :class="{ 'blue text-white': time.id == selectedTimeslot.id,}">
-                                                                ${time.start_time | formatTime}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>{% endcomment %}
                         </div>
                     </div>
 
                 </div>
                 <div class="col-12 col-md-3 m-30 select-specialist__filter d-copy">
                     <div class="filter__title">Направление</div>
-                    <div class="filter-list m-30"> {% comment %}
-                            <input type="radio" class="form-check-input" v-bind:id='{}'
-                                   v-model="selectedTheme" v-bind:value="{}"/>
-                            <label class="form-check-label" v-bind:for='{}'>Без темы</label>
-                            <div v-for="(theme, index) in themes">
-                                <input type="radio" class="form-check-input" v-bind:value="theme"
-                                       v-model="selectedTheme" v-bind:id='theme.id'/>
-                                <label class="form-check-label" v-bind:for='theme.id'>${theme.description}</label>
-                            </div>
-                        </div>{% endcomment %}
+                    <div class="filter-list m-30">
                         <div class="theme-item" v-for="(theme, index) in themes">
                             <input v-bind:id='theme.id' type="radio" class="filter-input"
                                    name="filter-theme[]" v-bind:value="theme" v-model="selectedTheme"/>

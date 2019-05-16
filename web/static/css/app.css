@@ -1601,14 +1601,22 @@ div:nth-child(n+6) {
 }
 
 .modal-div {
-    width: 590px;
-    min-height: 260px;
-    background: #fff;
-    position: absolute;
+    position: fixed;
     top: 45%;
     left: 50%;
-    margin-top: -400px;
-    margin-left: -295px;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    /*  right: 15px;*/
+    min-height: 260px;
+    width: 590px;
+    /*
+        min-height: 260px;
+        background: #fff;
+        position: absolute;
+        top: 45%;
+        left: 50%;*/
+    /*    margin-top: -400px;
+        margin-left: -295px;*/
     display: none;
     opacity: 0;
     z-index: 1000;
@@ -1660,8 +1668,7 @@ div:nth-child(n+6) {
 @media only screen and (max-width: 650px) {
     .modal-div {
         width: 90%;
-        left: 0;
-        margin-left: 5%;
-        margin-right: 5%;
+
+
     }
 }

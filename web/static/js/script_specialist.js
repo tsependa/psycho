@@ -102,7 +102,7 @@ openModalBtn.click(function (e) {
     overlay
         .fadeIn(400,
             function () {
-                $(div).css('display', 'block').animate({opacity: 1, top: '475px'}, 200);
+                $(div).css('display', 'block').animate({opacity: 1, }, 200);
             });
 });
 
