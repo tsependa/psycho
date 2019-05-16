@@ -17,6 +17,8 @@ services:
       - db
     networks:
       psycho-net:
+        - aliases:
+            - ${WEB_NAME}
 
 
   db:
