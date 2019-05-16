@@ -1,9 +1,10 @@
 version: '3.7'
 services:
   django:
+    container_name: ${WEB_NAME}
     restart: always
     env_file:
-      - env
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
@@ -23,7 +24,7 @@ services:
     image: mysql:5.7
 
     env_file:
-      - env
+      - .env
 
     environment:
       MYSQL_ROOT_PASSWORD: 'psycho'
