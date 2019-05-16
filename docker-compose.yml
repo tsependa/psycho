@@ -1,18 +1,18 @@
 version: '3.7'
 services:
   django:
-    container_name: ${WEB_NAME}
+    hostname: ${WEB_NAME}
     restart: always
     env_file:
       - .env
     build:
       context: .
       dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:9000
+    command: python manage.py runserver 0.0.0.0:${DJANGO_PORT}
     volumes:
       - ./web:/code
     ports:
-      - "${DJANGO_PORT}:9000"
+      - "${DJANGO_PORT}:${DJANGO_PORT}"
     depends_on:
       - db
     networks:
