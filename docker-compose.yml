@@ -1,6 +1,7 @@
 version: '3.7'
 services:
   django:
+    container_name: ${WEB_NAME}
     hostname: ${WEB_NAME}
     restart: always
     env_file:
@@ -17,8 +18,8 @@ services:
       - db
     networks:
       psycho-net:
-        - aliases:
-            - ${WEB_NAME}
+        aliases:
+          - ${WEB_NAME}
 
 
   db:
