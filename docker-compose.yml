@@ -9,11 +9,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:${DJANGO_PORT}
+    command: python manage.py runserver 0.0.0.0:${WEB_PORT}
     volumes:
       - ./web:/code
     ports:
-      - "${DJANGO_PORT}:${DJANGO_PORT}"
+      - "${WEB_PORT}:${WEB_PORT}"
     depends_on:
       - db
     networks:
@@ -23,6 +23,8 @@ services:
 
 
   db:
+    container_name: ${DB_NAME}
+    hostname: ${DB_NAME}
     restart: always
     image: mysql:5.7
 
@@ -38,9 +40,11 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
     ports:
-      - "${MYSQL_PORT}:3306"
+      - "${DB_PORT}:3306"
     networks:
       psycho-net:
+        aliases:
+          - ${DB_NAME}
     command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci --skip-character-set-client-handshake
 
 

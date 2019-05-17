@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1zyec#+17c=f+u453%)z&hww*mi(l6#$j&bccz2!o2actrhhkt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", False)
 
 ALLOWED_HOSTS = ["*"]
 
@@ -87,8 +87,8 @@ DATABASES = {
         'USER': 'psycho',
         'DATABASE': 'psycho',
         'PASSWORD': 'Celeron!1',
-        'HOST': 'db',
-        'PORT': '3306',
+        'HOST': os.environ.get("DB_NAME"),
+        'PORT': os.environ.get("DB_PORT"),
         'OPTIONS': {'charset': 'utf8'},
     }
 
