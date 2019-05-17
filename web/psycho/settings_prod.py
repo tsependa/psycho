@@ -87,8 +87,8 @@ DATABASES = {
         'USER': 'psycho',
         'DATABASE': 'psycho',
         'PASSWORD': 'Celeron!1',
-        'HOST': os.environ.get("DB_NAME"),
-        'PORT': os.environ.get("DB_PORT"),
+        'HOST': 'db',
+        'PORT': '3306',
         'OPTIONS': {'charset': 'utf8'},
     }
 
