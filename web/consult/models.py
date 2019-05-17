@@ -99,24 +99,11 @@ class Enroll(models.Model):
 
 
 class Payment(models.Model):
-    STATUS_OPEN = "OPEN"
-    STATUS_CANCELED = "CANCELED"
-    STATUS_PENDING = "PENDING"
-    STATUS_EXPIRED = "EXPIRED"
-    STATUS_FAILED = "FAILED"
-    STATUS_PAID = "PAID"
-
-    STATUS_CHOICES = (
-        (STATUS_OPEN, "open"),
-        (STATUS_CANCELED, "canceled"),
-        (STATUS_PENDING, "pending"),
-        (STATUS_EXPIRED, "expired"),
-        (STATUS_FAILED, "failed"),
-        (STATUS_PAID, "paid")
-    )
-
     enroll = models.ForeignKey(Enroll, on_delete=models.CASCADE)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=STATUS_OPEN)
+    status = models.CharField(max_length=50)
+    yandex_payment = models.CharField(max_length=50, blank=True)
+    amount = models.DecimalField(decimal_places=2, max_digits=10, default=0)
+    payload = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

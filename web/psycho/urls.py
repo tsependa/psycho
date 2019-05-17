@@ -43,6 +43,7 @@ urlpatterns = [
                   path('pay/<int:timeslot_id>/', views.pay),
                   path('api-auth/', include('rest_framework.urls')),
                   path('api/', include(router.urls)),
+                  path('api/pay/notifications', views.pay_notification),
                   path('pages/', include('django.contrib.flatpages.urls')),
 
               ] + static(settings_prod.STATIC_URL, document_root=settings_prod.STATIC_ROOT) + static(

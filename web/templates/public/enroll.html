@@ -1,52 +1,70 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block header %}
     {% include "header.html" %}
 {% endblock %}
 
 {% block content %}
+
     <div id="enroll_app" class="container">
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-2 m-30">
-                <h4>Cпециалист:</h4>
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-1 m-30">
-                <img src="../media/{{ specialist.avatar }}" alt="" class="d-copy" style="max-width: 100%">
+        <form method="post" action="/pay/{{ timeslot.id }}/">
+        {% csrf_token %}
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-2 m-1">
+                    <h4>Cпециалист:</h4>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-1 m-1">
+                    <img src="../media/{{ specialist.avatar }}" alt="" class="d-copy" style="max-width: 100%">
                     <img src="../media/{{ specialist.avatar_mob }}" alt="" class="m-copy" style="max-width: 100%">
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-9 m-10">
+                    <p class="specialist__name"> {{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }}</p>
+                    <p class="specialist__prof">{{ specialist.experience }} лет опыта консультирования</p>
+                </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-9 m-30">
-                <p class="specialist__name"> {{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }}</p>
-                <p class="specialist__prof">{{ specialist.experience }} лет опыта консультирования</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-2 m-30">
-                <h4>Выбранное время:</h4>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3 m-30">
-                <p class="specialist__time"> {{ timeslot.start_time | date:"D d M H:i" }}</p>
-            </div>
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-2 m-1">
+                    <h4>Выбранное время:</h4>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 m-1">
+                    <p class="specialist__time"> {{ timeslot.start_time | date:"D d M H:i" }}</p>
+                </div>
 
-        </div>
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-2 m-30">
-                <h4>Стоимость консультации:</h4>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3 m-30">
-                <p class="specialist__name"> 3 400 руб.</p>
-            </div>
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-2 m-1">
+                    <h4>Стоимость консультации:</h4>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 m-1">
+                    <h5> 3 400 руб.</h5>
+                </div>
 
-        </div>
-        <div class="row">
-            <form method="get" action="/pay/{{ timeslot.id }}">
-                <button class="green-btn">
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-2 m-1">
+                    <h4>Электронная почта:</h4>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 m-1">
+                    {% if user.is_authenticated %}
+                        <input type="email" id="email" name="email" value="{{ user.email }}" disabled>
+                    {% else %}
+                        <input type="email" id="email" name="email">
+                    {% endif %}
+
+                </div>
+            </div>
+            <div class="row">
+
+                <button class="green-btn m-1">
                     Оплатить 3 400 руб.
                 </button>
-            </form>
-        </div>
-
+            </div>
+        </form>
     </div>
+
+
 {% endblock %}
 
 {% block js_add %}

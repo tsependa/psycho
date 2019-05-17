@@ -139,6 +139,6 @@ VIDEOCONF_URL = 'https://meet.jit.si'
 
 SITE_ID = 3
 
-KASSA_ACCOUNT = 602385
-KASSA_SECRET = "test_iHkZR98UHAIn2h-UzFhLtiSFaXCY14YZLC7w85BvOKw"
-KASSA_REDIRECT_URL = "https://роспсихология.рф/office"
+KASSA_ACCOUNT = os.getenv("KASSA_ACCOUNT")
+KASSA_SECRET = os.getenv("KASSA_SECRET")
+KASSA_REDIRECT_URL = os.getenv("KASSA_REDIRECT_URL")

@@ -174,6 +174,7 @@ const app2 = new Vue({
         },
         mounted: function () {
             this.specialist_id = s_id;
+            this.getUserEnrolls();
             this.getSpecialistTimeslots();
             this.getSpecialistEnrolls();
 

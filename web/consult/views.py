@@ -14,13 +14,17 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views import View
+from rest_framework.decorators import api_view
 
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from yandex_checkout import Configuration, Payment
+from yandex_checkout import Configuration, Payment as YandexPayment
 
-from consult.models import Theme, Specialist, Enroll, TimeSlot, Faq
+from consult.models import Theme, Specialist, Enroll, TimeSlot, Faq, Payment
+
+Configuration.account_id = settings.KASSA_ACCOUNT
+Configuration.secret_key = settings.KASSA_SECRET
 
 
 @login_required
@@ -99,15 +103,12 @@ def user_enroll(request, timeslot_id):
     return render(request, 'public/enroll.html', {'timeslot': timeslot, 'specialist': specialist})
 
 
-Configuration.account_id = settings.KASSA_ACCOUNT
-Configuration.secret_key = settings.KASSA_SECRET
-
-
 def pay(request, timeslot_id):
+    amount = 3400
     timeslot = TimeSlot.objects.get(pk=timeslot_id)
-    payment = Payment.create({
+    yandex_payment = YandexPayment.create({
         "amount": {
-            "value": "3400.00",
+            "value": amount,
             "currency": "RUB"
         },
         "payment_method_data": {
@@ -117,18 +118,39 @@ def pay(request, timeslot_id):
             "type": "redirect",
             "return_url": settings.KASSA_REDIRECT_URL
         },
-        "capture": True,
+        "capture": False,
         "description": "Консультация 1 " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name
     }, uuid.uuid4())
 
-    return HttpResponseRedirect(payment.confirmation.confirmation_url)
+    print(yandex_payment)
+
+    user = create_user(request)
+    enroll = Enroll.objects.create(timeslot_id=timeslot_id, user=user, )
+    enroll.save()
+    payment = Payment.objects.create(enroll=enroll, status="initial", amount=amount,)
+    payment.save()
+    return HttpResponseRedirect(yandex_payment.confirmation.confirmation_url)
 
 
-class YandexNotification(APIView):
-    permission_classes = [AllowAny]
+def create_user(request):
+    try:
+        user = User.objects.get(username=request.user.username)
+    except User.DoesNotExist:
+        user = None
 
-    def post(self, request):
-        payment_id = request.data['object']['id']
-        Payment.capture(payment_id)
+    if user is None:
+        user = User.objects.create_user(email=request.POST['email'], username=request.POST['email'], password='123456')
+        user.save()
+        auth_user = authenticate(username=user.username, password='123456')
+        login(request, auth_user)
+    return user
 
-        return Response(status=200)
+def pay_approve(request):
+    return render(request, 'public/enroll.html', {})
+
+
+@api_view(['POST'])
+def pay_notification(request):
+    payment_id = request.data['object']['id']
+    response = YandexPayment.capture(payment_id)
+    return Response(status=200)
