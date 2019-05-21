@@ -80,7 +80,7 @@
                                 <img src="../media/{{ specialist.avatar }}" class="resp-img">
                             </div>
 
-                            <div class="specialist__wrapper m-copy" >
+                            <div class="specialist__wrapper m-copy">
                                 <img src="../media/{{ specialist.avatar_mob }}" class="resp-img">
                             </div>
                             <div class="m-info-wrapper">
@@ -110,9 +110,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 offset-0 col-sm-4 offset-sm-4">
-                    <button class="inv-green-btn">
-                        Все специалисты
-                    </button>
+                    <a href="{% url 'select' %}">
+                        <button class="inv-green-btn">
+
+                            Все специалисты
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

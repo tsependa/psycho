@@ -3,3 +3,4 @@ djangorestframework
 Pillow
 mysqlclient
 yandex-checkout
+sendgrid

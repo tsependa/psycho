@@ -135,7 +135,7 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-VIDEOCONF_URL = 'https://meet.jit.si'
+VIDEOCONF_URL = 'https://meet.роспсихология.рф'
 
 SITE_ID = 3
 

@@ -22,6 +22,7 @@ from rest_framework.views import APIView
 from yandex_checkout import Configuration, Payment as YandexPayment
 
 from consult.models import Theme, Specialist, Enroll, TimeSlot, Faq, Payment
+from consult.utils.mail import pay_email_notify
 
 Configuration.account_id = settings.KASSA_ACCOUNT
 Configuration.secret_key = settings.KASSA_SECRET
@@ -106,6 +107,11 @@ def user_enroll(request, timeslot_id):
 def pay(request, timeslot_id):
     amount = 3400
     timeslot = TimeSlot.objects.get(pk=timeslot_id)
+    user = create_user(request)
+    enroll = Enroll.objects.create(timeslot_id=timeslot_id, user=user, )
+    enroll.save()
+    payment = Payment.objects.create(enroll=enroll, status="initial", amount=amount, )
+    payment.save()
     yandex_payment = YandexPayment.create({
         "amount": {
             "value": amount,
@@ -116,19 +122,17 @@ def pay(request, timeslot_id):
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": settings.KASSA_REDIRECT_URL
+            "return_url": settings.KASSA_REDIRECT_URL + payment.id
         },
         "capture": False,
-        "description": "Консультация 1 " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name
+        "description": "Консультация " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name
     }, uuid.uuid4())
 
-    print(yandex_payment)
-
-    user = create_user(request)
-    enroll = Enroll.objects.create(timeslot_id=timeslot_id, user=user, )
-    enroll.save()
-    payment = Payment.objects.create(enroll=enroll, status="initial", amount=amount,)
+    payment_id = yandex_payment['object']['id']
+    payment.yandex_payment = payment_id
     payment.save()
+
+    print(yandex_payment)
     return HttpResponseRedirect(yandex_payment.confirmation.confirmation_url)
 
 
@@ -145,12 +149,22 @@ def create_user(request):
         login(request, auth_user)
     return user
 
+
 def pay_approve(request):
     return render(request, 'public/enroll.html', {})
+
+
+@login_required
+def pay_success(request):
+    return render(request, 'public/pay_success.html')
 
 
 @api_view(['POST'])
 def pay_notification(request):
     payment_id = request.data['object']['id']
     response = YandexPayment.capture(payment_id)
+    payment = Payment.objects.get(yandex_payment=payment_id)
+    payment.status = "success"
+    payment.save()
+    pay_email_notify(payment)
     return Response(status=200)
