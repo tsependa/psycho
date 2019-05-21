@@ -71,6 +71,8 @@ class Specialist(models.Model):
 
     promo = models.IntegerField(blank=True, default=1)
 
+    active = models.BooleanField(default=False)
+
     def __str__(self):
         return self.middle_name + " " + self.first_name + " " + self.last_name
 

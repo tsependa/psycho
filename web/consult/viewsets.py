@@ -17,6 +17,10 @@ class SpecialistViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Specialist.objects.all()
     serializer_class = SpecialistSerializer
 
+    def get_queryset(self):
+        queryset = Specialist.objects.all().filter(active=True)
+        return queryset
+
 
 class TimeslotFilteredViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TimeSlotSerializer
