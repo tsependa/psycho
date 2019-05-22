@@ -73,7 +73,7 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             my_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=my_password)
+            user = authenticate(username=username, email=username, password=my_password)
             login(request, user)
             return redirect('index')
     else:
@@ -122,13 +122,13 @@ def pay(request, timeslot_id):
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": settings.KASSA_REDIRECT_URL + payment.id
+            "return_url": settings.KASSA_REDIRECT_URL
         },
         "capture": False,
         "description": "Консультация " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name
     }, uuid.uuid4())
 
-    payment_id = yandex_payment['object']['id']
+    payment_id = yandex_payment.id
     payment.yandex_payment = payment_id
     payment.save()
 
@@ -163,8 +163,12 @@ def pay_success(request):
 def pay_notification(request):
     payment_id = request.data['object']['id']
     response = YandexPayment.capture(payment_id)
-    payment = Payment.objects.get(yandex_payment=payment_id)
-    payment.status = "success"
+    print(response)
+    payment = Payment.objects.get_or_create(yandex_payment=payment_id)
+    payment.status = response.status
     payment.save()
-    pay_email_notify(payment)
+    if not payment.notify:
+        pay_email_notify(payment)
+        payment.notify = True
+
     return Response(status=200)
