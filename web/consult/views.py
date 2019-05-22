@@ -142,13 +142,23 @@ def pay(request, timeslot_id):
 
 
 def create_user(request):
-    try:
-        user = User.objects.filter(username=request.POST['email']).first()
-    except User.DoesNotExist:
-        user = None
+    print("POST email")
+    print(request.POST.get('email'))
+    print(request.POST)
+    if request.user:
+        try:
+            user = User.objects.get(id=request.user.id)
+        except User.DoesNotExist:
+            user = None
+    else:
+        try:
+            user = User.objects.filter(username=request.POST.get('email')).first()
+
+        except User.DoesNotExist:
+            user = None
 
     if user is None:
-        user = User.objects.create_user(email=request.POST['email'], username=request.POST['email'],
+        user = User.objects.create_user(email=request.POST.get('email'), username=request.POST.get('email'),
                                         password='123456')
         user.is_active = False
         user.save()

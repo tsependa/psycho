@@ -48,9 +48,9 @@
                 </div>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 m-1">
                     {% if user.is_authenticated %}
-                        <input type="email" id="email" name="email" value="{{ user.email }}" disabled>
+                        <input type="email" name="email" value="{{ user.email }}" disabled>
                     {% else %}
-                        <input type="email" id="email" name="email">
+                        <input type="email" name="email">
                     {% endif %}
 
                 </div>
