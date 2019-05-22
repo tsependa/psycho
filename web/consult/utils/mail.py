@@ -23,7 +23,7 @@ def pay_email_notify(payment, password=None):
         "link": payment.enroll.timeslot.videoconf_url,
         "specialist": '',
         "email": payment.enroll.user.email,
-        "password": payment.enroll.user.password,
+        "password": password,
     }
     if password is None:
         message.template_id = EXISTING_PAY_TEMPLATE_ID

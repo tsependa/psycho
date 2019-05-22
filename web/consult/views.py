@@ -4,6 +4,7 @@ from collections import defaultdict
 from datetime import timedelta, datetime
 
 import uuid
+from random import choice
 
 from django.conf import settings
 from django.http import HttpResponseRedirect
@@ -36,7 +37,6 @@ def user_office(request):
     user = User.objects.get(username=request.user.username)
     context = {}
     context.pop("user", user)
-
 
     response = render(request, "office/office.html", context=context)
 
@@ -140,15 +140,17 @@ def pay(request, timeslot_id):
 
 def create_user(request):
     try:
-        user = User.objects.filter(username=request.user.username).first()
+        user = User.objects.filter(username=request.POST['email']).first()
     except User.DoesNotExist:
         user = None
 
     if user is None:
-        user = User.objects.create_user(email=request.POST['email'], username=request.POST['email'], password='123456')
+        user = User.objects.create_user(email=request.POST['email'], username=request.POST['email'],
+                                        password='123456')
+        user.is_active = False
         user.save()
-        auth_user = authenticate(username=user.username, password='123456')
-        login(request, auth_user)
+        # auth_user = authenticate(username=user.username, password='123456')
+    login(request, user)
     return user
 
 
@@ -173,11 +175,13 @@ def pay_notification(request):
         print(yandex_payment.status)
         user = payment.enroll.user
 
-
         password = None
-        if user.check_password("123456"):
+        if not user.is_active:
             alphabet = string.ascii_letters + string.digits
-            user.set_password(''.join(secrets.choice(alphabet) for i in range(6)))
+            password = ''.join(choice(alphabet) for i in range(6))
+            user.set_password(password)
+            user.is_active = True
+            user.save()
         if not payment.notify:
             pay_email_notify(payment, password)
             payment.notify = True
