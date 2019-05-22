@@ -34,12 +34,11 @@ Configuration.secret_key = settings.KASSA_SECRET
 @login_required
 def user_office(request):
     user = User.objects.get(username=request.user.username)
-    context = dict()
+    context = {}
     context.pop("user", user)
 
+
     response = render(request, "office/office.html", context=context)
-    # response.delete_cookie("specialist_id")
-    # response.set_cookie("user_id", user.id)
 
     if hasattr(user, 'specialist'):
         response.set_cookie("specialist_id", user.specialist.id)

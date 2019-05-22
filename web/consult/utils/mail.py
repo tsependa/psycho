@@ -1,6 +1,7 @@
 import os
 
 from django.conf import settings
+from django.utils.timezone import make_aware
 from sendgrid import Mail, SendGridAPIClient
 
 from psycho import settings_prod

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% load groups %}
+
 
 
 {% block header %}
@@ -16,7 +16,7 @@
         <div class="">
 
             <div class="mt-3 mb-3">
-                <div class="h2-responsive">Записи специалиста</div>
+                <div class="h2-responsive">Записи на консультацию</div>
 
 
                 <table class="table " style=" ">
@@ -24,7 +24,6 @@
                     <thead>
                     <tr>
                         <td>Дата</td>
-                        <td>Осталось до начала</td>
                         <td>Пользователь</td>
                         <td>Психолог</td>
                         <td>Оплата</td>
@@ -32,18 +31,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="enroll in user_enrolls" class="">
-                        <td>
-                            <div class="day mr-1">${enroll.timeslot.start_time | day }</div>
-                            <div class="month flex-wrap mr-3">${enroll.timeslot.start_time | month}</div>
-                        </td>
+                    {% for enroll in user.enroll_set.all %}
+                        <tr class="">
+                            <td>
+                                <div class="day mr-1">{{ enroll.timeslot.start_time |date:"d M"}}</div>
+                               <div class="month flex-wrap mr-3">{{ enroll.timeslot.start_time|date:"H:i" }}</div>
+                            </td>
 
-                        <td> ${enroll.timeslot.start_time | formatDiff}</td>
-                        <td> ${enroll.user.username}</td>
-                        <td> ${enroll.timeslot.specialist.middle_name} ${enroll.timeslot.specialist.first_name}</td>
-                        <td>${enroll.payment}</td>
-                        <td><a :href="enroll.timeslot.videoconf_url">Перейти</a></td>
-                    </tr>
+                            <td> {{ enroll.user.username }}</td>
+                            <td> {{ enroll.timeslot.specialist.middle_name }} {{ enroll.timeslot.specialist.first_name }}</td>
+                            <td> {{ enroll.payment.status }}</td>
+                            <td><a href="{{ enroll.timeslot.videoconf_url }}">Перейти</a></td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
 
                 </table>

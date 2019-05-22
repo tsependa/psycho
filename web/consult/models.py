@@ -80,8 +80,7 @@ class Specialist(models.Model):
         return self.middle_name + " " + self.first_name + " " + self.last_name
 
     def next_slot(self):
-        return self.timeslots.filter(start_time__gte=datetime.now()).exclude(
-            enrolls__payment__status="success").order_by('start_time').first()
+        return self.timeslots.filter(start_time__gte=datetime.now()).exclude(enroll__payment__status="succeeded").order_by('start_time').first()
 
     class Meta:
         ordering = ('promo',)
@@ -98,14 +97,14 @@ class TimeSlot(models.Model):
 
 
 class Enroll(models.Model):
-    timeslot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, related_name='enrolls')
+    timeslot = models.OneToOneField(TimeSlot, on_delete=models.CASCADE, related_name='enroll')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
 class Payment(models.Model):
-    enroll = models.ForeignKey(Enroll, on_delete=models.CASCADE)
+    enroll = models.OneToOneField(Enroll, on_delete=models.CASCADE, related_name='payment')
     status = models.CharField(max_length=50)
     notify = models.BooleanField(default=False)
     yandex_payment = models.CharField(max_length=50, blank=True)
