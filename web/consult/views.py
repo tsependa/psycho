@@ -21,6 +21,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from yandex_checkout import Configuration, Payment as YandexPayment
 
+from consult.forms import RegisterForm
 from consult.models import Theme, Specialist, Enroll, TimeSlot, Faq, Payment
 from consult.utils.mail import pay_email_notify
 
@@ -68,16 +69,16 @@ def specialist(request, specialist_id):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             my_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, email=username, password=my_password)
+            user = authenticate(request, username=username, password=my_password)
             login(request, user)
             return redirect('index')
     else:
-        form = UserCreationForm()
+        form = RegisterForm()
     return render(request, 'registration/signup.html', {'form': form})
 
 
@@ -164,7 +165,7 @@ def pay_notification(request):
     payment_id = request.data['object']['id']
     response = YandexPayment.capture(payment_id)
     print(response)
-    payment = Payment.objects.get_or_create(yandex_payment=payment_id)
+    payment = Payment.objects.get(yandex_payment=payment_id)
     payment.status = response.status
     payment.save()
     if not payment.notify:
