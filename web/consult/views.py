@@ -143,15 +143,15 @@ def create_user(request):
     print("POST email")
     print(request.POST.get('email'))
     print(request.POST)
+    user = None
     if hasattr(request, 'user'):
         try:
             user = User.objects.get(id=request.user.id)
         except User.DoesNotExist:
             user = None
-    else:
+    if user is not None:
         try:
-            user = User.objects.filter(username=request.POST.get('email')).first()
-
+            user = User.objects.get(email=request.POST.get('email'))
         except User.DoesNotExist:
             user = None
 
