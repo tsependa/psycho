@@ -7,7 +7,7 @@ from sendgrid import Mail, SendGridAPIClient
 from psycho import settings_prod
 
 EXISTING_PAY_TEMPLATE_ID = 'd-51f583e5a81f41759fbab3fd432b0059'
-NEW_PAY_TEMPLATE_ID = "d-b62f5d1e6ddc4457b3c5f2e4d9196f5e"
+NEW_PAY_TEMPLATE_ID = 'd-b62f5d1e6ddc4457b3c5f2e4d9196f5e'
 NEW_USER_TEMPLATE_ID = ""
 
 

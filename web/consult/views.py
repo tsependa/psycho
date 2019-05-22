@@ -35,10 +35,13 @@ Configuration.secret_key = settings.KASSA_SECRET
 @login_required
 def user_office(request):
     user = User.objects.get(username=request.user.username)
+    enrolls = None
+    if user.specialist:
+        enrolls = Enroll.objects.filter(timeslot__specialist_id=user.specialist.id)
     context = {}
     context.pop("user", user)
-
-    response = render(request, "office/office.html", context=context)
+    context.pop("enrolls", enrolls)
+    response = render(request, "office/office.html", {'user': user, 'enrolls': enrolls})
 
     if hasattr(user, 'specialist'):
         response.set_cookie("specialist_id", user.specialist.id)
