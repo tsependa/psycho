@@ -34,7 +34,7 @@ class TimeslotFilteredViewSet(viewsets.ReadOnlyModelViewSet):
         specialist_id = self.kwargs['specialist_id']
         if specialist_id is not None:
             queryset = queryset.filter(specialist_id=specialist_id).filter(start_time__gte=datetime.now()).exclude(
-                enroll__payment__status="succeeded")
+                enroll__isnull=False)
         return queryset
 
 
