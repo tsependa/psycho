@@ -1,28 +1,35 @@
 import os
 
+from django.conf import settings
 from sendgrid import Mail, SendGridAPIClient
 
-EXISTING_PAY_TEMPLATE_ID = "d-d7dede3e1be14b6781e786ca9f71db5b"
-NEW_PAY_TEMPLATE_ID = ""
+from psycho import settings_prod
+
+EXISTING_PAY_TEMPLATE_ID = 'd-51f583e5a81f41759fbab3fd432b0059'
+NEW_PAY_TEMPLATE_ID = "d-b62f5d1e6ddc4457b3c5f2e4d9196f5e"
 NEW_USER_TEMPLATE_ID = ""
 
 
-def pay_email_notify(payment):
+def pay_email_notify(payment, password=None):
     message = Mail(
         from_email='remind@xn--c1ajbknbbehlb3cxi.xn--p1ai',
         to_emails=payment.enroll.user.email,
-        subject='Новая консультация на Роспсихология.рф',
-        html_content='')
+        subject='new consult',
+        html_content='<strong>and easy to do anywhere, even with Python</strong>')
     message.dynamic_template_data = {
-        "date": payment.enroll.timeslot.start_time,
-        "time": payment.enroll.timeslot.start_time,
+        "date": payment.enroll.timeslot.start_time.strftime('%d %b'),
+        "time": payment.enroll.timeslot.start_time.strftime('%H:%M'),
         "link": payment.enroll.timeslot.videoconf_url,
-        "specialist": payment.enroll.timeslot.specialist.middle_name
+        "specialist": '',
+        "email": payment.enroll.user.email,
+        "password": payment.enroll.user.password,
     }
-    message.template_id = EXISTING_PAY_TEMPLATE_ID
+    if password is None:
+        message.template_id = EXISTING_PAY_TEMPLATE_ID
+    else:
 
-    try:
-        sendgrid_client = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-        sendgrid_client.send(message)
-    except Exception as e:
-        print(e)
+        message.template_id = NEW_PAY_TEMPLATE_ID
+
+    sendgrid_client = SendGridAPIClient(settings.SENDGRID_API_KEY)
+    sendgrid_client.send(message)
+

@@ -33,7 +33,8 @@ class TimeslotFilteredViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = TimeSlot.objects.all()
         specialist_id = self.kwargs['specialist_id']
         if specialist_id is not None:
-            queryset = queryset.filter(specialist_id=specialist_id).filter(start_time__gte=datetime.now())
+            queryset = queryset.filter(specialist_id=specialist_id).filter(start_time__gte=datetime.now()).exclude(
+                enrolls__payment__status="success")
         return queryset
 
 
@@ -57,7 +58,6 @@ class EnrollViewSet(viewsets.ReadOnlyModelViewSet):
 class EnrollSpecViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Enroll.objects.all()
     serializer_class = EnrollSerializer
-
 
 
 class UserViewSet(viewsets.ModelViewSet):

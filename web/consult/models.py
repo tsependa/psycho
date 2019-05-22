@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 from psycho import settings_prod
 
 
@@ -77,7 +80,8 @@ class Specialist(models.Model):
         return self.middle_name + " " + self.first_name + " " + self.last_name
 
     def next_slot(self):
-        return self.timeslots.filter(start_time__gte=datetime.now()).order_by('start_time').first()
+        return self.timeslots.filter(start_time__gte=datetime.now()).exclude(
+            enrolls__payment__status="success").order_by('start_time').first()
 
     class Meta:
         ordering = ('promo',)
@@ -103,11 +107,17 @@ class Enroll(models.Model):
 class Payment(models.Model):
     enroll = models.ForeignKey(Enroll, on_delete=models.CASCADE)
     status = models.CharField(max_length=50)
+    notify = models.BooleanField(default=False)
     yandex_payment = models.CharField(max_length=50, blank=True)
     amount = models.DecimalField(decimal_places=2, max_digits=10, default=0)
     payload = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+@receiver(post_save, sender=Payment)
+def payment_save(sender, instance, **kwargs):
+    print('post save')
 
 
 class Faq(models.Model):

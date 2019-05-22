@@ -1,3 +1,5 @@
+import secrets
+import string
 from collections import defaultdict
 from datetime import timedelta, datetime
 
@@ -139,7 +141,7 @@ def pay(request, timeslot_id):
 
 def create_user(request):
     try:
-        user = User.objects.get(username=request.user.username)
+        user = User.objects.filter(username=request.user.username).first()
     except User.DoesNotExist:
         user = None
 
@@ -163,13 +165,23 @@ def pay_success(request):
 @api_view(['POST'])
 def pay_notification(request):
     payment_id = request.data['object']['id']
-    response = YandexPayment.capture(payment_id)
-    print(response)
+    yandex_payment = YandexPayment.capture(payment_id)
     payment = Payment.objects.get(yandex_payment=payment_id)
-    payment.status = response.status
-    payment.save()
-    if not payment.notify:
-        pay_email_notify(payment)
-        payment.notify = True
+    if payment:
+        payment.status = yandex_payment.status
+        payment.save()
+        print(yandex_payment.id)
+        print(yandex_payment.status)
+        user = payment.enroll.user
+
+
+        password = None
+        if user.check_password("123456"):
+            alphabet = string.ascii_letters + string.digits
+            user.set_password(''.join(secrets.choice(alphabet) for i in range(6)))
+        if not payment.notify:
+            pay_email_notify(payment, password)
+            payment.notify = True
+            payment.save()
 
     return Response(status=200)
