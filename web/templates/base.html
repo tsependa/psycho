@@ -11,13 +11,12 @@
     <title>Онлайн консультации психологов</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="/static/css/mdb.min.css" rel="stylesheet">
+{% comment %}    <link href="/static/css/mdb.min.css" rel="stylesheet">{% endcomment %}
     <link href="/static/css/app.css" rel="stylesheet">
-    <link href="/static/css/owl.carousel.min.css" rel="stylesheet">
-    <link href="/static/css/owl.theme.default.css" rel="stylesheet">
+
 
 </head>
-<body сlass="page">
+<body>
 
 {% block header %}
     {% include 'header.html' %}
@@ -39,7 +38,7 @@
 <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
-<script src="https://unpkg.com/vue-scrollto@2.7.9/vue-scrollto.js"></script>
+{% comment %}<script src="https://unpkg.com/vue-scrollto@2.7.9/vue-scrollto.js"></script>{% endcomment %}
 
 {% comment %}<script src="https://cdn.jsdelivr.net/npm/vue-cookies@1.5.12/vue-cookies.js"></script>{% endcomment %}
 <!-- Yandex.Metrika counter -->

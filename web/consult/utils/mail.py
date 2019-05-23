@@ -14,6 +14,7 @@ NEW_USER_TEMPLATE_ID = ""
 def pay_email_notify(payment, password=None):
     message = Mail(
         from_email='remind@xn--c1ajbknbbehlb3cxi.xn--p1ai',
+
         to_emails=payment.enroll.user.email,
         subject='new consult',
         html_content='<strong>and easy to do anywhere, even with Python</strong>')

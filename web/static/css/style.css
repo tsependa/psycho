@@ -409,3 +409,5 @@ input:valid:not(:placeholder-shown) {
     display: block !important;
 }
 
+.blue {
+  background-color: #2196f3 !important; }

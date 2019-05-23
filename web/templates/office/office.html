@@ -11,86 +11,88 @@
 
 
     <div id="adm_app" class="container">
-
-        {% include "office/sidebar.html" %}
-        {% if user.specialist %}
-            <div class="h2-responsive mb-2">{{ user.specialist.middle_name }} {{ user.specialist.first_name }}</div>
-            <div class="mt-3 mb-3">
-                <div class="h2-responsive">Записи пользователей</div>
-
-
-                <table class="table " style=" ">
-
-                    <thead>
-                    <tr>
-                        <td>Дата</td>
-                        <td>Пользователь</td>
-                        <td>Психолог</td>
-                        <td>Оплата</td>
-                        <td>Ссылка</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for enroll in enrolls %}
-                        <tr class="">
-                            <td>
-                                <div class="day mr-1">{{ enroll.timeslot.start_time |date:"d M" }}</div>
-                                <div class="month flex-wrap mr-3">{{ enroll.timeslot.start_time|date:"H:i" }}</div>
-                            </td>
-
-                            <td> {{ enroll.user.username }}</td>
-                            <td> {{ enroll.timeslot.specialist.middle_name }} {{ enroll.timeslot.specialist.first_name }}</td>
-                            <td> {{ enroll.payment.status }}</td>
-                            <td><a href="{{ enroll.timeslot.videoconf_url }}">Перейти</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-
-                </table>
-
-            </div>
-        {% else %}
-            <div class="">
-
-                <div class="mt-3 mb-3">
-                    <div class="h2-responsive">Записи на консультацию</div>
+        <div class="row">
+     {% comment %}       {% include "office/sidebar.html" %}{% endcomment %}
+            <div class="col-md-12">
+                {% if user.specialist %}
+                    <div class="h2-responsive mb-2">{{ user.specialist.middle_name }} {{ user.specialist.first_name }}</div>
+                    <div class="mt-3 mb-3">
+                        <div class="h2-responsive">Записи пользователей</div>
 
 
-                    <table class="table " style=" ">
+                        <table class="table " style=" ">
 
-                        <thead>
-                        <tr>
-                            <td>Дата</td>
-                            <td>Пользователь</td>
-                            <td>Психолог</td>
-                            <td>Оплата</td>
-                            <td>Ссылка</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for enroll in user.enroll_set.all %}
-                            <tr class="">
-                                <td>
-                                    <div class="day mr-1">{{ enroll.timeslot.start_time |date:"d M" }}</div>
-                                    <div class="month flex-wrap mr-3">{{ enroll.timeslot.start_time|date:"H:i" }}</div>
-                                </td>
-
-                                <td> {{ enroll.user.username }}</td>
-                                <td> {{ enroll.timeslot.specialist.middle_name }} {{ enroll.timeslot.specialist.first_name }}</td>
-                                <td> {{ enroll.payment.status }}</td>
-                                <td><a href="{{ enroll.timeslot.videoconf_url }}">Перейти</a></td>
+                            <thead>
+                            <tr>
+                                <td>Дата</td>
+                                <td>Пользователь</td>
+                                <td>Психолог</td>
+                                <td>Оплата</td>
+                                <td>Ссылка</td>
                             </tr>
-                        {% endfor %}
-                        </tbody>
+                            </thead>
+                            <tbody>
+                            {% for enroll in enrolls %}
+                                <tr class="">
+                                    <td class="">
+                                        <div class="day">{{ enroll.timeslot.start_time |date:"H:i" }}</div>
+                                        <div class="" style="display: flow">{{ enroll.timeslot.start_time |date:"d M"  }}</div>
+                                    </td>
 
-                    </table>
+                                    <td> {{ enroll.user.username }}</td>
+                                    <td> {{ enroll.timeslot.specialist.middle_name }} {{ enroll.timeslot.specialist.first_name }}</td>
+                                    <td> {{ enroll.payment.status }}</td>
+                                    <td><a href="{{ enroll.timeslot.videoconf_url }}">Перейти</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
 
-                </div>
+                        </table>
+
+                    </div>
+                {% else %}
+                    <div class="">
+
+                        <div class="mt-3 mb-3">
+                            <div class="h2-responsive">Записи на консультацию</div>
 
 
+                            <table class="table " style=" ">
+
+                                <thead>
+                                <tr>
+                                    <td>Дата</td>
+                                    <td>Пользователь</td>
+                                    <td>Психолог</td>
+                                    <td>Оплата</td>
+                                    <td>Ссылка</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for enroll in user.enroll_set.all %}
+                                    <tr class="">
+                                        <td>
+                                            <div class="day mr-1">{{ enroll.timeslot.start_time |date:"d M" }}</div>
+                                            <div class="month flex-wrap mr-3">{{ enroll.timeslot.start_time|date:"H:i" }}</div>
+                                        </td>
+
+                                        <td> {{ enroll.user.username }}</td>
+                                        <td> {{ enroll.timeslot.specialist.middle_name }} {{ enroll.timeslot.specialist.first_name }}</td>
+                                        <td> {{ enroll.payment.status }}</td>
+                                        <td><a href="{{ enroll.timeslot.videoconf_url }}">Перейти</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
-
+        </div>
     </div>
 
 

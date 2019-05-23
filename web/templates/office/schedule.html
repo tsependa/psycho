@@ -9,21 +9,21 @@
 
 {% block content %}
     <div id="adm_app" class="container">
-        {% include "office/sidebar.html" %}
+    {% comment %}    {% include "office/sidebar.html" %}{% endcomment %}
         <div class="h2-responsive mb-2">{{ specialist.middle_name }} {{ specialist.first_name }}</div>
 
         <div class="h2-responsive ">Выбор доступного времени консультаций</div>
         <div class="row mt-4 align-content-center">
             <div class="text-center " v-for="(date, index) in slotsByDate" style="display: flex;">
 
-                <p class="day mr-1">${index | day} </p>
-                <p class="month flex-wrap mr-3">${index | month}</p>
+                <p class="day">${index | day} </p>
+                <p class="month">${index | month}</p>
 
                 {% comment %} <p class="">${index | dayOfWeek}</p>{% endcomment %}
                 <div class="m-1" v-for="timeslot in date">
                     <div class="slot border p-1"
                          @click="editTimeSlot(timeslot)"
-                         :class="{ 'blue text-white': timeslot.id > 0,}">
+                         :class="{ 'slot-free text-white': timeslot.id > 0,}">
                         <div>${timeslot.time}</div>
 
                     </div>
@@ -73,7 +73,7 @@
 {% endblock %}
 
 {% block js_add %}
-    <script type="text/javascript" src="{% static "js/script_adm.js" %}"></script>
+    <script type="text/javascript" src="/static/js/script_adm.js"></script>
 
 {% endblock %}
 

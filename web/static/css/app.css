@@ -1154,7 +1154,7 @@ blockquote cite {
 }
 
 .day {
-    font-size: 1.7em;
+    font-size: 1.5em;
     font-weight: 300;
     line-height: 1;
     width: 40px;
@@ -1164,7 +1164,7 @@ blockquote cite {
     font-size: 1.3em;
     font-weight: 200;
     line-height: 1;
-    width: 50px;
+    width: 60px;
 }
 
 .slot:hover {
@@ -1670,3 +1670,10 @@ div:nth-child(n+6) {
         width: 90%;
     }
 }
+
+
+.blue {
+  background-color: #2196f3 !important; }
+
+.slot-free {
+  background-color: #81c784 !important; }
