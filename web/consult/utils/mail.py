@@ -14,15 +14,17 @@ NEW_USER_TEMPLATE_ID = ""
 
 def pay_email_notify(payment, password=None):
     user_timezone = pytz.timezone(settings.TIME_ZONE)
+    start_time = payment.enroll.timeslot.start_time
+    start_time
+    print(start_time)
     message = Mail(
         from_email='remind@xn--c1ajbknbbehlb3cxi.xn--p1ai',
-
         to_emails=payment.enroll.user.email,
         subject='new consult',
         html_content='<strong>and easy to do anywhere, even with Python</strong>')
     message.dynamic_template_data = {
-        "date": user_timezone.localize(payment.enroll.timeslot.start_time).strftime('%d %b'),
-        "time": user_timezone.localize(payment.enroll.timeslot.start_time).strftime('%H:%M'),
+        "date": start_time.strftime('%d %b'),
+        "time": start_time.strftime('%H:%M'),
         "link": payment.enroll.timeslot.videoconf_url,
         "specialist": '',
         "email": payment.enroll.user.email,
