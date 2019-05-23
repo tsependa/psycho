@@ -150,15 +150,14 @@ def create_user(request):
         except User.DoesNotExist:
             user = None
 
-    if user is not None:
+    if user is None:
         try:
-            user = User.objects.get(email=request.POST.get('email'))
+            user = User.objects.filter(email=request.POST.get('email')).first()
         except User.DoesNotExist:
             user = None
 
     if user is None:
-        user = User.objects.create_user(email=request.POST.get('email'), username=request.POST.get('email'),
-                                        password='123456')
+        user = User.objects.create_user(email=request.POST.get('email'), username=request.POST.get('email'), password='123456')
         user.is_active = False
         user.save()
         # auth_user = authenticate(username=user.username, password='123456')
