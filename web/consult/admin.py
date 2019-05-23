@@ -8,17 +8,36 @@ from consult.models import Theme, Specialist, TimeSlot, Enroll, Payment, Method,
 
 admin.site.register(Theme)
 admin.site.register(Specialist)
-admin.site.register(TimeSlot)
+
 admin.site.register(Enroll)
 admin.site.register(Payment)
 admin.site.register(Method)
 admin.site.register(Faq)
 
+
+class EnrollInline(admin.StackedInline):
+    model = Enroll
+
+
+class TimeslotAdmin(admin.ModelAdmin):
+    list_display = ('id', 'specialist', 'start_time', 'enroll', 'has_payment')
+    list_filter = ('specialist', 'start_time')
+    list_select_related = ('enroll',)
+    inlines = (EnrollInline,)
+
+    def has_payment(self, obj):
+        return bool(obj.enroll.payment)
+    has_payment.boolean = True
+
+
+admin.site.register(TimeSlot, TimeslotAdmin)
+
+
 class FlatPageAdmin(FlatPageAdmin):
     fieldsets = (
         (None, {'fields': ('url', 'title', 'content', 'sites')}),
         (('Advanced options'), {
-            'classes': ('collapse', ),
+            'classes': ('collapse',),
             'fields': (
                 'enable_comments',
                 'registration_required',
@@ -26,6 +45,7 @@ class FlatPageAdmin(FlatPageAdmin):
             ),
         }),
     )
+
 
 # Re-register FlatPageAdmin
 admin.site.unregister(FlatPage)

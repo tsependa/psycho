@@ -96,6 +96,8 @@ class TimeSlot(models.Model):
     def videoconf_url(self):
         return settings_prod.VIDEOCONF_URL + "/" + str(abs(hash(self.start_time)))
 
+    class Meta:
+        ordering = ('start_time',)
 
 class Enroll(models.Model):
     timeslot = models.OneToOneField(TimeSlot, on_delete=models.CASCADE, related_name='enroll')
@@ -103,6 +105,8 @@ class Enroll(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.user.email
 
 class Payment(models.Model):
     enroll = models.OneToOneField(Enroll, on_delete=models.CASCADE, related_name='payment')

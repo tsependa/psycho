@@ -160,7 +160,7 @@ def create_user(request):
         user = User.objects.create_user(email=request.POST.get('email'), username=request.POST.get('email'), password='123456')
         user.is_active = False
         user.save()
-        # auth_user = authenticate(username=user.username, password='123456')
+        auth_user = authenticate(username=user.username, password='123456')
     login(request, user)
     return user
 
