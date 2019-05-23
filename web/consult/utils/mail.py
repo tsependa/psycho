@@ -1,6 +1,7 @@
 import os
 
 import pytz
+from datetime import timedelta
 from django.conf import settings
 from django.utils.timezone import make_aware
 from sendgrid import Mail, SendGridAPIClient
@@ -15,7 +16,7 @@ NEW_USER_TEMPLATE_ID = ""
 def pay_email_notify(payment, password=None):
     user_timezone = pytz.timezone(settings.TIME_ZONE)
     start_time = payment.enroll.timeslot.start_time
-    start_time
+    start_time = start_time + timedelta(hours=3)
     print(start_time)
     message = Mail(
         from_email='remind@xn--c1ajbknbbehlb3cxi.xn--p1ai',
