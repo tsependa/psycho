@@ -26,7 +26,7 @@ def pay_user_email_notify(payment):
         "date": start_time.strftime('%d/%м/%G'),
         "time": start_time.strftime('%H:%M'),
         "link": payment.enroll.timeslot.videoconf_url,
-        "specialist": payment.enroll.timeslot.specialist,
+        "specialist": payment.enroll.timeslot.specialist.full_name(),
         "email": payment.enroll.user.email,
 
     }
@@ -51,7 +51,7 @@ def pay_specialist_email_notify(payment):
         "date": start_time.strftime('%d/%м/%G'),
         "time": start_time.strftime('%H:%M'),
         "link": payment.enroll.timeslot.videoconf_url,
-        "specialist": payment.enroll.timeslot.specialist,
+        "specialist": payment.enroll.timeslot.specialist.full_name(),
         "email": payment.enroll.user.email,
 
     }

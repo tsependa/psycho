@@ -83,6 +83,9 @@ class Specialist(models.Model):
         return self.timeslots.filter(start_time__gte=datetime.now()).exclude(
             enroll__isnull=False).order_by('start_time').first()
 
+    def full_name(self):
+        return self.middle_name + " " + self.first_name
+
     class Meta:
         ordering = ('promo',)
 
@@ -99,6 +102,7 @@ class TimeSlot(models.Model):
     class Meta:
         ordering = ('start_time',)
 
+
 class Enroll(models.Model):
     timeslot = models.OneToOneField(TimeSlot, on_delete=models.CASCADE, related_name='enroll')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -107,6 +111,7 @@ class Enroll(models.Model):
 
     def __str__(self):
         return self.user.email
+
 
 class Payment(models.Model):
     enroll = models.OneToOneField(Enroll, on_delete=models.CASCADE, related_name='payment')
