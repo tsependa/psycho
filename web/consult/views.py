@@ -26,7 +26,7 @@ from yandex_checkout import Configuration, Payment as YandexPayment
 
 from consult.forms import RegisterForm
 from consult.models import Theme, Specialist, Enroll, TimeSlot, Faq, Payment
-from consult.utils.mail import pay_user_email_notify, pay_specialist_email_notify
+from consult.utils.mail import pay_user_email_notify, pay_specialist_email_notify, new_user_email_notify
 
 Configuration.account_id = settings.KASSA_ACCOUNT
 Configuration.secret_key = settings.KASSA_SECRET
@@ -140,9 +140,7 @@ def pay(request, timeslot_id):
 
 
 def create_user(request):
-    print("POST email")
     print(request.POST.get('email'))
-    print(request.POST)
     user = None
     if request.user.is_authenticated:
         try:
@@ -157,11 +155,13 @@ def create_user(request):
             user = None
 
     if user is None:
-        user = User.objects.create_user(email=request.POST.get('email'), username=request.POST.get('email'), password='123456')
-        user.is_active = False
+        alphabet = string.ascii_letters + string.digits
+        password = ''.join(choice(alphabet) for i in range(6))
+        user = User.objects.create_user(email=request.POST.get('email'), username=request.POST.get('email'), password=password)
         user.save()
-        auth_user = authenticate(username=user.username, password='123456')
-    login(request, user)
+        new_user_email_notify(user, password)
+        auth_user = authenticate(username=user.username, password=password)
+        login(request, auth_user)
     return user
 
 
@@ -186,17 +186,11 @@ def pay_notification(request):
         print(yandex_payment.status)
         user = payment.enroll.user
 
-        password = None
-        if not user.is_active:
-            alphabet = string.ascii_letters + string.digits
-            password = ''.join(choice(alphabet) for i in range(6))
-            user.set_password(password)
-            user.is_active = True
-            user.save()
         if not payment.notify:
-            pay_user_email_notify(payment, password)
-            pay_specialist_email_notify(payment)
             payment.notify = True
             payment.save()
+            pay_user_email_notify(payment)
+            pay_specialist_email_notify(payment)
+
 
     return Response(status=200)

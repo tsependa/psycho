@@ -119,11 +119,6 @@ class Payment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-@receiver(post_save, sender=Payment)
-def payment_save(sender, instance, **kwargs):
-    print('post save')
-
-
 class Faq(models.Model):
     question = models.TextField(blank=True)
     answer = models.TextField(blank=True)
