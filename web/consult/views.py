@@ -144,11 +144,12 @@ def create_user(request):
     print(request.POST.get('email'))
     print(request.POST)
     user = None
-    if hasattr(request, 'user'):
+    if request.user.is_authenticated:
         try:
             user = User.objects.get(id=request.user.id)
         except User.DoesNotExist:
             user = None
+
     if user is not None:
         try:
             user = User.objects.get(email=request.POST.get('email'))
