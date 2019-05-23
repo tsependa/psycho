@@ -26,7 +26,7 @@ from yandex_checkout import Configuration, Payment as YandexPayment
 
 from consult.forms import RegisterForm
 from consult.models import Theme, Specialist, Enroll, TimeSlot, Faq, Payment
-from consult.utils.mail import pay_email_notify
+from consult.utils.mail import pay_user_email_notify, pay_specialist_email_notify
 
 Configuration.account_id = settings.KASSA_ACCOUNT
 Configuration.secret_key = settings.KASSA_SECRET
@@ -194,7 +194,8 @@ def pay_notification(request):
             user.is_active = True
             user.save()
         if not payment.notify:
-            pay_email_notify(payment, password)
+            pay_user_email_notify(payment, password)
+            pay_specialist_email_notify(payment)
             payment.notify = True
             payment.save()
 
