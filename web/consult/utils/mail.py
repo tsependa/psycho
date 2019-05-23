@@ -32,7 +32,6 @@ def pay_user_email_notify(payment):
     }
 
     message.template_id = EXISTING_PAY_TEMPLATE_ID
-    message.template_id = NEW_USER_TEMPLATE_ID
 
     sendgrid_client = SendGridAPIClient(settings.SENDGRID_API_KEY)
     sendgrid_client.send(message)
