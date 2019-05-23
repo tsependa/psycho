@@ -1,5 +1,6 @@
 import os
 
+import pytz
 from django.conf import settings
 from django.utils.timezone import make_aware
 from sendgrid import Mail, SendGridAPIClient
@@ -12,6 +13,7 @@ NEW_USER_TEMPLATE_ID = ""
 
 
 def pay_email_notify(payment, password=None):
+    user_timezone = pytz.timezone(settings.TIME_ZONE)
     message = Mail(
         from_email='remind@xn--c1ajbknbbehlb3cxi.xn--p1ai',
 
@@ -19,8 +21,8 @@ def pay_email_notify(payment, password=None):
         subject='new consult',
         html_content='<strong>and easy to do anywhere, even with Python</strong>')
     message.dynamic_template_data = {
-        "date": payment.enroll.timeslot.start_time.strftime('%d %b'),
-        "time": payment.enroll.timeslot.start_time.strftime('%H:%M'),
+        "date": user_timezone.localize(payment.enroll.timeslot.start_time).strftime('%d %b'),
+        "time": user_timezone.localize(payment.enroll.timeslot.start_time).strftime('%H:%M'),
         "link": payment.enroll.timeslot.videoconf_url,
         "specialist": '',
         "email": payment.enroll.user.email,
