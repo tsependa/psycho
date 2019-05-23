@@ -22,7 +22,7 @@ class SpecialistViewSet(viewsets.ReadOnlyModelViewSet):
         return queryset
 
 
-class TimeslotFilteredViewSet(viewsets.ReadOnlyModelViewSet):
+class TimeslotAvailableViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TimeSlotSerializer
 
     def get_queryset(self):
@@ -35,6 +35,21 @@ class TimeslotFilteredViewSet(viewsets.ReadOnlyModelViewSet):
         if specialist_id is not None:
             queryset = queryset.filter(specialist_id=specialist_id).filter(start_time__gte=datetime.now()).exclude(
                 enroll__isnull=False)
+        return queryset
+
+
+class TimeslotSpecialistViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = TimeSlotSerializer
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        queryset = TimeSlot.objects.all()
+        specialist_id = self.kwargs['specialist_id']
+        if specialist_id is not None:
+            queryset = queryset.filter(specialist_id=specialist_id).filter(start_time__gte=datetime.now())
         return queryset
 
 

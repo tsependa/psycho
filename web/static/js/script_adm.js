@@ -77,7 +77,7 @@ const app2 = new Vue({
 
             getSpecialistTimeslots: function () {
                 this.loading = true;
-                this.$http.get('/api/timeslots/' + readCookie('specialist_id') + '/')
+                this.$http.get('/api/timeslots_all/' + readCookie('specialist_id') + '/')
                     .then((response) => {
                         this.timeslots = response.data;
                         this.loading = false;
