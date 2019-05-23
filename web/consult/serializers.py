@@ -10,12 +10,17 @@ class ThemeSerializer(serializers.ModelSerializer):
         model = Theme
         fields = '__all__'
 
+class SimpleEnrollSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Enroll
+        fields = '__all__'
 
 class TimeSlotSerializer(serializers.ModelSerializer):
     # specialist = SpecialistSerializer(many=False, read_only=True)
     #videoconf_url = serializers.ReadOnlyField()
-    #enrolls = serializers.StringRelatedField(many=True, read_only=True)
-    date  = serializers.SerializerMethodField(read_only=True)
+    enroll = SimpleEnrollSerializer(many=False, read_only=True)
+    date = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = TimeSlot

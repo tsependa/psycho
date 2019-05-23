@@ -23,7 +23,7 @@
                 <div class="m-1" v-for="timeslot in date">
                     <div class="slot border p-1"
                          @click="editTimeSlot(timeslot)"
-                         :class="{ 'slot-free text-white': timeslot.id > 0,}">
+                         :class="{ 'slot-free text-white': timeslot.id > 0, 'slot-enroll disabled': timeslot.enroll}">
                         <div>${timeslot.time}</div>
 
                     </div>

@@ -153,24 +153,23 @@ const app2 = new Vue({
                             console.log(err);
                         })
                 } else {
-                    this.$http.delete('/api/timeslot/' + this.editSlot.id, {
-                        headers:
-                            {"X-CSRFToken": csrftoken}
-                    },).then((response) => {
-                        var index = this.timeslots.indexOf(this.editSlot);
-                        this.timeslots.splice(index, 1);
-                        this.loading = false;
-                    })
-                        .catch((err) => {
+                    if (!this.editSlot.enroll) {
+                        this.$http.delete('/api/timeslot/' + this.editSlot.id, {
+                            headers:
+                                {"X-CSRFToken": csrftoken}
+                        },).then((response) => {
+                            var index = this.timeslots.indexOf(this.editSlot);
+                            this.timeslots.splice(index, 1);
                             this.loading = false;
-                            console.log(err);
                         })
+                            .catch((err) => {
+                                this.loading = false;
+                                console.log(err);
+                            })
+                    }
                 }
 
             },
-            setEditSlot: function () {
-
-            }
         },
         mounted: function () {
             this.specialist_id = s_id;
