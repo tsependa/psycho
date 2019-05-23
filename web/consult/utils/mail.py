@@ -46,7 +46,7 @@ def pay_specialist_email_notify(payment):
     print(start_time)
     message = Mail(
         from_email='remind@xn--c1ajbknbbehlb3cxi.xn--p1ai',
-        to_emails=payment.enroll.user.email,
+        to_emails=payment.enroll.timeslot.specialist.user.email,
         subject='new consult',
         html_content='<strong></strong>')
     message.dynamic_template_data = {
