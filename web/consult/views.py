@@ -143,12 +143,13 @@ def pay(request, timeslot_id):
                     "currency": "RUB"
                 },
                 "vat_code": 1,
+                "payment_subject": "service",
+                "payment_mode": "full_prepayment"
 
             }],
             "tax_system_code": 3,
             "email": user.email,
-            "payment_subject": "service",
-            "payment_mode": "full_prepayment"
+
         }
     }, uuid.uuid4())
 
