@@ -55,6 +55,9 @@ var app = new Vue({
             }, {})
 
         },
+        isEnroll() {
+            return this.selectedTimeslot.id;
+        }
 
     }
 

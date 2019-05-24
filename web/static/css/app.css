@@ -500,9 +500,16 @@ h4 {
     transition: ease-out 0.2s;
 }
 
-.green-btn:hover {
-    background: #3db994;
+.green-btn:disabled,
+.green-btn[disabled]{
+  background-color: #cccccc;
+
 }
+
+
+/*.green-btn:hover {
+    background: #3db994;
+}*/
 
 .green-btn-small {
     width: 100%;
@@ -1673,10 +1680,13 @@ div:nth-child(n+6) {
 
 
 .blue {
-  background-color: #2196f3 !important; }
+    background-color: #2196f3 !important;
+}
 
 .slot-free {
-  background-color: #81c784 !important; }
+    background-color: #81c784 !important;
+}
 
 .slot-enroll {
-  background-color: #818181 !important; }
+    background-color: #818181 !important;
+}

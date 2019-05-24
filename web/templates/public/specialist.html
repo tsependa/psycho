@@ -19,9 +19,16 @@
                     </div>
 
                     <div class="profile__actions">
-                        <a href="#consultation" class="green-btn profile-btn open-modal">
-                            Выбрать время консультации
-                        </a>
+                        {% if  specialist.next_slot %}
+                            <a href="#consultation" class="green-btn profile-btn open-modal">
+                                Выбрать время консультации
+                            </a>
+                        {% else %}
+                            <a href="#" class="green-btn profile-btn disabled " disabled>
+                                Выбрать время консультации
+                            </a>
+                        {% endif %}
+
                         <p>
                             <strong>Ближайшая консультация:</strong>
                             {{ specialist.next_slot.start_time | date:"d M H:i" }}
@@ -155,7 +162,8 @@
                                 ${selectedTimeslot.start_time | formatDate} ${selectedTimeslot.start_time | formatTime}
 		            	</p>
 
-		            	    <button class="green-btn">
+		            	    <button class="green-btn" {% comment %}:class="{ 'grey-btn' : !isEnroll}"{% endcomment %}
+                                    :disabled="!isEnroll">
 		            		Записаться
                             </button>
 
