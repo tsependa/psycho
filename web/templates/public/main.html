@@ -111,37 +111,7 @@
         </div>
     </section>
 
-    <section class="white-block specialists">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h2>Наши специалисты</h2>
-                </div>
-            </div>
-            <div class="row specialists__list">
-                <div class="col-10 offset-1 col-md-12 offset-md-0">
-                    <div>
-                        <div class="owl-carousel specialist__slider">
-                            {% for specialist in specialists %}
-                                <div>
-                                    <img class="img__gradient1" src="/media/{{ specialist.avatar }}">
-                                    <p class="specialist__name">{{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }} </p>
-                                    <p class="specialist__prof">Опыт консультирования {{ specialist.experience }}
-                                        лет.</p>
-                                    <p class="specialist__time">6 мая, 10:00</p>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <form action="{% url 'select' %}">
-                        <button class="green-btn" type="submit">
-                            Подобрать специалиста
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <section class="white-block about">
         <div class="container">
@@ -235,7 +205,37 @@
     </section>
 
 
-
+    <section class="white-block specialists">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Наши специалисты</h2>
+                </div>
+            </div>
+            <div class="row specialists__list">
+                <div class="col-10 offset-1 col-md-12 offset-md-0">
+                    <div>
+                        <div class="owl-carousel specialist__slider">
+                            {% for specialist in specialists %}
+                                <div>
+                                    <img class="img__gradient1" src="/media/{{ specialist.avatar }}">
+                                    <p class="specialist__name">{{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }} </p>
+                                    <p class="specialist__prof">Опыт консультирования {{ specialist.experience }}
+                                        лет.</p>
+                                    <p class="specialist__time">6 мая, 10:00</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <form action="{% url 'select' %}">
+                        <button class="green-btn" type="submit">
+                            Подобрать специалиста
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}
 
