@@ -135,8 +135,6 @@ def pay(request, timeslot_id):
         "capture": False,
         "description": "Консультация " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name,
         "receipt": {
-            "customerContact": user.email,
-            "taxSystem": 3,
             "items": [{
                 "description": "Консультация " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name,
                 "quantity": 1,
