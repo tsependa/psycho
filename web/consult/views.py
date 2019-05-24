@@ -113,7 +113,7 @@ def user_enroll(request, timeslot_id):
 
 
 def pay(request, timeslot_id):
-    amount = 10
+    amount = 3400
     timeslot = TimeSlot.objects.get(pk=timeslot_id)
     user = create_user(request)
     enroll = Enroll.objects.create(timeslot_id=timeslot_id, user=user, )
