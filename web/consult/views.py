@@ -135,6 +135,8 @@ def pay(request, timeslot_id):
         "capture": False,
         "description": "Консультация " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name,
         "receipt": {
+            "customerContact": user.email,
+            "taxSystem": 3,
             "items": [{
                 "description": "Консультация " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name,
                 "quantity": 1,
@@ -147,6 +149,8 @@ def pay(request, timeslot_id):
             }],
             "tax_system_code": 3,
             "email": user.email,
+            "payment_subject": "service",
+            "payment_mode": "full_prepayment"
         }
     }, uuid.uuid4())
 
