@@ -133,7 +133,21 @@ def pay(request, timeslot_id):
             "return_url": settings.KASSA_REDIRECT_URL
         },
         "capture": False,
-        "description": "Консультация " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name
+        "description": "Консультация " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name,
+        "receipt": {
+            "items": {
+                "description": "Консультация " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name,
+                "quantity": 1,
+                "amount": {
+                    "value": amount,
+                    "currency": "RUB"
+                },
+                "vat_code": 1,
+
+            },
+            "tax_system_code": 3,
+            "email": user.email,
+        }
     }, uuid.uuid4())
 
     payment_id = yandex_payment.id
@@ -162,7 +176,8 @@ def create_user(request):
     if user is None:
         alphabet = string.ascii_letters + string.digits
         password = ''.join(choice(alphabet) for i in range(6))
-        user = User.objects.create_user(email=request.POST.get('email'), username=request.POST.get('email'), password=password)
+        user = User.objects.create_user(email=request.POST.get('email'), username=request.POST.get('email'),
+                                        password=password)
         user.save()
         new_user_email_notify(user, password)
         auth_user = authenticate(username=user.username, password=password)
@@ -196,6 +211,5 @@ def pay_notification(request):
             payment.save()
             pay_user_email_notify(payment)
             pay_specialist_email_notify(payment)
-
 
     return Response(status=200)
