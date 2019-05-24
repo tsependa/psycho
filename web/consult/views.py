@@ -135,7 +135,7 @@ def pay(request, timeslot_id):
         "capture": False,
         "description": "Консультация " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name,
         "receipt": {
-            "items": {
+            "items": [{
                 "description": "Консультация " + timeslot.specialist.middle_name + " " + timeslot.specialist.first_name,
                 "quantity": 1,
                 "amount": {
@@ -144,7 +144,7 @@ def pay(request, timeslot_id):
                 },
                 "vat_code": 1,
 
-            },
+            }],
             "tax_system_code": 3,
             "email": user.email,
         }
