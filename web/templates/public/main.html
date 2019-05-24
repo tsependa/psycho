@@ -222,7 +222,12 @@
                                     <p class="specialist__name">{{ specialist.middle_name }} {{ specialist.first_name }} {{ specialist.last_name }} </p>
                                     <p class="specialist__prof">Опыт консультирования {{ specialist.experience }}
                                         лет.</p>
-                                    <p class="specialist__time">6 мая, 10:00</p>
+                                    {% if specialist.next_slot %}
+                                        <p class="specialist__time"> {{ specialist.next_slot.start_time | date:"d M H:i" }}</p>
+                                    {% else %}
+                                        <p class="specialist__time__empty">На ближайшие даты нет записи</p>
+                                    {% endif %}
+
                                 </div>
                             {% endfor %}
                         </div>
