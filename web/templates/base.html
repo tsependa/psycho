@@ -42,9 +42,29 @@
 <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
-{% comment %}<script src="https://unpkg.com/vue-scrollto@2.7.9/vue-scrollto.js"></script>{% endcomment %}
 
-{% comment %}<script src="https://cdn.jsdelivr.net/npm/vue-cookies@1.5.12/vue-cookies.js"></script>{% endcomment %}
+<script type='text/javascript'>
+(function () {
+    window['yandexChatWidgetCallback'] = function() {
+        try {
+            window.yandexChatWidget = new Ya.ChatWidget({
+                guid: '52053245-4242-453c-95aa-66af630e4f4d',
+                buttonText: '',
+                title: 'Чат',
+                theme: 'light',
+                collapsedDesktop: 'never',
+                collapsedTouch: 'never'
+            });
+        } catch(e) { }
+    };
+    var n = document.getElementsByTagName('script')[0],
+        s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://chat.s3.yandex.net/widget.js';
+    n.parentNode.insertBefore(s, n);
+})();
+</script>
+
 <!-- Yandex.Metrika counter -->
 
 <script type="text/javascript">
