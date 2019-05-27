@@ -20,7 +20,7 @@ class EnrollInline(admin.StackedInline):
 
 
 class TimeslotAdmin(admin.ModelAdmin):
-    list_display = ('id', 'specialist', 'start_time', 'enroll', 'has_payment')
+    list_display = ('id', 'specialist', 'start_time', 'enroll', 'has_payment', 'videoconf_url')
     list_filter = ('specialist', 'start_time')
     list_select_related = ('enroll',)
     inlines = (EnrollInline,)
