@@ -1045,7 +1045,6 @@ footer strong {
 .img__gradient1 {
     display: block;
     width: 100%;
-/*    content: '';*/
     background: radial-gradient(#efefef, #dfdfdf);
     border-radius: 10px;
 }
