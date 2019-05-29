@@ -54,8 +54,9 @@ def consult(request):
 
 
 def select(request):
+    specialists = Specialist.objects.all().filter(active=True)
     return render(request, "public/select.html",
-                  context={})
+                  context={'specialists': specialists})
 
 
 def specialist(request, specialist_id):
@@ -216,3 +217,7 @@ def pay_notification(request):
             pay_specialist_email_notify(payment)
 
     return Response(status=200)
+
+
+def support(request):
+    return render(request, 'public/support.html')

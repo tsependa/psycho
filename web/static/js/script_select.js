@@ -26,8 +26,8 @@ var app = new Vue({
     },
 
     mounted: function () {
-        this.getThemes();
-        this.getSpecialists();
+/*        this.getThemes();
+        this.getSpecialists();*/
 
         /*this.getMethods();*/
 
