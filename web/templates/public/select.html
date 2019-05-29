@@ -112,7 +112,7 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-md-9 m-30 select-specialist__pro">
+                <div class="col-12 col-md-12 m-30 select-specialist__pro">
                     <div class="row select-specialist__list">
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4 m-30"
                              v-for="specialist in filteredSpecialists" :key="specialist.id"
@@ -150,7 +150,7 @@
                     </div>
 
                 </div>
-                <div class="col-12 col-md-3 m-30 select-specialist__filter d-copy">
+                {% comment %}<div class="col-12 col-md-3 m-30 select-specialist__filter d-copy">
                     <div class="filter__title">Направление</div>
                     <div class="filter-list m-30">
                         <div class="theme-item" v-for="(theme, index) in themes">
@@ -168,7 +168,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div>{% endcomment %}
             </div>
         </div>
 </div>
