@@ -41,8 +41,8 @@ services:
 
     volumes:
       - ./mysql:/var/lib/mysql
-    #ports:
-    #  - "${DB_PORT}:3306"
+    ports:
+      - "${DB_PORT}:3306"
     networks:
       psycho-net:
         aliases:

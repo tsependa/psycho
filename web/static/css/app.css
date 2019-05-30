@@ -1689,3 +1689,17 @@ div:nth-child(n+6) {
 .slot-enroll {
     background-color: #818181 !important;
 }
+
+.modal-div-support {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    min-height: 130px;
+    width: 590px;
+    display: block;
+    opacity: 1;
+    z-index: 1000;
+    border-radius: 8px;
+}

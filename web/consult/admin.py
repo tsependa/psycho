@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 
-from consult.models import Theme, Specialist, TimeSlot, Enroll, Payment, Method, Faq
+from consult.models import Theme, Specialist, TimeSlot, Enroll, Payment, Method, Faq, SupportQuestion
 
 admin.site.register(Theme)
 admin.site.register(Specialist)
@@ -13,6 +13,7 @@ admin.site.register(Enroll)
 admin.site.register(Payment)
 admin.site.register(Method)
 admin.site.register(Faq)
+
 
 
 class EnrollInline(admin.StackedInline):
@@ -46,6 +47,11 @@ class FlatPageAdmin(FlatPageAdmin):
         }),
     )
 
+
+class SupportAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'email', 'phone', 'question', 'created_at')
+
+admin.site.register(SupportQuestion, SupportAdmin)
 
 # Re-register FlatPageAdmin
 admin.site.unregister(FlatPage)
