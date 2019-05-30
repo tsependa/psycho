@@ -7,37 +7,37 @@
 
 {% block content %}
     <h3>Задать вопрос</h3>
-    <div class="container ">
+    <div class="container col-md-6 offset-md-3">
         <form id="feedback-form" method="post" class="form-horizontal" enctype="multipart/form-data">
             {% csrf_token %}
 
 
             <div class="form-group ">
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-12 col-sm-12">
                     <label class="control-label">Имя</label>
                 </div>
-                <div class=" col-md-9 col-sm-12">
-                    <input type="text" name="name" id="id_name" class="form-control col-md-10 col-sm-12"></div>
+                <div class="col-md-12 col-sm-12">
+                    <input type="text" name="name" id="id_name" class="form-control col-md-12 col-sm-12"></div>
 
             </div>
 
             <div class="form-group ">
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-12 col-sm-12">
                     <label class="control-label"><strong>Ваш email</strong></label>
                 </div>
-                <div class=" col-md-9 col-sm-12">
+                <div class=" col-md-12 col-sm-12">
                     <input type="email" name="email" required="True" id="id_email"
-                           class="form-control col-md-10 col-sm-12">
+                           class="form-control col-md-12 col-sm-12">
                 </div>
 
             </div>
 
             <div class="form-group ">
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-12 col-sm-12">
                     <label class="control-label">Телефон</label>
                 </div>
-                <div class=" col-md-9 col-sm-12">
-                    <input type="text" name="phone" id="id_phone" class="form-control col-md-10 col-sm-12"></div>
+                <div class=" col-md-12 col-sm-12">
+                    <input type="text" name="phone" id="id_phone" class="form-control col-md-12 col-sm-12"></div>
 
             </div>
 
@@ -45,18 +45,18 @@
                 <div class="col-md-3 col-sm-12">
                     <label class="control-label"><strong>Сообщение</strong></label>
                 </div>
-                <div class=" col-md-9 col-sm-12">
+                <div class=" col-md-12 col-sm-12">
                     <textarea name="question" rows="10" cols="40"
-                              class="form-control col-md-10 col-sm-12" id="id_message"
+                              class="form-control col-md-12 col-sm-12" id="id_message"
                               required=""></textarea>
                 </div>
 
             </div>
 
             <div class="form-group">
-                <div class=" col-md-offset-3 col-md-9">
+                <div class="col-md-12">
 
-                    <button name="submit" class="green-btn" id="submitFeedback">Отправить</button>
+                    <button name="submit" class="green-btn flex-center" id="submitFeedback">Отправить</button>
                     <label class="text-black-50 mt-2">
                         <input type="checkbox" checked="" id="policyCheckboxFeedback">
 
@@ -66,7 +66,8 @@
                     </label>
                 </div>
             </div>
-        </form>
+    </div>
+    </form>
     </div>
 
     {% if popup %}

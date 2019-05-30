@@ -1697,7 +1697,7 @@ div:nth-child(n+6) {
     transform: translate(-50%, -50%);
     background: #fff;
     min-height: 130px;
-    width: 590px;
+    width: fit-content;
     display: block;
     opacity: 1;
     z-index: 1000;
