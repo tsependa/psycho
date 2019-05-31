@@ -58,6 +58,9 @@
                     <li>
                         <a href="{% url 'faq' %}" class="header-btn">Ответы на вопросы</a>
                     </li>
+                 <li>
+                        <a href="{% url 'supervision' %}" class="header-btn">Психологам</a>
+                    </li>
                     {% if user.is_authenticated %}
                         <li>
                             <a href="{% url 'logout' %}" class="header-btn login">
