@@ -41,6 +41,7 @@ urlpatterns = [
                   path('enroll/<int:timeslot_id>', views.user_enroll, name='enroll'),
                   path('faq', views.faq, name='faq'),
                   path('support', views.support, name='support'),
+                  path('supervision', views.supervision, name='supervision'),
                   path('pay/<int:timeslot_id>/', views.pay),
                   path('pay/success/<int:enroll_id>', views.pay_success),
                   path('api-auth/', include('rest_framework.urls')),
@@ -48,6 +49,5 @@ urlpatterns = [
                   path('api/pay/notifications', views.pay_notification),
                   path('pages/', include('django.contrib.flatpages.urls')),
 
-              ] + \
-              static(settings_prod.STATIC_URL, document_root=settings_prod.STATIC_ROOT) + \
+              ] + static(settings_prod.STATIC_URL, document_root=settings_prod.STATIC_ROOT) + \
               static(settings_prod.MEDIA_URL, document_root=settings_prod.MEDIA_ROOT)

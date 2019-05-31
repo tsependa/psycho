@@ -628,7 +628,7 @@ header {
 .header__row {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 
 .header__btns {
@@ -651,7 +651,7 @@ header {
     display: inline-block;
 }
 
-.header__btns li:first-child {
+.header__btns li:nth-child(n+1) {
     margin: 0 30px 0 0;
 }
 

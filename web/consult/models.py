@@ -140,3 +140,11 @@ class SupportQuestion(models.Model):
     phone = models.TextField(blank=True, null=True)
     question = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class LandingRequest(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField()
+    phone = models.TextField(blank=True, null=True)
+    question = models.TextField(blank=True, null=True)
+    type = models.CharField(max_length=255, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)

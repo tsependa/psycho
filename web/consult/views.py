@@ -25,7 +25,7 @@ from rest_framework.views import APIView
 from yandex_checkout import Configuration, Payment as YandexPayment
 
 from consult.forms import RegisterForm
-from consult.models import Theme, Specialist, Enroll, TimeSlot, Faq, Payment, SupportQuestion
+from consult.models import Theme, Specialist, Enroll, TimeSlot, Faq, Payment, SupportQuestion, LandingRequest
 from consult.utils.mail import pay_user_email_notify, pay_specialist_email_notify, new_user_email_notify
 
 Configuration.account_id = settings.KASSA_ACCOUNT
@@ -230,3 +230,15 @@ def support(request):
         support_question.save()
         popup = True
     return render(request, 'public/support.html', {'popup': popup})
+
+def supervision(request):
+    popup = False
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+        question = request.POST.get("question")
+        landing_request = LandingRequest.objects.create(name=name, email=email, phone=phone, question=question, type="super")
+        landing_request.save()
+        popup = True
+    return render(request, 'public/supervision.html', {'popup': popup})
