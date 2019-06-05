@@ -1,5 +1,4 @@
-from datetime import datetime
-
+from datetime import timedelta
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -7,6 +6,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
+from django.utils.datetime_safe import datetime
 
 from psycho import settings_prod
 
@@ -81,7 +81,7 @@ class Specialist(models.Model):
         return self.middle_name + " " + self.first_name + " " + self.last_name
 
     def next_slot(self):
-        return self.timeslots.filter(start_time__gte=datetime.now()).exclude(
+        return self.timeslots.filter(start_time__gte=datetime.now()+timedelta(days=1)).exclude(
             enroll__isnull=False).order_by('start_time').first()
 
     def full_name(self):

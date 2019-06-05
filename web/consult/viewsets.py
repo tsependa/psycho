@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.contrib.auth.models import User
 from rest_framework import viewsets
@@ -33,7 +33,8 @@ class TimeslotAvailableViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = TimeSlot.objects.all()
         specialist_id = self.kwargs['specialist_id']
         if specialist_id is not None:
-            queryset = queryset.filter(specialist_id=specialist_id).filter(start_time__gte=datetime.now()).exclude(
+            queryset = queryset.filter(specialist_id=specialist_id).filter(
+                start_time__gte=datetime.now() + timedelta(days=1)).exclude(
                 enroll__isnull=False)
         return queryset
 
