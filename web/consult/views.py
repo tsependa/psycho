@@ -17,6 +17,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views import View
+from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework.decorators import api_view
 
 from rest_framework.permissions import AllowAny
@@ -33,6 +34,7 @@ Configuration.secret_key = settings.KASSA_SECRET
 
 
 @login_required
+@ensure_csrf_cookie
 def user_office(request):
     user = User.objects.get(username=request.user.username)
     enrolls = {}
@@ -70,6 +72,7 @@ def specialist(request, specialist_id):
     return render(request, "public/specialist.html", context={'specialist': specialist, 'recommends': recommends})
 
 
+@ensure_csrf_cookie
 def signup(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -230,6 +233,7 @@ def support(request):
         support_question.save()
         popup = True
     return render(request, 'public/support.html', {'popup': popup})
+
 
 def supervision(request):
     popup = False
