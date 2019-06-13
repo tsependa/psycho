@@ -501,8 +501,8 @@ h4 {
 }
 
 .green-btn:disabled,
-.green-btn[disabled]{
-  background-color: #cccccc;
+.green-btn[disabled] {
+    background-color: #cccccc;
 
 }
 
@@ -1702,4 +1702,365 @@ div:nth-child(n+6) {
     opacity: 1;
     z-index: 1000;
     border-radius: 8px;
+}
+
+
+/* user's visit list */
+.visit-list {
+    padding: 60px 0 0 0;
+}
+.submenu__btns {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 0 0 30px 0;
+    padding: 0 0 15px 0;
+}
+.submenu__btns li {
+    display: inline-block;
+    background: none;
+    margin: 0;
+    padding: 0;
+}
+.submenu-btn.active {
+    color: #2D9CDB;
+    font-size: 18px;
+    border-bottom: 2px solid #2D9CDB;
+}
+.submenu-btn {
+    margin: 0 40px 0 0;
+    color: #212529;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 2px solid transparent;
+}
+.submenu-btn:last:child {
+    margin: 0;
+}
+.visit__wrapper.hidden {
+    display: none;
+}
+.visit__wrapper,
+.webinar-coach__wrapper {
+    max-width: 800px;
+}
+.visit__item ,
+.visit__item-prof,
+.coach-item {
+    background: #F3F9FF;
+    display: flex;
+}
+.visit-item__img-box {
+    width: 150px;
+    display: flex;
+    align-items: center;
+}
+@media only screen and (max-width: 769px) {
+    .visit-item__img-box {
+        display: none;
+    }
+}
+.visit-item-prof__img-box,
+.coach-item__img-box {
+    width: 150px;
+    display: flex;
+    align-items: center;
+}
+.visit-item__img {
+    background-size: cover;
+    max-width: 150px;
+}
+@media only screen and (max-width: 992px) {
+    .visit-item__img {
+        border-radius: 50%;
+        margin: 0 0 0 10px;
+    }
+}
+.visit-item-prof__img,
+.coach-item__img {
+    background-size: cover;
+    max-width: 120px;
+    margin: 0;
+}
+@media only screen and (max-width: 992px) {
+    .visit-item-prof__img,
+    .coach-item__img {
+        border-radius: 50%;
+        margin: 0 0 0 10px;
+        max-width: 100px;
+    }
+}
+.visit-item__descr,
+.visit-item-prof__descr ,
+.coach-item__descr {
+    position: relative;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.visit-item__theme,
+.visit-item-prof__name,
+.coach-item__name {
+    color: #212529;
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+@media only screen and (max-width: 769px) {
+    .visit-item__theme,
+    .visit-item-prof__name,
+    .coach-item__name {
+        font-size: 20px;
+    }
+}
+.visit-item__specialists {
+    margin: 0 0 50px 0;
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .visit-item__specialists {
+        margin: 0 0 20px 0;
+    }
+}
+.visit-item__specialists span {
+    display: inline-block;
+    background: url('../img/visit-specialist.svg') left no-repeat;
+    padding: 0 0 0 20px;
+    margin: 0 20px 0 0;
+    background-size: 15px 15px;
+}
+.visit-item__bottom {
+    position: absolute;
+    right: 20px;
+    left: 15px;
+    bottom: 20px;
+    line-height: 40px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.visit-item-prof__bottom {
+    line-height: 40px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media only screen and (max-width: 992px) {
+    .visit-item__bottom {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+    }
+    .visit-item__bottom,
+    .visit-item-prof__bottom {
+        flex-direction: column;
+        align-items: start;
+    }
+}
+.visit-details,
+.visit-details-prof {
+    width: 100%;
+}
+.visit-details span,
+.visit-item-prof__bottom span {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+}
+.visit-details__date,
+.visit-details-prof__date {
+    background: url('../img/visit-date.svg') 0 top no-repeat;
+    padding: 0 0 0 35px;
+    background-size: 35px 35px;
+    white-space: nowrap;
+    margin: 0 20px 0 -3px;
+}
+.visit-details__hours,
+.visit-details-prof__hours {
+    background: url('../img/visit-hours.svg') 0 5px no-repeat;
+    padding: 0 0 0 32px;
+    background-size: 27px 27px;
+    margin: 0 20px 0 0;
+}
+.visit-details__paid,
+.visit-details-prof__paid {
+    background: url('../img/visit-paid.svg') 0 top no-repeat;
+    padding: 0 0 0 40px;
+    background-size: 35px 35px;
+    margin: 0 20px 0 0;
+}
+.visit-item__status,
+.visit-item-prof__status {
+    font-size: 18px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    width: auto;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+@media only screen and (max-width: 769px) {
+    .visit-item__status,
+    .visit-item-prof__status {
+        margin: 10px 0 0 0;
+    }
+}
+.visit-item__status--sign,
+.visit-item-prof__status--prof{
+    color: #fff;
+}
+.visit-item-prof_status--prof:hover {
+    color: #fff;
+}
+.visit-item__status--done {
+    color: #02BB83;
+    background: #fff;
+}
+.visit-item__status--done:hover {
+    color: #3db994;
+    background: #fff;
+}
+.visit-item__status--check {
+    color: #fff;
+    background: #2D9CDB;
+}
+.visit-item__status--check:hover {
+    color: #fff;
+    background: #46b2ef;
+}
+
+
+
+/* webinar page description */
+.webinar-poster {
+    margin: 0 0 60px 0;
+    background: url('/static/img/webinar_poster.png') top center no-repeat;
+    background-size: cover;
+    position: relative;
+    padding: 40px 0;
+}
+.webinar-poster:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #16638e;
+    opacity: 0.7;
+    background: -moz-linear-gradient(left,  #16638e 0%, #c0d6e3 100%);
+    background: -webkit-linear-gradient(left,  #16638e 0%,#c0d6e3 100%);
+    background: linear-gradient(to right,  #16638e 0%,#c0d6e3 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#518fb2', endColorstr='#c0d6e3',GradientType=1 );
+}
+.webinar-poster__row {
+    position: relative;
+    z-index: 5;
+}
+.webinar-poster__title {
+    font-size: 40px;
+    color: #fff;
+    font-weight: normal;
+    margin: 0 0 140px 0;
+}
+@media (max-width: 992px) {
+    .webinar-poster__title {
+        font-size: 30px;
+        margin: 0 0 40px 0;
+    }
+}
+.webinar-poster__footer {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media (max-width: 992px) {
+    .webinar-poster__footer {
+        flex-direction: column;
+    }
+}
+@media (max-width: 769px) {
+     .webinar-poster__footer {
+        align-items: flex-start;
+     }
+}
+.webinar-poster__descr {
+    display: inline-block;
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+    font-weight: normal;
+    line-height: 40px;
+    padding: 0 60px 0 0;
+    position: relative;
+}
+.webinar-poster__descr:after {
+    content: '';
+    position: absolute;
+    right: 30px;
+    top: 0;
+    bottom: 0;
+    border-right: 2px solid #fff;
+}
+.webinar-poster__descr:last-child:after {
+    display: none;
+}
+@media (max-width: 992px) {
+    .webinar-poster__descr {
+        font-size: 18px;
+        margin: 0 0 20px 0;
+    }
+}
+@media (max-width: 769px) {
+    .webinar-poster__descr {
+        display: block;
+        padding: 0;
+        text-align: left;
+        line-height: 20px;
+    }
+    .webinar-poster__descr:after {
+        display: none;
+    }
+    .webinar-poster__descr > div {
+        display: inline-block;
+    }
+    .webinar-poster__descr > div:last-child {
+        font-weight: bold;
+    }
+}
+
+
+
+.webinar-descr,
+.webinar-coach {
+    margin: 0 0 60px 0;
+}
+.webinar-descr__col ,
+.webinar-coach__col {
+    background: #F3F9FF;
+    padding: 40px;
+}
+@media (max-width: 500px) {
+    .webinar-descr__col ,
+    .webinar-coach__col {
+      padding: 40px 10px;
+    }
+}
+.blue-title {
+    color: #2D9CDB;
+    margin: 0 0 10px 0;
+    font-size: 22px;
+    font-weight: bold;
 }

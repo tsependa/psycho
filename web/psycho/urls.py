@@ -42,6 +42,8 @@ urlpatterns = [
                   path('faq', views.faq, name='faq'),
                   path('support', views.support, name='support'),
                   path('supervision', views.supervision, name='supervision'),
+                  path('webinars', views.webinars, name='webinars'),
+                  path('webinar/<str:webinar_slug>/', views.webinar, name='webinar'),
                   path('pay/<int:timeslot_id>/', views.pay),
                   path('pay/success/<int:enroll_id>', views.pay_success),
                   path('api-auth/', include('rest_framework.urls')),

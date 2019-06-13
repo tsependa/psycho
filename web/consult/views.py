@@ -7,7 +7,10 @@ import uuid
 from random import choice
 
 from django.conf import settings
+from django.db import models
+from django.db.models import Count, Max, FilteredRelation, Q
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -26,7 +29,8 @@ from rest_framework.views import APIView
 from yandex_checkout import Configuration, Payment as YandexPayment
 
 from consult.forms import RegisterForm
-from consult.models import Theme, Specialist, Enroll, TimeSlot, Faq, Payment, SupportQuestion, LandingRequest
+from consult.models import Theme, Specialist, Enroll, TimeSlot, Faq, Payment, SupportQuestion, LandingRequest, Webinar, \
+    WebinarEnroll
 from consult.utils.mail import pay_user_email_notify, pay_specialist_email_notify, new_user_email_notify
 
 Configuration.account_id = settings.KASSA_ACCOUNT
@@ -74,6 +78,9 @@ def specialist(request, specialist_id):
 
 @ensure_csrf_cookie
 def signup(request):
+    redirect_to = request.GET.get('next', None)
+    if not redirect_to:
+        redirect_to = request.POST.get('next', None)
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -82,10 +89,14 @@ def signup(request):
             my_password = form.cleaned_data.get('password1')
             user = authenticate(request, username=username, password=my_password)
             login(request, user)
-            return redirect('index')
+            if not redirect_to:
+                # redirect_to = settings.LOGIN_REDIRECT_URL
+                return redirect('index')
+            else:
+                return redirect(redirect_to)
     else:
         form = RegisterForm()
-    return render(request, 'registration/signup.html', {'form': form})
+    return render(request, 'registration/signup.html', {'form': form, 'next': redirect_to})
 
 
 def profile(request):
@@ -242,7 +253,33 @@ def supervision(request):
         email = request.POST.get("email")
         phone = request.POST.get("phone")
         question = request.POST.get("question")
-        landing_request = LandingRequest.objects.create(name=name, email=email, phone=phone, question=question, type="super")
+        landing_request = LandingRequest.objects.create(name=name, email=email, phone=phone, question=question,
+                                                        type="super")
         landing_request.save()
         popup = True
     return render(request, 'public/supervision.html', {'popup': popup})
+
+
+@ensure_csrf_cookie
+def webinars(request):
+    if request.method == "POST":
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('%s?next=%s' % (reverse('signup'), reverse('webinars')))
+        else:
+            webinar_id = request.POST.get("webinar_id")
+            webinar_enroll = WebinarEnroll.objects.get_or_create(webinar_id=webinar_id, user_id=request.user.id)
+    webinar_list = Webinar.objects.filter().annotate(
+        user_enroll=Count('enrolls', Q(enrolls__user_id__exact=request.user.id)), )
+    return render(request, 'public/webinars.html', {'webinars': webinar_list})
+
+
+@ensure_csrf_cookie
+def webinar(request, webinar_slug):
+    webinar_item = Webinar.objects.get(slug=webinar_slug)
+    webinar_enroll = WebinarEnroll.objects.filter(webinar=webinar_item, user_id=request.user.id) or None
+    if request.method == "POST":
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('%s?next=%s' % (reverse('signup'), reverse('webinars')))
+        else:
+            webinar_enroll = WebinarEnroll.objects.get_or_create(webinar=webinar_item, user_id=request.user.id)
+    return render(request, 'public/webinar.html', {'webinar': webinar_item, 'enroll': webinar_enroll})

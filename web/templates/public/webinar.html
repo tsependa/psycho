@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+    <section
+            class="webinar-poster"{% comment %} style="background: url('/media/{{ webinar.image }}') top center no-repeat;"{% endcomment %}>
+        <div class="container">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row webinar-poster__row">
+                    <div class="col-12">
+
+                        <div class="webinar-poster__title">Вебинар: <span>{{ webinar.name }}</span>
+                        </div>
+                        <div class="webinar-poster__footer">
+                            <div>
+                                <div class="webinar-poster__descr">
+                                    <div>Дата проведения</div>
+                                    <div>{{ webinar.start_date|date:"d M H:i" }}</div>
+                                </div>
+                                <div class="webinar-poster__descr">
+                                    <div>Длительность</div>
+                                    <div>{{ webinar.duration }} минут</div>
+                                </div>
+                                <div class="webinar-poster__descr">
+                                    <div>Стоимость</div>
+                                    {% if webinar.price == 0 %}
+                                        <div>Бесплатно</div>
+                                    {% else %}
+                                        <div>{{ webinar.price }}</div>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                            <input type="hidden" name="webinar_id" value="{{ webinar.id }}"/>
+                            {% if enroll %}
+                                <div class="row">
+                                    <button class="green-btn" value="" disabled>Записаться</button>
+                                    <div style="color: white">Вы уже записаны на вебинар</div>
+                                </div>
+
+                            {% else %}
+                                <button class="green-btn" value="">Записаться</button>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="webinar-descr">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 webinar-descr__col">
+                    <div class="blue-title m-30">Описание</div>
+                    <p>{{ webinar.description }}</p>
+                </div>
+                <div class="col-12 col-md-6 webinar-descr__col">
+                    <div class="blue-title m-30">Темы</div>
+                    <ul>
+                        <li>Что такое самомотивация и как ее развить?</li>
+                        <li>Кнут или пряник? Мотивация ОТ... Мотивация К...</li>
+                        <li>Как не бросить все на полпути?</li>
+                        <li>Как из неудач рождается драйв: "Я вам докажу"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="webinar-coach">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 webinar-coach__col">
+                    <div class="blue-title m-30">Ведущие</div>
+                    <div class="webinar-coach__wrapper">
+                        {% for author in webinar.authors.all %}
+                            <div class="webinar-couch__item coach-item m-30">
+                                <div class="coach-item__img-box">
+                                    <img src="/media/{{ author.avatar_mob }}" class="coach-item__img" alt="">
+                                </div>
+                                <div class="coach-item__descr">
+                                    <div class="coach-item__name">{{ author.middle_name }} {{ author.first_name }} {{ author.last_name }}</div>
+                                    <p>кандидат психологических наук, выпускница МГУ им. М.В.Ломоносова</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block js_add %}
+
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}

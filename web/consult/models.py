@@ -81,7 +81,7 @@ class Specialist(models.Model):
         return self.middle_name + " " + self.first_name + " " + self.last_name
 
     def next_slot(self):
-        return self.timeslots.filter(start_time__gte=datetime.now()+timedelta(days=1)).exclude(
+        return self.timeslots.filter(start_time__gte=datetime.now() + timedelta(days=1)).exclude(
             enroll__isnull=False).order_by('start_time').first()
 
     def full_name(self):
@@ -114,9 +114,50 @@ class Enroll(models.Model):
         return self.user.email
 
 
+class Webinar(models.Model):
+    STATUS_CHOICES = (
+        ('hidden', 'Скрыт'),
+        ('enroll_open', 'Запись открыта'),
+        ('enroll_closed', 'Запись закрыта'),
+        ('ended', 'Завершен')
+    )
+
+    name = models.CharField(max_length=255, blank=True)
+    slug = models.CharField(max_length=50, blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    start_date = models.DateTimeField()
+    duration = models.IntegerField(default=60)
+    themes = models.ManyToManyField(Theme, blank=True)
+    authors = models.ManyToManyField(Specialist, blank=True)
+    description = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='hidden')
+    image = models.ImageField(blank=True)
+    video_url = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class WebinarEnroll(models.Model):
+    webinar = models.ForeignKey(Webinar, on_delete=models.CASCADE, related_name='enrolls', null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.user.email
+
+
 class Payment(models.Model):
-    enroll = models.OneToOneField(Enroll, on_delete=models.CASCADE, related_name='payment')
+    TYPE_CHOICES = (
+        ('consult', 'Консультация'),
+        ('webinar', 'Вебинар'),
+    )
+    enroll = models.OneToOneField(Enroll, on_delete=models.CASCADE, related_name='payment', blank=True, null=True)
+    webinar_enroll = models.OneToOneField(WebinarEnroll, on_delete=models.CASCADE, related_name='payment', blank=True,
+                                          null=True)
     status = models.CharField(max_length=50)
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='consult')
     notify = models.BooleanField(default=False)
     yandex_payment = models.CharField(max_length=50, blank=True)
     amount = models.DecimalField(decimal_places=2, max_digits=10, default=0)
@@ -140,6 +181,7 @@ class SupportQuestion(models.Model):
     phone = models.TextField(blank=True, null=True)
     question = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
 
 class LandingRequest(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)

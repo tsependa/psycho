@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="header__small">
+        <div class="container">
+            <div class="row header__info">
+                <div class="col-sm-12 col-md-6 header__lrow">
+                    <h1>Вебинары</h1>
+                    <img src="/static/img/webinar_logo.png" class="resp-img m-copy" alt="">
+                </div>
+
+                <div class="col-sm-12 col-md-6 header__lrow d-copy">
+                    <img src="/static/img/webinar_logo.png" class="resp-img" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="webinar_block about">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3>Формат вебинаров</h3>
+                </div>
+            </div>
+            <div class="row about__list">
+                <div class="col-12 col-sm-6 col-md-4 m-30">
+                    <img src="/static/img/msgs.png">
+                    <p>Чат для общения </p>
+                    <p>во время трансляций</p>
+
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 m-30">
+                    <img src="/static/img/homework.png">
+                    <p>Полная анонимность</p>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <img src="/static/img/msgs.png">
+                    <p>После трансляции </p>
+                    <p>доступна запись</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 m-30">
+
+                <h3 class="m-30 text-center">Запись на вебинар</h3>
+                <div class="visit__wrapper ">
+                    {% for webinar in webinars %}
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="webinar_id" value="{{ webinar.id }}"/>
+                            <div class="visit__item m-30">
+                                <div class="visit-item__img-box">
+                                    <img src="/media/{{ webinar.image }}" class="visit-item__img" alt="">
+                                </div>
+                                <div class="visit-item__descr">
+                                    <div class="visit-item__theme"><a
+                                            href="{% url 'webinar' webinar.slug %} ">{{ webinar.name }}</a></div>
+                                    <div class="visit-item__specialists">
+                                        {% for author in webinar.authors.all %}
+                                            <span>{{ author.middle_name }} {{ author.first_name|slice:"1" }}.{{ author.last_name|slice:"1" }}. </span>
+
+                                        {% endfor %}
+                                    </div>
+                                    <div class="visit-item__bottom">
+                                        <div class="visit-item__details visit-details">
+                                            <span class="visit-details__date">{{ webinar.start_date }}</span>
+                                            <span class="visit-details__hours">{{ webinar.duration }}</span>
+                                        </div>
+                                        {% if webinar.user_enroll == 1 %}
+                                            <button class="green-btn visit-item__status visit-item__status--done "
+                                                    disabled>
+                                                Вы записаны
+                                            </button>
+                                        {% else %}
+                                            <button class="green-btn visit-item__status visit-item__status--sign">
+                                                Записаться
+                                            </button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                        {% if webinar.enrolls.all %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% comment %}						<div class="visit__item m-30">
+							<div class="visit-item__img-box">
+								<img src="img/visit-img.png" class="visit-item__img" alt="">
+							</div>
+							<div class="visit-item__descr">
+								<div class="visit-item__theme">Путешествие по семейной истории</div>
+								<div class="visit-item__specialists">
+									<span>Ромадинова Г.И.</span>
+								</div>
+								<div class="visit-item__bottom">
+									<div class="visit-item__details visit-details">
+										<span class="visit-details__date">15 июля 16:00</span>
+										<span class="visit-details__hours">2 часа</span>
+										<span class="visit-details__paid">Оплачено</span>
+									</div>
+									<button class="green-btn visit-item__status visit-item__status--done">
+										Вы записаны
+									</button>
+								</div>
+							</div>
+						</div>{% endcomment %}
+
+                    {% comment %}<div class="visit__item m-30">
+							<div class="visit-item__img-box">
+								<img src="img/visit-img.png" class="visit-item__img" alt="">
+							</div>
+							<div class="visit-item__descr">
+								<div class="visit-item__theme">Влияние семьи и фактора наследственности на развитие индивидуальных способностей личности.Влияние темперамента на индивидуальный стиль деятельности</div>
+								<div class="visit-item__specialists">
+									<span>Комаров М.А.</span>
+								</div>
+								<div class="visit-item__bottom">
+									<div class="visit-item__details visit-details">
+										<span class="visit-details__date">15 июля 16:00</span>
+										<span class="visit-details__hours">1 час</span>
+									</div>
+									<button class="green-btn visit-item__status visit-item__status--check js-show-visit-prof">
+										Посмотреть запись
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="visit__item-prof m-30 hidden js-visit-prof">
+							<div class="visit-item-prof__img-box">
+								<img src="img/visit-prof.png" class="visit-item-prof__img" alt="">
+							</div>
+							<div class="visit-item-prof__descr">
+								<div class="visit-item-prof__name">Комаров Максим Александрович</div>
+								<div class="visit-item-prof__bottom">
+									<div class="visit-item-prof__details visit-details-prof">
+										<span class="visit-details-prof__date">15 июля 16:00</span>
+										<span class="visit-details-prof__hours">1 час</span>
+									</div>
+									<a href="/specialist.html" target="_blank" class="green-btn visit-item-prof__status visit-item-prof_status--prof">
+										Профиль
+									</a>
+								</div>
+							</div>
+						</div>{% endcomment %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block js_add %}
+
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}

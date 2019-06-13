@@ -22,16 +22,14 @@
                     <div class="form-row mb-4">
 
                         {% csrf_token %}
-                        {% if next %}
-                            <input type="hidden" name="next" value="{{ next }}"/>
-                        {% endif %}
+                        <input type="hidden" name="next" value="{{ next }}"/>
                         <!-- Login -->
                         <label for="materialLoginFormEmail">E-mail</label>
                         <input type="text" id="materialLoginFormEmail" name="username" class="form-control mb-4">
 
 
                         <!-- Password -->
-                        <label for="materialLoginFormPassword2">Пароль</label>
+                        <label for="materialLoginFormPassword1">Пароль</label>
                         <input type="password" id="materialLoginFormPassword1" name="password1"
                                class="form-control mb-4">
 
@@ -41,9 +39,9 @@
                                class="form-control mb-4">
 
                         <input class="form-check-input" type="checkbox" value="1" id="defaultCheck1" checked>
-                        <span class="form-check-label  text-small" for="defaultCheck1">
-                            Я принимаю условия  <a href="" target="_blank">Пользовательского соглашения</a>
-                        </span>
+                        <label class="form-check-label  text-small" for="defaultCheck1">
+                            Я принимаю условия <a href="" target="_blank">Пользовательского соглашения</a>
+                        </label>
 
                         {% for field in form %}
                             {% for error in field.errors %}
