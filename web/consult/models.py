@@ -127,10 +127,10 @@ class Webinar(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     start_date = models.DateTimeField()
     duration = models.IntegerField(default=60)
-    themes = models.ManyToManyField(Theme, blank=True)
+    themes = models.TextField(null=True, blank=True)
     authors = models.ManyToManyField(Specialist, blank=True)
     description = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='hidden')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='hidden')
     image = models.ImageField(blank=True)
     video_url = models.URLField(blank=True)
 

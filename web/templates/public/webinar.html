@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load custom_tags %}
 
 {% block header %}
     {% include 'header.html' %}
@@ -64,10 +65,11 @@
                 <div class="col-12 col-md-6 webinar-descr__col">
                     <div class="blue-title m-30">Темы</div>
                     <ul>
-                        <li>Что такое самомотивация и как ее развить?</li>
-                        <li>Кнут или пряник? Мотивация ОТ... Мотивация К...</li>
-                        <li>Как не бросить все на полпути?</li>
-                        <li>Как из неудач рождается драйв: "Я вам докажу"</li>
+                        {% with webinar.themes|split:";" as themes %}
+                            {% for theme in themes %}
+                                <li>{{ theme }}</li>
+                            {% endfor %}
+                        {% endwith %}
                     </ul>
                 </div>
             </div>
