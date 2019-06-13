@@ -5,7 +5,7 @@ from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 
 from consult.models import Theme, Specialist, TimeSlot, Enroll, Payment, Method, Faq, SupportQuestion, LandingRequest, \
-    Webinar, WebinarEnroll
+    Webinar, WebinarEnroll, WebinarAuthor
 
 admin.site.register(Theme)
 admin.site.register(Specialist)
@@ -17,7 +17,7 @@ admin.site.register(Faq)
 
 admin.site.register(Webinar)
 admin.site.register(WebinarEnroll)
-
+admin.site.register(WebinarAuthor)
 
 class EnrollInline(admin.StackedInline):
     model = Enroll
