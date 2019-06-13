@@ -114,6 +114,17 @@ class Enroll(models.Model):
         return self.user.email
 
 
+class WebinarAuthor(models.Model):
+    first_name = models.CharField(max_length=100, blank=True)
+    last_name = models.CharField(max_length=100, blank=True)
+    middle_name = models.CharField(max_length=100, blank=True)
+    avatar = models.ImageField(blank=True)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.middle_name + " " + self.first_name + " " + self.last_name
+
+
 class Webinar(models.Model):
     STATUS_CHOICES = (
         ('hidden', 'Скрыт'),
@@ -128,7 +139,7 @@ class Webinar(models.Model):
     start_date = models.DateTimeField()
     duration = models.IntegerField(default=60)
     themes = models.TextField(null=True, blank=True)
-    authors = models.ManyToManyField(Specialist, blank=True)
+    authors = models.ManyToManyField(WebinarAuthor, blank=True)
     description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='hidden')
     image = models.ImageField(blank=True)

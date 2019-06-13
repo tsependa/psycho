@@ -82,14 +82,14 @@
                 <div class="col-12 webinar-coach__col">
                     <div class="blue-title m-30">Ведущие</div>
                     <div class="webinar-coach__wrapper">
-                        {% for author in webinar.authors.all %}
+                        {% for author in webinar.authors %}
                             <div class="webinar-couch__item coach-item m-30">
                                 <div class="coach-item__img-box">
-                                    <img src="/media/{{ author.avatar_mob }}" class="coach-item__img" alt="">
+                                    <img src="/media/{{ author.avatar }}" class="coach-item__img" alt="">
                                 </div>
                                 <div class="coach-item__descr">
                                     <div class="coach-item__name">{{ author.middle_name }} {{ author.first_name }} {{ author.last_name }}</div>
-                                    <p>кандидат психологических наук, выпускница МГУ им. М.В.Ломоносова</p>
+                                    <p>{{ author.description }}</p>
                                 </div>
                             </div>
                         {% endfor %}
