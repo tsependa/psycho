@@ -82,7 +82,7 @@
                 <div class="col-12 webinar-coach__col">
                     <div class="blue-title m-30">Ведущие</div>
                     <div class="webinar-coach__wrapper">
-                        {% for author in webinar.authors %}
+                        {% for author in webinar.authors.all %}
                             <div class="webinar-couch__item coach-item m-30">
                                 <div class="coach-item__img-box">
                                     <img src="/media/{{ author.avatar }}" class="coach-item__img" alt="">
