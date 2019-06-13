@@ -67,7 +67,7 @@
                                             href="{% url 'webinar' webinar.slug %} ">{{ webinar.name }}</a></div>
                                     <div class="visit-item__specialists">
                                         {% for author in webinar.authors.all %}
-                                            <span>{{ author.middle_name }} {{ author.first_name|slice:"1" }}.{{ author.last_name|slice:"1" }}. </span>
+                                            <span>{{ author.last_name }} {{ author.first_name|slice:"1" }}.{{ author.middle_name|slice:"1" }}. </span>
 
                                         {% endfor %}
                                     </div>
