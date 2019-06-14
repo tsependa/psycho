@@ -1747,11 +1747,15 @@ div:nth-child(n+6) {
     display: none;
 }
 
-.visit__wrapper,
-.webinar-coach__wrapper {
+.visit__wrapper {
     max-width: 800px;
     float: none;
     margin: 0 auto;
+}
+
+.webinar-coach__wrapper {
+    max-width: 800px;
+
 
 }
 
