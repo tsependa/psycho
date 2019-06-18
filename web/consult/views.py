@@ -65,6 +65,10 @@ def select(request):
                   context={'specialists': specialists})
 
 
+def help_select(request):
+    return render(request, "public/help_select.html", )
+
+
 def specialist(request, specialist_id):
     specialist = Specialist.objects.get(pk=specialist_id)
     theme_id = request.GET.get('theme', None)
@@ -79,8 +83,10 @@ def specialist(request, specialist_id):
 @ensure_csrf_cookie
 def signup(request):
     redirect_to = request.GET.get('next', None)
-    if not redirect_to:
+    if redirect_to is None:
         redirect_to = request.POST.get('next', None)
+        if redirect_to is None:
+            redirect_to = 'index'
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -89,7 +95,7 @@ def signup(request):
             my_password = form.cleaned_data.get('password1')
             user = authenticate(request, username=username, password=my_password)
             login(request, user)
-            if not redirect_to:
+            if redirect_to is None:
                 # redirect_to = settings.LOGIN_REDIRECT_URL
                 return redirect('index')
             else:
